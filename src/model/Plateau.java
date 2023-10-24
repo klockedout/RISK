@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase; 
-	private Territoire [][] plateau  = new Territoire [100][100];
+	private Continent [][] plateau  = new Continent [70][50];
 	static private int idPlateau=0;
 	private int tour=0;
 	private Joueur joueurActif;
@@ -18,19 +18,21 @@ public class Plateau extends AbstractModel{
 		this.creerJoueurs();
 		this.creerPlile();
 		this.idPlateau+=1;*/
+		
+	//Larissa : ajout de bordure et ocean 
 	 for (int x = 0; x < plateau.length; x++) { 
 		 for (int y=0; y < plateau[x].length; y++) {
-			 plateau[x][y] = new Territoire("Ocean",TypeCase.CHEMIN);
+			 plateau[x][y] = new Continent("Bordure",TypeCase.BORDURE);
 			}
 		}
 	 for (int x = 1; x < plateau.length - 1; x++) {
 			for (int y = 1; y < plateau[x].length - 1; y++) {
-				plateau[x][y] = new Territoire("Test",TypeCase.OCEAN);
+				plateau[x][y] = new Continent("Ocean",TypeCase.OCEAN);
 
 			}
 	 }
 		
-//		plateau[0][0] = new Territoire("France", TypeCase.CHEMIN);
+
 	}
 	
 	private void creerJoueurs() {
@@ -39,19 +41,29 @@ public class Plateau extends AbstractModel{
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
 		}
 	}
+//	Larissa 
+//	private void creerContinents() {
+//		String[] nomsCont = new String[]{
+//				"Europe",
+//				"Asie",
+//				"Amérique du Nord",
+//				"Amérique du Sud",
+//				"Afrique",
+//				"Océanie"};
+//		for (String nomCont : nomsCont) {
+//			this.continents.add(new Continent(nomCont));
+//		}
+//	}
 	
-	private void creerContinents() {
-		String[] nomsCont = new String[]{
-				"Europe",
-				"Asie",
-				"Amérique du Nord",
-				"Amérique du Sud",
-				"Afrique",
-				"Océanie"};
-		for (String nomCont : nomsCont) {
-			this.continents.add(new Continent(nomCont));
-		}
-	}
+//Larissa(+)
+	//Larissa : creation continent
+	 Continent afrique = new Continent("Afrique", TypeTerritoire.AFRIQUE); //couleur : rouge
+	 Continent europe = new Continent("Europe", TypeTerritoire.EUROPE); // couleur : bleu
+	 Continent asie = new Continent("Asie", TypeTerritoire.ASIE); //vert
+	 Continent ameriqueSud = new Continent("Amerique du Sud", TypeTerritoire.AMERIQUESUD); //orange
+	 Continent ameriqueNord = new Continent("Amerique du Nord", TypeTerritoire.AMERIQUEN); //jaune
+	 Continent oceanie = new Continent("Oceanie", TypeTerritoire.OCEANIE); // rose
+	 // creation territoire 
 	
 	private void creerTerritoires() {
 		String[] nomsTerEurope = new String[] {
@@ -133,13 +145,15 @@ public class Plateau extends AbstractModel{
 
 	@Override
 	public TypeTerritoire getTypeTerritoire(int x, int y) {
-		return plateau[x][y].getTypeTerritoire();
+		//return plateau[x][y].getTypeTerritoire();
+		return null;
 	}
 
 	@Override
 	public Joueur getVainqueur(int x, int y) {
 		// TODO Auto-generated method stub
-		return this.plateau[x][y].getVainqueur();
+		//return this.plateau[x][y].getVainqueur();
+		return null;
 	}
 
 	@Override
