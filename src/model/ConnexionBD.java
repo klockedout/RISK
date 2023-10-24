@@ -44,36 +44,7 @@
 	    }
 
 		public static void main(String[] args) {
-			/*
-		    String URL = "jdbc:mysql://localhost:3306/risk";
-		    String UTILISATEUR = "root";
-		    String MOT_DE_PASSE = "";
 			
-			try {
-	            
-	            Connection connexion = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-	            Statement statement = connexion.createStatement();
-	            
-	            String requeteSQL = "SELECT * FROM joueur";
-
-	            ResultSet resultat = statement.executeQuery(requeteSQL);
-
-	            while (resultat.next()) {
-	                int id = resultat.getInt("numInscription");
-	                String nom = resultat.getString("nomJoueur");
-	                String prenom = resultat.getString("prenomJoueur");
-
-	                System.out.println("ID : " + id + ", Nom : " + nom + ", Prenom : " + prenom);
-	            }
-
-	            resultat.close();
-	            statement.close();
-	            connexion.close();
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }*/
-
 		}
 
 	}
