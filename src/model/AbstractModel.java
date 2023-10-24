@@ -30,6 +30,7 @@ public abstract class AbstractModel implements Observable {
     */
     public abstract int getLargeur();
     public abstract int getHauteur();
+    public abstract TypeTerritoire getTypeTerritoire(int x, int y);
     /*
     public abstract int getNbSourisIn();
     public abstract int getNbSourisOut();
