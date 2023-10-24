@@ -23,20 +23,20 @@ public class Plateau extends AbstractModel{
 			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
 			}
 		}
-		/*for (int x = 1; x < plateau.length - 1; x++) {
+	  for (int x = 1; x < plateau.length - 1; x++) {
 			for (int y = 1; y < plateau[x].length - 1; y++) {
 				plateau[x][y] = new Territoire("Test",TypeCase.CHEMIN);
 
 			}
-		}*/
+		}
 	}
 	
-	private void creerJoueurs() {
+	/*private void creerJoueurs() {
 		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
 		}
-	}
+	}*/
 	
 	/*private void creerContinents() {
 		String[] nomsCont = new String[]{
@@ -174,13 +174,13 @@ public class Plateau extends AbstractModel{
 		this.continents = continents;
 	}
 
-	public ArrayList<Joueur> getJoueurs() {
+	/*public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
 	}
 
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
-	}
+	}*/
 
 	public ArrayList<CarteRisk> getPile() {
 		return pile;
