@@ -133,4 +133,15 @@ public class Joueur {
 
 	}
 
+	// Pour afficher les cartes d'un joueur
+	public void afficherCartes() {
+
+		for (int i = 0; i < this.carteRisk.size(); i++) {
+
+			System.out.println("Actuellement vous avez :" + "\nLa carte" + this.carteRisk.get(i).getNomCarte()
+					+ "et elle est de type : " + this.carteRisk.get(i).getTypeCarte());
+		}
+
+	}
+
 }
