@@ -25,6 +25,10 @@ public class Territoire {
 	public String getNomTer() {
 		return nomTer;
 	}
+	public Joueur getVainqueur() {
+		return null; 
+		
+	}
 
 	public void setNomTer(String nomTer) {
 		this.nomTer = nomTer;
