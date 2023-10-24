@@ -41,6 +41,96 @@ public class Joueur {
 		Joueur other = (Joueur) obj;
 		return Objects.equals(couleur, other.couleur) && idPlateau == other.idPlateau;
 	}
+
+
+	public int getIdPlateau() {
+		return idPlateau;
+	}
+
+
+	public void setIdPlateau(int idPlateau) {
+		this.idPlateau = idPlateau;
+	}
+
+
+	public String getCouleur() {
+		return couleur;
+	}
+
+
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
+	}
+
+
+	public int getNbAttaque() {
+		return nbAttaque;
+	}
+
+
+	public void setNbAttaque(int nbAttaque) {
+		this.nbAttaque = nbAttaque;
+	}
+
+
+	public int getNbDefense() {
+		return nbDefense;
+	}
+
+
+	public void setNbDefense(int nbDefense) {
+		this.nbDefense = nbDefense;
+	}
+
+
+	public String getPhase() {
+		return phase;
+	}
+
+
+	public void setPhase(String phase) {
+		this.phase = phase;
+	}
+
+
+	public int getNbRegimentJoueur() {
+		return nbRegimentJoueur;
+	}
+
+
+	public void setNbRegimentJoueur(int nbRegimentJoueur) {
+		this.nbRegimentJoueur = nbRegimentJoueur;
+	}
+
+
+	public ArrayList<CarteRisk> getCarteRisk() {
+		return carteRisk;
+	}
+
+
+	public void setCarteRisk(ArrayList<CarteRisk> carteRisk) {
+		this.carteRisk = carteRisk;
+	}
+
+
+	public ArrayList<Territoire> getListeTerritoire() {
+		return Territoire;
+	}
+
+
+	public void setTerritoire(ArrayList<Territoire> territoire) {
+		Territoire = territoire;
+	}
+
+
+	public Territoire getTerritoire() {
+		return territoire;
+	}
+
+
+	public void setTerritoire(Territoire territoire) {
+		this.territoire = territoire;
+	}
 	
 	
 
