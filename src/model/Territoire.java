@@ -9,4 +9,22 @@ public class Territoire {
 		this.nomTer=nom;
 	}
 
+	public String getNomTer() {
+		return nomTer;
+	}
+
+	public void setNomTer(String nomTer) {
+		this.nomTer = nomTer;
+	}
+
+	public int getNbRegTer() {
+		return nbRegTer;
+	}
+
+	public void setNbRegTer(int nbRegTer) {
+		this.nbRegTer = nbRegTer;
+	}
+	
+	
+
 }

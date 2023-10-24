@@ -12,4 +12,22 @@ public class CarteRisk {
 		this.typeCarte=typeCarte;
 	}
 
+	public String getNomCarte() {
+		return nomCarte;
+	}
+
+	public void setNomCarte(String nomCarte) {
+		this.nomCarte = nomCarte;
+	}
+
+	public TypeCarte getTypeCarte() {
+		return typeCarte;
+	}
+
+	public void setTypeCarte(TypeCarte typeCarte) {
+		this.typeCarte = typeCarte;
+	}
+	
+	
+
 }
