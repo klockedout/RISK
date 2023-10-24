@@ -3,19 +3,32 @@ package model;
 import java.util.ArrayList;
 
 public class Plateau extends AbstractModel{
+	private TypeTerritoire TypeCase; 
+	private Territoire [][] plateau  = new Territoire [10][10];
 	static private int idPlateau=0;
 	private int tour=0;
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Continent> continents;
-	private ArrayList<Joueur> joueurs;
+	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile;
 	
-	public Plateau() {
+	public Plateau(int idPlateau) {
 		/*this.creerContinents();
 		this.creerJoueurs();
 		this.creerPlile();
 		this.idPlateau+=1;*/
+	 for (int x = 0; x < plateau.length; x++) { 
+		 for (int y=0; y < plateau[x].length; y++) {
+			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
+			}
+		}
+		/*for (int x = 1; x < plateau.length - 1; x++) {
+			for (int y = 1; y < plateau[x].length - 1; y++) {
+				plateau[x][y] = new Territoire("Test",TypeCase.CHEMIN);
+
+			}
+		}*/
 	}
 	
 	private void creerJoueurs() {
@@ -39,7 +52,7 @@ public class Plateau extends AbstractModel{
 	}*/
 	
 	private void creerTerritoires() {
-		String[] nomsTerEu = new String[] {
+		String[] nomsTerEurope = new String[] {
 				"Grande-Bretagne",
 				"Islande",
 				"Europe du Nord",
@@ -47,7 +60,7 @@ public class Plateau extends AbstractModel{
 				"Europe du Sud",
 				"Ukraine",
 				"Europe occidentale"};
-		String[] nomsTerAs = new String[] {
+		String[] nomsTerAsie = new String[] {
 				"Afghanistan",
 				"Chine",
 				"Inde",
@@ -61,7 +74,7 @@ public class Plateau extends AbstractModel{
 				"Oural",
 				"Yakoutie"
 				};
-		String[] nomsTerAmN = new String[] {
+		String[] nomsTerAmeriqueN = new String[] {
 				"Alaska",
 				"Alberta",
 				"Amérique centrale",
@@ -71,25 +84,29 @@ public class Plateau extends AbstractModel{
 				"Ontario",
 				"Québec",
 				"États de l'Ouest"};
-		String[] nomsTerAmS = new String[] {
+		String[] nomsTerAmeriqueS = new String[] {
 				"Argentine",
 				"Brésil",
 				"Pérou",
 				"Venezuela"};
-		String[] nomsTerAf = new String[] {
+		String[] nomsTerAfrique = new String[] {
 				"Congo",
 				"Afrique de l’Est",
 				"Égypte",
 				"Madagascar",
 				"Afrique du Nord",
 				"Afrique du Sud"};
-		String[] nomsTerOc = new String[] {
+		String[] nomsTerOceanie = new String[] {
 				"Australie Orientale",
 				"Indonésie",
 				"Nouvelle-Guinée",
 				"Australie Occidentale"
 };
 		//for (String nomTerEu : th )
+	}
+	
+	public TypeTerritoire getTypeTerritoire() {
+		return this.TypeCase;
 	}
 	
 	private void creerPlile() {
@@ -99,13 +116,13 @@ public class Plateau extends AbstractModel{
 	@Override
 	public int getLargeur() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.plateau[0].length;
 	}
 
 	@Override
 	public int getHauteur() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.plateau.length;
 	}
 
 	public boolean partieTerminer() {
@@ -115,6 +132,11 @@ public class Plateau extends AbstractModel{
 	public static int getIdPlateau() {
 		return idPlateau;
 	}
+	@Override
+	public TypeTerritoire getTypeTerritoire(int x, int y) {
+		return plateau[x][y].getTypeTerritoire();
+	}
+
 
 	public static void setIdPlateau(int idPlateau) {
 		Plateau.idPlateau = idPlateau;

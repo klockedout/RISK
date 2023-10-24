@@ -53,16 +53,9 @@ public class Vue extends javax.swing.JFrame implements Observateur{
         this.mouseListener.updateDimension(x, y, x+cote*model.getHauteur(), y+cote*model.getLargeur(), cote);
         for(int xP=0; xP<model.getHauteur();xP++){
             for(int yP=0; yP<model.getLargeur();yP++){
-            	/*
-                switch(model.getTypeCase(xP, yP)){
-                case IN : 
-                        panelJeu.drawCaseIn(x+xP*cote, y+yP*cote, cote);
-                    break;
-                case OUT : 
-                        panelJeu.drawCaseOut(x+xP*cote, y+yP*cote, cote);
-                    break;
-                case MUR : 
-                        panelJeu.drawCaseMur(x+xP*cote, y+yP*cote, cote);
+                switch(model.getTypeTerritoire(xP, yP)){
+                case OCEAN : 
+                        panelJeu.drawOcean(xP, yP, cote);
                     break;
                 case CHEMIN : 
                         panelJeu.drawCaseChemin(x+xP*cote, y+yP*cote, cote);
@@ -78,7 +71,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                     break;
                 case FLECHE_GAUCHE : 
                         panelJeu.drawCaseFlecheGauche(x+xP*cote, y+yP*cote, cote);
-                    break;*/
+                    break;
                 }
                 
                 /*if(model.getAnimalPlusFort(xP, yP) instanceof Souris){
@@ -87,10 +80,9 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                     panelJeu.drawChat(x+xP*cote, y+yP*cote, cote);
                 }*/
             
-            }
         }
-    
-    
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,11 +94,11 @@ public class Vue extends javax.swing.JFrame implements Observateur{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelNbSourisIN.setText("jLabel1");
+       labelNbSourisIN.setText("jLabel1");
 
         labelNbFleches.setText("nbFleche");
 
-        labelNbSourisOut.setText("jLabel3");
+       labelNbSourisOut.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,12 +110,14 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                 .addComponent(labelNbSourisOut, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelNbFleches, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            //taille de la largeur de la fenetre
+            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            		///taille de la longueur de la fenetre 
+                .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNbSourisIN)

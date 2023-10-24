@@ -5,21 +5,28 @@ import java.util.Objects;
 
 public class Joueur {
 	
+	//attribut 
 	private int idPlateau;
 	private String couleur;
 	private int nbAttaque;
 	private int nbDefense;
+	//a commenter 
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
 	private ArrayList  <Territoire> Territoire;
+	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
+	//contructeur 
 	
-	Joueur (int idPlateau, String couleur){
-		this.idPlateau=idPlateau;
+	public Joueur (int idPlateau, String couleur, int nbRegiment){
+		//this.idPlateau=idPlateau;
 		this.couleur=couleur;
+		this.nbRegimentJoueur = nbRegiment; 
+		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
+		//liste des territoires du joueur 
 		this.Territoire=new ArrayList<Territoire>();
 	}
 
@@ -29,7 +36,7 @@ public class Joueur {
 		return Objects.hash(couleur, idPlateau);
 	}
 
-
+//à commenter 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
