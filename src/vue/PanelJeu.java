@@ -33,26 +33,8 @@ public class PanelJeu extends javax.swing.JPanel {
         }
     }
     
-    public void drawSouris(int x, int y,int cote){
-        cg.drawImage(RessourcesImages.SOURIS, x , y , cote, cote ,this);
-    }
-    
-    public void drawChat(int x, int y,int cote){
-        cg.drawImage(RessourcesImages.CHAT, x , y , cote, cote ,this);
-    }
-    
-    public void drawCaseIn(int x, int y,int cote){
-        this.drawCaseChemin(x, y, cote);
-        cg.drawImage(RessourcesImages.IN, x , y , cote, cote ,this);
-    }
-    
-    public void drawCaseOut(int x, int y,int cote){
-        this.drawCaseChemin(x, y, cote);
-        cg.drawImage(RessourcesImages.OUT, x , y , cote, cote ,this);
-    }
-    
-    public void drawCaseMur(int x, int y,int cote){
-        cg.drawImage(RessourcesImages.MUR, x , y , cote, cote ,this);
+    public void drawOcean(int x, int y,int cote){
+        cg.drawImage(RessourcesImages.OCEAN, x , y , cote, cote ,this);
     }
     
     public void drawCaseChemin(int x, int y,int cote){
