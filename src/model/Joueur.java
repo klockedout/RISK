@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Joueur {
 	
 	//attribut 
+	private String nom;
 	private int idPlateau;
 	private String couleur;
 	private int nbAttaque;
@@ -64,6 +65,9 @@ public class Joueur {
 		return couleur;
 	}
 
+	public String getNom() {
+		return this.nom;
+	}
 
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;

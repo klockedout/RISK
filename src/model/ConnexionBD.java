@@ -9,11 +9,11 @@
 
 	public class ConnexionBD {
 		
-	    private String URL = "jdbc:mysql://localhost:3306/risk";
-	    private String UTILISATEUR = "root";
-	    private String MOT_DE_PASSE = "";
+	    private static String URL = "jdbc:mysql://localhost:3306/risk";
+	    private static String UTILISATEUR = "root";
+	    private static String MOT_DE_PASSE = "";
 
-	    private Connection connexion;
+	    private static Connection connexion;
 
 	    public ConnexionBD() {
 	        try {
@@ -28,7 +28,7 @@
 	        }
 	    }
 	    
-	   public Connection getConnexion() {
+	   public static Connection getConnexion() {
 	        return connexion;
 	    }
 

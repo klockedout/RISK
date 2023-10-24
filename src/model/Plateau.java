@@ -1,6 +1,11 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase; 
@@ -12,8 +17,12 @@ public class Plateau extends AbstractModel{
 	private ArrayList<Continent> continents;
 	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile;
-	
+	private HashMap<Territoire, Joueur> territoiresControles;
+
 	public Plateau(int idPlateau) {
+		
+		territoiresControles = new HashMap<>();
+		
 		/*this.creerContinents();
 		this.creerJoueurs();
 		this.creerPlile();
@@ -31,16 +40,15 @@ public class Plateau extends AbstractModel{
 
 			}
 	 }
-		
-
 	}
 	
-	/*private void creerJoueurs() {
-		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
+	private void creerJoueurs(String couleur, int nbRegiment) {
+		this.listeJoueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
+		/*String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
-		}
-	}*/
+		}*/
+	}
 //	Larissa 
 //	private void creerContinents() {
 //		String[] nomsCont = new String[]{
@@ -119,6 +127,86 @@ public class Plateau extends AbstractModel{
 		//for (String nomTerEu : th )
 	}
 	
+	public void afficherRes() {
+		
+		Connection connection;
+		connection = ConnexionBD.getConnexion();
+		
+	    String req = "SELECT j.nomJoueur, s.scoreJoueur FROM scorejoueur s, joueur j WHERE j.numInscription = s.joueur ORDER BY scoreJoueur DESC";
+	    PreparedStatement statement = null;
+
+	    try {
+	        statement = connection.prepareStatement(req);
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            System.out.println("Classement des joueurs :");
+	            while (resultSet.next()) {
+	                String nomJoueur = resultSet.getString("nomJoueur");
+	                int score = resultSet.getInt("scoreJoueur");
+	                System.out.println("Joueur : " + nomJoueur + ", Score : " + score);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
+	
+   
+    public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
+        territoiresControles.put(territoire, joueur);
+    }
+
+    public boolean territoireControle(Territoire territoire, Joueur joueur) {
+        return territoiresControles.get(territoire) == joueur;
+    }
+
+    public int getNombreTerritoiresControles(Joueur joueur) {
+        int count = 0;
+        for (Territoire territoire : territoiresControles.keySet()) {
+            if (territoireControle(territoire, joueur)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public void calculerScore(Joueur joueur) {
+		
+    	Connection connection;
+		connection = ConnexionBD.getConnexion();
+    	
+		// chaque territoire = 1 point
+    	int score = getNombreTerritoiresControles(joueur);
+    	
+        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
+        PreparedStatement statement = null;
+
+        try {
+            statement = connection.prepareStatement(req);
+            statement.setDouble(1, score);
+            statement.setString(2, joueur.getNom());
+            statement.executeUpdate();	
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            //fermer le PreparedStatement soit aprés le try ou aprés le catch
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
 	public TypeTerritoire getTypeTerritoire() {
 		return this.TypeCase;
 	}
