@@ -37,14 +37,14 @@ public class PanelJeu extends javax.swing.JPanel {
         cg.drawImage(RessourcesImages.OCEAN, x , y , cote, cote ,this);
     }
     
-    public void drawCaseChemin(int x, int y,int cote){
-        cg.drawImage(RessourcesImages.CHEMIN, x , y , cote, cote ,this);
+    public void drawCaseAfrique(int x, int y,int cote){
+        cg.drawImage(RessourcesImages.AFRIQUE, x , y , cote, cote ,this);
         
     }
     
     public void drawCaseFlecheHaut(int x, int y,int cote){
         Graphics2D g2d=(Graphics2D)cg;
-        this.drawCaseChemin(x, y, cote);
+        //this.drawCaseChemin(x, y, cote);
         g2d.rotate(-Math.PI/2.d, x+cote/2, y+cote/2);
         cg.drawImage(RessourcesImages.FLECHE, x , y , cote, cote ,this);
         g2d.rotate(Math.PI/2.d, x+cote/2, y+cote/2);
@@ -54,7 +54,7 @@ public class PanelJeu extends javax.swing.JPanel {
 
     public void drawCaseFlecheBas(int x, int y,int cote){
         Graphics2D g2d=(Graphics2D)cg;
-        this.drawCaseChemin(x, y, cote);
+        //this.drawCaseChemin(x, y, cote);
         g2d.rotate(Math.PI/2.d, x+cote/2, y+cote/2);
         cg.drawImage(RessourcesImages.FLECHE, x , y , cote, cote ,this);
         g2d.rotate(-Math.PI/2.d, x+cote/2, y+cote/2);
@@ -62,14 +62,14 @@ public class PanelJeu extends javax.swing.JPanel {
     
     public void drawCaseFlecheGauche(int x, int y,int cote){
         Graphics2D g2d=(Graphics2D)cg;
-        this.drawCaseChemin(x, y, cote);
+        //this.drawCaseChemin(x, y, cote);
         g2d.rotate(Math.PI, x+cote/2, y+cote/2);
         cg.drawImage(RessourcesImages.FLECHE, x , y , cote, cote ,this);
         g2d.rotate(Math.PI, x+cote/2, y+cote/2);
     }
     
     public void drawCaseFlecheDroite(int x, int y,int cote){
-        this.drawCaseChemin(x, y, cote);
+        //this.drawCaseChemin(x, y, cote);
         cg.drawImage(RessourcesImages.FLECHE, x , y , cote, cote ,this);
     }
 }

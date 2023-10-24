@@ -18,7 +18,19 @@ public class Plateau extends AbstractModel{
 		this.creerJoueurs();
 		this.creerPlile();
 		this.idPlateau+=1;*/
-	 for (int x = 0; x < plateau.length; x++) { 
+		
+		 for (int x = 0; x < plateau.length; x++) { 
+			 for (int y=0; y < plateau[x].length; y++) {
+				 if(x==1 && y==1) {
+				 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
+				}else {
+				 plateau[x][y] = new Territoire("Afrique",TypeCase.AFRIQUE);
+				}
+				}
+			}
+	}
+		 
+	 /*for (int x = 0; x < plateau.length; x++) { 
 		 for (int y=0; y < plateau[x].length; y++) {
 			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
 			}
@@ -29,14 +41,16 @@ public class Plateau extends AbstractModel{
 
 			}
 		}
-	}
+	}*/
 	
-	/*private void creerJoueurs() {
-		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
+	private void creerJoueurs(String couleur, int nbRegiment) {
+		this.listeJoueurs.add(new Joueur(this.idPlateau,couleur, nbRegiment));
+		
+		/*String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
-		}
-	}*/
+		}*/
+	}
 	
 	/*private void creerContinents() {
 		String[] nomsCont = new String[]{
