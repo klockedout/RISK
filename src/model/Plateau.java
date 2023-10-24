@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase; 
-	private Territoire [][] plateau  = new Territoire [10][10];
+	private Territoire [][] plateau  = new Territoire [100][100];
 	static private int idPlateau=0;
 	private int tour=0;
 	private Joueur joueurActif;
@@ -20,15 +20,17 @@ public class Plateau extends AbstractModel{
 		this.idPlateau+=1;*/
 	 for (int x = 0; x < plateau.length; x++) { 
 		 for (int y=0; y < plateau[x].length; y++) {
-			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
+			 plateau[x][y] = new Territoire("Ocean",TypeCase.CHEMIN);
 			}
 		}
-		/*for (int x = 1; x < plateau.length - 1; x++) {
+	 for (int x = 1; x < plateau.length - 1; x++) {
 			for (int y = 1; y < plateau[x].length - 1; y++) {
-				plateau[x][y] = new Territoire("Test",TypeCase.CHEMIN);
+				plateau[x][y] = new Territoire("Test",TypeCase.OCEAN);
 
 			}
-		}*/
+	 }
+		
+//		plateau[0][0] = new Territoire("France", TypeCase.CHEMIN);
 	}
 	
 	private void creerJoueurs() {
@@ -38,10 +40,10 @@ public class Plateau extends AbstractModel{
 		}
 	}
 	
-	/*private void creerContinents() {
+	private void creerContinents() {
 		String[] nomsCont = new String[]{
 				"Europe",
-				"Aise",
+				"Asie",
 				"Amérique du Nord",
 				"Amérique du Sud",
 				"Afrique",
@@ -49,7 +51,7 @@ public class Plateau extends AbstractModel{
 		for (String nomCont : nomsCont) {
 			this.continents.add(new Continent(nomCont));
 		}
-	}*/
+	}
 	
 	private void creerTerritoires() {
 		String[] nomsTerEurope = new String[] {
@@ -132,6 +134,24 @@ public class Plateau extends AbstractModel{
 	@Override
 	public TypeTerritoire getTypeTerritoire(int x, int y) {
 		return plateau[x][y].getTypeTerritoire();
+	}
+
+	@Override
+	public Joueur getVainqueur(int x, int y) {
+		// TODO Auto-generated method stub
+		return this.plateau[x][y].getVainqueur();
+	}
+
+	@Override
+	public int getNbRegimentPlacés() {
+		// on parcourt la liste des joueur et on prendre le nombre de regiment
+		return 0; 
+	}
+
+	@Override
+	public int getNbRegiment() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

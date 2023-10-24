@@ -25,6 +25,10 @@ public class Territoire {
 	public int getNbRegTer() {
 		return this.nbRegTer;
 	}
+	public Joueur getVainqueur() {
+		return null; 
+		
+	}
 
 	//methode qui ajouter un regiment sur un territoire 
 
