@@ -3,24 +3,28 @@ import java.util.ArrayList;
 
 public class Continent {
 	private String nomCont;
-	private TypeTerritoire typeCase;
-	private ArrayList<Territoire> listTerritoires;
+	private ArrayList<Territoire> Territoires;
 	
-	public Continent(String nomCont, TypeTerritoire typeCase){
+	Continent(String nomCont){
 		this.nomCont=nomCont;
-		this.typeCase = typeCase;
-		this.listTerritoires=new ArrayList<Territoire>();
-	}
-	
-	public String getNom() {
-		return this.nomCont;
-	}
-	
-	public TypeTerritoire getTypeCase() {
-		return this.typeCase; 
-	}
-	public ArrayList<Territoire> getListTerritoire() {
-			return this.listTerritoires; 
-		}
+		this.Territoires=new ArrayList<Territoire>();
 	}
 
+	public String getNomCont() {
+		return nomCont;
+	}
+
+	public void setNomCont(String nomCont) {
+		this.nomCont = nomCont;
+	}
+
+	public ArrayList<Territoire> getTerritoires() {
+		return Territoires;
+	}
+
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		Territoires = territoires;
+	}
+	
+	
+}

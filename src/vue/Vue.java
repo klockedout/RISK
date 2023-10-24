@@ -55,29 +55,11 @@ public class Vue extends javax.swing.JFrame implements Observateur{
             for(int yP=0; yP<model.getLargeur();yP++){
                 switch(model.getTypeTerritoire(xP, yP)){
                 case OCEAN : 
-                        panelJeu.drawOcean(x+xP*cote, y+yP*cote, cote);
+                        panelJeu.drawOcean(xP, yP, cote);
                     break;
-                case AFRIQUE : 
-                        panelJeu.drawAfrique(x+xP*cote, y+yP*cote, cote);
+                case CHEMIN : 
+                        panelJeu.drawCaseChemin(x+xP*cote, y+yP*cote, cote);
                     break;
-                case ASIE : 
-                    panelJeu.drawAsie(x+xP*cote, y+yP*cote, cote);
-                break;
-                case AMERIQUEN : 
-                    panelJeu.drawAmeriqueNord(x+xP*cote, y+yP*cote, cote);
-                break;
-                case AMERIQUESUD: 
-                    panelJeu.drawAmeriqueSud(x+xP*cote, y+yP*cote, cote);
-                break;
-                case EUROPE : 
-                    panelJeu.drawEurope(x+xP*cote, y+yP*cote, cote);
-                break;
-                case OCEANIE : 
-                    panelJeu.drawOceanie(x+xP*cote, y+yP*cote, cote);
-                break;
-                case BORDURE : 
-                    panelJeu.drawBordure(x+xP*cote, y+yP*cote, cote);
-                break;
                 case FLECHE_HAUT : 
                         panelJeu.drawCaseFlecheHaut(x+xP*cote, y+yP*cote, cote);
                     break;
@@ -129,13 +111,13 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelNbFleches, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
             //taille de la largeur de la fenetre
-            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
             		///taille de la longueur de la fenetre 
-                .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(panelJeu, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNbSourisIN)

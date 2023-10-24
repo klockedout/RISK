@@ -7,9 +7,10 @@ public class Territoire {
 	int nbRegTer;
 	private TypeTerritoire typeTer; 
 	
-	Territoire(String nom){
+	Territoire(String nom, TypeTerritoire typeTer){
 		this.nbRegTer=0;
 		this.nomTer=nom;
+		this.typeTer = typeTer; 
 	}
 	//methodes 
 	
@@ -23,10 +24,6 @@ public class Territoire {
 
 	public String getNomTer() {
 		return nomTer;
-	}
-	public Joueur getVainqueur() {
-		return null; 
-		
 	}
 
 	public void setNomTer(String nomTer) {
