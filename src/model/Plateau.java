@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Plateau extends AbstractModel{
-	private TypeTerritoire TypeCase; 
+	private TypeTerritoire TypeCase;
 	private Territoire [][] plateau  = new Territoire [10][10];
 	static private int idPlateau=0;
 	private int tour=0;
@@ -31,10 +31,10 @@ public class Plateau extends AbstractModel{
 		}*/
 	}
 	
-	private void creerJoueurs() {
+	private void creerJoueurs(int nbRegDefault) {
 		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
-			this.joueurs.add(new Joueur(this.idPlateau,couleur));
+			this.listeJoueurs.add(new Joueur(Plateau.idPlateau,couleur,nbRegDefault));
 		}
 	}
 	
@@ -190,7 +190,13 @@ public class Plateau extends AbstractModel{
 		this.pile = pile;
 	}
 
+    public void placerRegiments(Territoire ter,int nbReg) {
+    	this.joueurActif.ajouterRegiment(ter, nbReg);
+    }
     
+    public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+    	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
+    }
 	
 }
 

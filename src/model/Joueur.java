@@ -14,7 +14,7 @@ public class Joueur {
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
-	private ArrayList  <Territoire> Territoire;
+	private ArrayList <Territoire> territoires;
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
@@ -27,7 +27,7 @@ public class Joueur {
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 
-		this.Territoire=new ArrayList<Territoire>();
+		this.territoires=new ArrayList<Territoire>();
 	}
 
 
@@ -120,13 +120,13 @@ public class Joueur {
 	}
 
 
-	public ArrayList<Territoire> getListeTerritoire() {
-		return Territoire;
+	public ArrayList<Territoire> getListeTerritoires() {
+		return territoires;
 	}
 
 
-	public void setTerritoire(ArrayList<Territoire> territoire) {
-		Territoire = territoire;
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		territoires = territoires;
 	}
 
 
@@ -139,6 +139,23 @@ public class Joueur {
 		this.territoire = territoire;
 	}
 	
+	public void ajouterRegiment(Territoire ter,int nbReg) {
+		if (this.territoires.contains(ter)&&this.nbRegimentJoueur>=nbReg) {
+			ter.setNbRegTer(nbReg+ter.getNbRegTer());
+			this.nbRegimentJoueur-=nbReg;
+		} else {
+			System.out.println("opération pas possible");
+		}
+	}
+	
+	public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+		if (this.territoires.contains(terDepart)&&this.territoires.contains(terDesti)&&terDepart.getNbRegTer()>nbReg) {
+			terDepart.setNbRegTer(terDepart.getNbRegTer()-nbReg);
+			terDesti.setNbRegTer(terDesti.getNbRegTer()+nbReg);;
+		} else {
+			System.out.println("opération pas possible");
+		}
+    }
 	
 
 }
