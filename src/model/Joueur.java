@@ -18,8 +18,9 @@ public class Joueur {
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
+	//contructeur 
 	
-	Joueur (int idPlateau, String couleur){
+	public Joueur (int idPlateau, String couleur, int nbRegiment){
 		//this.idPlateau=idPlateau;
 		this.couleur=couleur;
 		this.nbRegimentJoueur = nbRegiment; 

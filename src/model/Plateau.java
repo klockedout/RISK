@@ -10,7 +10,7 @@ public class Plateau extends AbstractModel{
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Continent> continents;
-	private ArrayList<Joueur> joueurs;
+	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile;
 	
 	public Plateau(int idPlateau) {
