@@ -9,4 +9,22 @@ public class Continent {
 		this.nomCont=nomCont;
 		this.Territoires=new ArrayList<Territoire>();
 	}
+
+	public String getNomCont() {
+		return nomCont;
+	}
+
+	public void setNomCont(String nomCont) {
+		this.nomCont = nomCont;
+	}
+
+	public ArrayList<Territoire> getTerritoires() {
+		return Territoires;
+	}
+
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		Territoires = territoires;
+	}
+	
+	
 }

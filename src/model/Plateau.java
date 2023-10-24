@@ -112,6 +112,63 @@ public class Plateau extends AbstractModel{
 		return false;
 	}
 
+	public static int getIdPlateau() {
+		return idPlateau;
+	}
 
+	public static void setIdPlateau(int idPlateau) {
+		Plateau.idPlateau = idPlateau;
+	}
+
+	public int getTour() {
+		return tour;
+	}
+
+	public void setTour(int tour) {
+		this.tour = tour;
+	}
+
+	public Joueur getJoueurActif() {
+		return joueurActif;
+	}
+
+	public void setJoueurActif(Joueur joueurActif) {
+		this.joueurActif = joueurActif;
+	}
+
+	public String getEtatPlateu() {
+		return etatPlateu;
+	}
+
+	public void setEtatPlateu(String etatPlateu) {
+		this.etatPlateu = etatPlateu;
+	}
+
+	public ArrayList<Continent> getContinents() {
+		return continents;
+	}
+
+	public void setContinents(ArrayList<Continent> continents) {
+		this.continents = continents;
+	}
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
+
+	public ArrayList<CarteRisk> getPile() {
+		return pile;
+	}
+
+	public void setPile(ArrayList<CarteRisk> pile) {
+		this.pile = pile;
+	}
+
+    
+	
 }
 

@@ -21,4 +21,36 @@ public class Place {
 		}*/
 	}
 
+
+	public int getNbRegTer() {
+		return nbRegTer;
+	}
+
+
+	public void setNbRegTer(int nbRegTer) {
+		this.nbRegTer = nbRegTer;
+	}
+
+
+	public Territoire getTerDepart() {
+		return terDepart;
+	}
+
+
+	public void setTerDepart(Territoire terDepart) {
+		this.terDepart = terDepart;
+	}
+
+
+	public Territoire getTerDes() {
+		return terDes;
+	}
+
+
+	public void setTerDes(Territoire terDes) {
+		this.terDes = terDes;
+	}
+	
+	
+
 }
