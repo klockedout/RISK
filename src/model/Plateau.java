@@ -35,12 +35,12 @@ public class Plateau extends AbstractModel{
 
 	}
 	
-	private void creerJoueurs() {
+	/*private void creerJoueurs() {
 		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
 		}
-	}
+	}*/
 //	Larissa 
 //	private void creerContinents() {
 //		String[] nomsCont = new String[]{
@@ -208,13 +208,13 @@ public class Plateau extends AbstractModel{
 		this.continents = continents;
 	}
 
-	public ArrayList<Joueur> getJoueurs() {
+	/*public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
 	}
 
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
-	}
+	}*/
 
 	public ArrayList<CarteRisk> getPile() {
 		return pile;
