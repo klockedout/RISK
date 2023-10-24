@@ -48,30 +48,32 @@ public class Plateau extends AbstractModel{
 				"Amérique du Sud",
 				"Afrique",
 				"Océanie"};
+		
 		for (String nomCont : nomsCont) {
 			this.continents.add(new Continent(nomCont));
 		}
 	}
 	
 	private void creerTerritoires() {
+		
 		String[] nomsTerEurope = new String[] {
 				"Grande-Bretagne",
 				"Islande",
 				"Europe du Nord",
 				"Scandinavie",
 				"Europe du Sud",
-				"Ukraine",
-				"Europe occidentale"};
+				"RUSSIE",
+				"Europe de l'ouest"};
 		String[] nomsTerAsie = new String[] {
 				"Afghanistan",
 				"Chine",
 				"Inde",
-				"Tchita",
+				"Asie du sud-est",
 				"Japon",
 				"Kamtchatka",
 				"Moyen-Orient",
 				"Mongolie",
-				"Siam",
+				"IRKOUTSK",
 				"Sibérie",
 				"Oural",
 				"Yakoutie"
@@ -84,7 +86,7 @@ public class Plateau extends AbstractModel{
 				"Groenland",
 				"Territoires du Nord-Ouest",
 				"Ontario",
-				"Québec",
+				"CANADA DE L'EST",
 				"États de l'Ouest"};
 		String[] nomsTerAmeriqueS = new String[] {
 				"Argentine",
@@ -92,8 +94,8 @@ public class Plateau extends AbstractModel{
 				"Pérou",
 				"Venezuela"};
 		String[] nomsTerAfrique = new String[] {
-				"Congo",
-				"Afrique de l’Est",
+				"AFRIQUE CENTRALE",
+				"Afrique orientale",
 				"Égypte",
 				"Madagascar",
 				"Afrique du Nord",
@@ -111,8 +113,70 @@ public class Plateau extends AbstractModel{
 		return this.TypeCase;
 	}
 	
+	// Je crée la pile de 
 	private void creerPlile() {
-		
+	     
+		//EUROPE
+		 pile.add(new CarteRisk("Grande-Bretagne", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Islande", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Europe du Nord", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Scandinavie", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Europe du Sud", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("RUSSIE", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Europe de l'ouest", TypeCarte.ARTILLERIE));
+
+
+		 //ASIE
+	     pile.add(new CarteRisk("Afghanistan", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Chine", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Inde", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Asie du sud-est", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Japon", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Kamtchatka", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Moyen-Orient", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Mongolie", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("IRKOUTSK", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Sibérie", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Oural", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Yakoutie", TypeCarte.CAVALERIE));
+	     
+	     // AMÉRIQUE DU NORD
+	     pile.add(new CarteRisk("Alaska", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Alberta", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Amérique centrale", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("États de l'Est", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Groenland", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Territoires du Nord-Ouest", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Ontario", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("CANADA DE L'EST", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("États de l'Ouest", TypeCarte.ARTILLERIE));
+	     
+	     //AMÉRIQUE DU SUD 
+	     pile.add(new CarteRisk("Argentine", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Brésil", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Pérou", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Venezuela", TypeCarte.INFANTERIE));
+	     
+	     
+	     //AFRIQUE
+	     pile.add(new CarteRisk("AFRIQUE CENTRALE", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Afrique orientale", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Égypte", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Madagascar", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Afrique du Nord", TypeCarte.CAVALERIE));
+	     pile.add(new CarteRisk("Afrique du Sud", TypeCarte.ARTILLERIE));
+	     
+	     //AUSTRALIE
+	     pile.add(new CarteRisk("Australie Orientale", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Indonésie", TypeCarte.ARTILLERIE));
+	     pile.add(new CarteRisk("Nouvelle-Guinée", TypeCarte.INFANTERIE));
+	     pile.add(new CarteRisk("Australie Occidentale", TypeCarte.ARTILLERIE));
+	     
+	     //JOKER
+	     pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
+	     pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
+	     
+	     
 	}
 
 	@Override
