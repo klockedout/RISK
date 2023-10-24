@@ -21,10 +21,6 @@ public class Territoire {
 	public String getNomTerritoire() {
 		return this.nomTer;
 	}
-	
-	public int getNbRegTer() {
-		return this.nbRegTer;
-	}
 
 	public String getNomTer() {
 		return nomTer;
