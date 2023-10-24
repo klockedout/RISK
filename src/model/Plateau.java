@@ -191,6 +191,8 @@ public class Plateau extends AbstractModel{
 	}
 
     
-	
+	public int obtenirNbTerritoire() {
+	    return plateau.length * plateau[0].length;
+	}
 }
 
