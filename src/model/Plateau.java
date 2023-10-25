@@ -17,11 +17,8 @@ public class Plateau extends AbstractModel{
 	private ArrayList<Continent> continents;
 	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile;
-	private HashMap<Territoire, Joueur> territoiresControles;
 
 	public Plateau(int idPlateau) {
-		
-		territoiresControles = new HashMap<>();
 		
 		/*this.creerContinents();
 		this.creerJoueurs();
@@ -157,56 +154,7 @@ public class Plateau extends AbstractModel{
 	        }
 	    }
 	}
-	
-   
-    public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
-        territoiresControles.put(territoire, joueur);
-    }
-
-    public boolean territoireControle(Territoire territoire, Joueur joueur) {
-        return territoiresControles.get(territoire) == joueur;
-    }
-
-    public int getNombreTerritoiresControles(Joueur joueur) {
-        int count = 0;
-        for (Territoire territoire : territoiresControles.keySet()) {
-            if (territoireControle(territoire, joueur)) {
-                count++;
-            }
-        }
-        return count;
-    }
-    
-    public void calculerScore(Joueur joueur) {
-		
-    	Connection connection;
-		connection = ConnexionBD.getConnexion();
-    	
-		// chaque territoire = 1 point
-    	int score = getNombreTerritoiresControles(joueur);
-    	
-        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
-        PreparedStatement statement = null;
-
-        try {
-            statement = connection.prepareStatement(req);
-            statement.setDouble(1, score);
-            statement.setString(2, joueur.getNom());
-            statement.executeUpdate();	
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //fermer le PreparedStatement soit aprés le try ou aprés le catch
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-    
+	    
 	public TypeTerritoire getTypeTerritoire() {
 		return this.TypeCase;
 	}

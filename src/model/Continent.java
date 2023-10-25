@@ -30,11 +30,11 @@ public class Continent {
 			return this.listTerritoires; 
 		}
 	
-	public ArrayList<Territoire> getListeTerritoire(String nomContinent) {
+	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
         ArrayList<Territoire> territoiresContinent = new ArrayList<>();
 
         for (Territoire territoire : listTerritoires) {
-            if (territoire.getTypeTerritoire().equals(nomContinent)) {
+            if (territoire.getTypeTerritoire().equals(nomContinent.getTypeCase())) {
                 territoiresContinent.add(territoire);
             }
         }
