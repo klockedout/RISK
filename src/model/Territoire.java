@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Territoire {
 	String nomTer;
 	int nbRegTer;
-	Continent continent; 
 	ArrayList<Territoire>listeTerritoireVoisin; 
 	
 	Territoire(String nom){
@@ -27,6 +26,16 @@ public class Territoire {
 	public Joueur getVainqueur() {
 		return null; 
 		
+	}
+	public ArrayList<Territoire> getListeTerritoireVoisin() {
+			return this.listeTerritoireVoisin;
+	}
+	
+	public void ajouterTerritoireVoisin(Territoire voisin) {
+	    if (listeTerritoireVoisin == null) {
+	        listeTerritoireVoisin = new ArrayList<>();
+	    }
+	    listeTerritoireVoisin.add(voisin);
 	}
 
 	//methode qui ajouter un regiment sur un territoire 

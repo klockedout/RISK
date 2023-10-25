@@ -26,6 +26,9 @@ public class Continent {
 	public void setTerritoire( Territoire territoire) {
 		this.territoire = territoire;
 	}
+	public String getTerritoire() {
+		return this.territoire.getNomTerritoire();
+	}
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 
 		}

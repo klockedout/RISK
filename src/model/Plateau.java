@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Plateau extends AbstractModel {
 	private TypeTerritoire TypeCase;
-	private Continent[][] plateau = new Continent[50][30];
+	private Territoire territoire;
+	private Continent[][] plateau = new Continent[51][30];
 	static private int idPlateau = 0;
 	private int tour = 0;
 	private Joueur joueurActif;
@@ -23,7 +24,7 @@ public class Plateau extends AbstractModel {
 		// Larissa : ajout de bordure et ocean
 		for (int x = 0; x < plateau.length; x++) {
 			for (int y = 0; y < plateau[x].length; y++) {
-				plateau[x][y] = new Continent("Bordure", TypeCase.BORDURE);
+				plateau[x][y] = new Continent("Bordure", TypeCase.OCEAN);
 			}
 		}
 		for (int x = 1; x < plateau.length - 1; x++) {
@@ -54,10 +55,12 @@ public class Plateau extends AbstractModel {
 		}
 		for (int x = 2; x < 5; x++) {
 			for (int y = 5; y < 7; y++) {
-				this.plateau[x][y].setTerritoire(new Territoire("Alaska")); 
+				Territoire alaska = new Territoire("Alaska");
+				this.plateau[x][y].setTerritoire(alaska); 
 				
 			}
 		}
+		
 		//
 		for (int x = 5; x < 10; x++) {
 			for (int y = 5; y < 7; y++) {
@@ -169,15 +172,15 @@ public class Plateau extends AbstractModel {
 			}
 		}
 		// japon
-		for (int x = 45; x < 47; x++) {
-			for (int y = 7; y < 10; y++) {
+		for (int x = 49; x < 51; x++) {
+			for (int y = 8; y < 11; y++) {
 				this.plateau[x][y] = asie;
 				this.plateau[x][y].setTerritoire(new Territoire("Japon"));
 			}
 		}
 		// karou
 		for (int x = 44; x < 47; x++) {
-			for (int y = 2; y < 6; y++) {
+			for (int y = 2; y < 7; y++) {
 				this.plateau[x][y] = asie;
 				this.plateau[x][y].setTerritoire(new Territoire("Kamtchatka"));
 			}
@@ -328,6 +331,12 @@ public class Plateau extends AbstractModel {
 	public int getNbRegiment() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String getTerritoire(int x, int y) {
+		// TODO Auto-generated method stub
+		return plateau[x][y].getTerritoire();
 	}
 
 }
