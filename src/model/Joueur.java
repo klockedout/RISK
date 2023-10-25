@@ -16,9 +16,9 @@ public class Joueur {
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
-	private ArrayList  <Territoire> Territoire;
-	//qu'est ce que c'est ? 
-	Territoire territoire;
+	private ArrayList  <Territoire> listeTerritoire;
+	
+	private Territoire territoire;
 	
 	//contructeur 
 	
@@ -29,7 +29,7 @@ public class Joueur {
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 
-		this.Territoire=new ArrayList<Territoire>();
+		this.listeTerritoire=new ArrayList<Territoire>();
 	}
 
 
@@ -128,12 +128,12 @@ public class Joueur {
 
 
 	public ArrayList<Territoire> getListeTerritoire() {
-		return Territoire;
+		return listeTerritoire;
 	}
 
 
 	public void setTerritoire(ArrayList<Territoire> territoire) {
-		Territoire = territoire;
+		listeTerritoire = territoire;
 	}
 
 
@@ -162,7 +162,22 @@ public class Joueur {
 		return this.resultatDe;
 	}
 	
-	public void attaquer(String nomTerritoire, int nbRegiment) {
+	public void attaquer(int nbRegiment) {
+		//valeur pour calculer score pour trophé
 		this.setNbAttaque(this.getNbAttaque()+1);
+		
+		for (Territoire territoire : this.listeTerritoire) {
+			System.out.println(territoire.getNomTer());
+		}
+		
+		//TODO --> choisir le territoire à attaquer
+		//System.out.println(getTerritoireVoisin);
+		
+		lancerDe(nbRegiment);
+	}
+	
+	
+	public void defendre(int nbRegiment) {
+		lancerDe(nbRegiment);
 	}
 }

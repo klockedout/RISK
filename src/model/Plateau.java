@@ -181,7 +181,7 @@ public class Plateau extends AbstractModel{
 		this.joueurActif = joueurActif;
 	}
 
-	public String getEtatPlateu() {
+	public String getEtatPlateu() { 
 		return etatPlateu;
 	}
 
@@ -197,12 +197,8 @@ public class Plateau extends AbstractModel{
 		this.continents = continents;
 	}
 
-	public ArrayList<Joueur> getJoueurs() {
-		return joueurs;
-	}
-
-	public void setJoueurs(ArrayList<Joueur> joueurs) {
-		this.joueurs = joueurs;
+	public ArrayList<Joueur> getListeJoueurs() {
+		return this.listeJoueurs;
 	}
 
 	public ArrayList<CarteRisk> getPile() {
