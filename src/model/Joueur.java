@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Joueur {
@@ -133,7 +134,7 @@ public class Joueur {
 
 	}
 
-	// Pour afficher les cartes d'un joueur
+	// Tidiane Pour afficher les cartes d'un joueur
 	public void afficherCartes() {
 
 		for (int i = 0; i < this.carteRisk.size(); i++) {
@@ -143,5 +144,51 @@ public class Joueur {
 		}
 
 	}
+	
+	// Tidiane Pour échanger les cartes
+	public void echangerCartes() {
+		
+		for (int i = 0; i < this.carteRisk.size(); i++) {
+		
+		
+		
+		
+//	// Création du compteur de cartes
+//	HashMap<TypeCarte, Integer> compteurCartes = new HashMap<>();
+//
+//	// Parcours de la liste des cartes du joueur et ajout au compteur
+//	for (CarteRisk carte : carteRisk) {
+//	    TypeCarte typeCarte = carte.getTypeCarte();
+//	    
+//	    if (compteurCartes.containsKey(typeCarte)) {
+//	        int nombreCartes = compteurCartes.get(typeCarte);
+//	        //compteur nous permet de stocker le nombre actuel de cartes dans la liste du joueur. 
+//	        compteurCartes.put(typeCarte, nombreCartes + 1);
+//	    } else {
+//	        compteurCartes.put(typeCarte, 1);
+//	    }
+//
+//    int nombreEchanges = 0;
+//
+//    // Calculer le nombre d'échange à faire 
+//    for (TypeCarte type : compteurCartes.keySet()) {
+//        int nombreCartes = compteurCartes.get(type);
+//        if (nombreCartes >= 3) {  // Échange pour trois cartes de même type
+//            // Effectuer l'échange
+//            nombreEchanges++;
+//        }
+//    }
+//
+//    // Ajouter des renforts en fonction du nombre d'échanges effectués
+//    
+//    
+//    
+//    // Retirer les cartes échangées de la main du joueur
+//    // ...
+//
+//    return ;
+//}
+
+}
 
 }
