@@ -84,6 +84,7 @@ public class Plateau extends AbstractModel {
 				this.plateau[x][y] = asie;
 			}
 		}
+		     
 		// moyen orient
 		for (int x = 27; x < 31; x++) {
 			for (int y = 11; y < 16; y++) {
