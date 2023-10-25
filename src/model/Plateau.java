@@ -51,6 +51,40 @@ public class Plateau extends AbstractModel {
 				
 			}
 		}
+		for (int x = 2; x < 5; x++) {
+			for (int y = 5; y < 7; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Alaska")); 
+				
+			}
+		}
+		//
+		for (int x = 5; x < 10; x++) {
+			for (int y = 5; y < 7; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Territoire du Nord Ouest")); 
+				
+			}
+		}
+		for (int x = 10; x < 12; x++) {
+			for (int y = 2; y < 5; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Ontario")); 
+				
+			}
+		}
+		//remplir rectangle Ontario
+		
+		for (int x = 12; x < 15; x++) {
+			for (int y = 5; y < 6; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Canada de l'Est")); 
+				
+			}
+		}
+		//Alberta
+		for (int x = 3; x < 8; x++) {
+			for (int y = 8; y < 7; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Canada de l'Est")); 
+				
+			}
+		}
 		for (int x = 3; x < 17; x++) {
 			for (int y = 13; y < 27; y++) {
 				this.plateau[x][y] = ameriqueSud;
