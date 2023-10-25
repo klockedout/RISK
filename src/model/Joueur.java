@@ -206,7 +206,7 @@ public class Joueur {
 
 		// Ajouter des régiments en fonction du nombre d'échanges effectués
 		if (this.echanger >= 1 && this.echanger <= 5) {
-		    this.nbRegimentJoueur += 2 * this.echanger + 2;
+		     this.nbRegimentJoueur += 2 * this.echanger + 2;
 		} else if (this.echanger >= 6) {
 		    this.nbRegimentJoueur += 10 + 5 * (this.echanger - 5);
 		}
