@@ -205,19 +205,18 @@ public class Joueur {
 		}
 
 		// Ajouter des régiments en fonction du nombre d'échanges effectués
-		if (this.echanger==1) {
-			this.nbRegimentJoueur+=4;
+		if (this.echanger >= 1 && this.echanger <= 5) {
+		    this.nbRegimentJoueur += 2 * this.echanger + 2;
+		} else if (this.echanger >= 6) {
+		    this.nbRegimentJoueur += 10 + 5 * (this.echanger - 5);
 		}
-		if (this.echanger==2) {
-			this.nbRegimentJoueur+=6;
-		}
-		if (this.echanger==3) {
-			this.nbRegimentJoueur+=8;
-		}
-
+		
 		// Retirer les cartes échangées de la main du joueur
+		
+		carteRisk.removeAll(artillerie);
+		carteRisk.removeAll(infanterie);
+		carteRisk.removeAll(cavalerie);
 
-		return;
 	}
 
 }
