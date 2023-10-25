@@ -6,20 +6,20 @@ import java.util.Scanner;
 public class Manche {
     private ArrayList<Joueur> joueurs;
     private int tourActuel;
-
+    //FARKI Imane
     public Manche(ArrayList<Joueur> joueurs) {
         this.joueurs = joueurs;
         this.tourActuel = 0; // Démarrez le tour au premier joueur
     }
-
+    //FARKI Imane
     public Joueur getJoueurActuel() {
         return joueurs.get(tourActuel);
     }
-
+    //FARKI Imane
     public void passerAuTourSuivant() {
         tourActuel += 1;
     }
-
+    //FARKI Imane
     public static boolean demanderContinuerDeplacementRegiments() {
         Scanner scanner = new Scanner(System.in);
         String reponse;
@@ -32,6 +32,7 @@ public class Manche {
 
         return reponse.equals("oui");
     }
+  //FARKI Imane
     public void gererTour() {
         Joueur joueurActuel = getJoueurActuel();
 		

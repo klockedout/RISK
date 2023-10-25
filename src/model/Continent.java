@@ -1,5 +1,7 @@
 package model;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,19 +19,19 @@ public class Continent {
 		this.listTerritoires=new ArrayList<Territoire>();
 		this.territoiresControles = new HashMap<Territoire, Joueur>();
 	}
-	
+	//FARKI Imane
 	public String getNom() {
 		return this.nomCont;
 	}
-	
+	//FARKI Imane
 	public TypeTerritoire getTypeCase() {
 		return this.typeCase; 
 	}
-	
+	//FARKI Imane
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 
 		}
-	
+	//FARKI Imane
 	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
         ArrayList<Territoire> territoiresContinent = new ArrayList<>();
 
@@ -40,15 +42,15 @@ public class Continent {
         }
         return territoiresContinent;
     }
-	
+	//FARKI Imane
     public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
         territoiresControles.put(territoire, joueur);
     }
-
+  //FARKI Imane
     public boolean territoireControle(Territoire territoire, Joueur joueur) {
         return territoiresControles.get(territoire) == joueur;
     }
-
+  //FARKI Imane
     public int getNombreTerritoiresControles(Joueur joueur) {
         int nombreTerritoires = 0;
         for (Territoire territoire : territoiresControles.keySet()) {
@@ -58,36 +60,8 @@ public class Continent {
         }
         return nombreTerritoires;
     }
-    
-    public void calculerScore(Joueur joueur) {
-		
-    	Connection connection;
-		connection = ConnexionBD.getConnexion();
-    	
-		// chaque territoire = 1 point
-    	int score = getNombreTerritoiresControles(joueur);
-    	
-        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
-        PreparedStatement statement = null;
+      
+}
 
-        try {
-            statement = connection.prepareStatement(req);
-            statement.setDouble(1, score);
-            statement.setString(2, joueur.getNom());
-            statement.executeUpdate();	
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            //fermer le PreparedStatement soit aprés le try ou aprés le catch
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-	}
+	
 
