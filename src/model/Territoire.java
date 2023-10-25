@@ -6,11 +6,13 @@ public class Territoire {
 	String nomTer;
 	int nbRegTer;
 	Continent continent; 
+	ArrayList<Territoire>listeTerritoireVoisin; 
 	
 	Territoire(String nom){
 		this.nbRegTer=0;
 		this.nomTer=nom;
-	}
+		}
+	
 	//methodes 
 	
 

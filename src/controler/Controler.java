@@ -1,6 +1,8 @@
 package controler;
 
 import model.AbstractModel;
+import model.Plateau;
+import model.TypeTerritoire;
 
 public class Controler extends AbstractControler {
 	
@@ -8,15 +10,15 @@ public class Controler extends AbstractControler {
         super(model);
     }
 	
-	/*
+
 	@Override
 	public void cliqueSur(int x, int y) {
 		System.out.println("Cliquer : " + x + " ; " + y);
-		
-		if (this.model instanceof Labyrinthe labyrinthe) {
-			TypeCase typeCase = labyrinthe.getEnvironnement()[x][y].getTypeCase();
-		
-		
+		if( this.model instanceof Plateau )
+		{Plateau plateau = (Plateau) model;
+		System.out.println(plateau.getTypeTerritoire(x, y));}
+	}
+		/*
 		// test 1 Si fleche disponible, je fais ce qui suit :
 		// test 2 Type case = mur in ou out je fais rien
 		// test 3 si c'est chemin alors je met type haut
@@ -62,11 +64,7 @@ public class Controler extends AbstractControler {
 		model.demandeMiseAjourVue();
 	}
 
-	@Override
-	public void cliqueSur(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 

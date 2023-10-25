@@ -22,7 +22,7 @@ public class Joueur {
 	Joueur (int idPlateau, String couleur){
 		//this.idPlateau=idPlateau;
 		this.couleur=couleur;
-		this.nbRegimentJoueur = nbRegiment; 
+		//this.nbRegimentJoueur = nbRegiment; 
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 

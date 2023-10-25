@@ -14,6 +14,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<CarteRisk> pile;
 
 	public Plateau(int idPlateau) {
+		super();
 		/*
 		 * this.creerContinents(); this.creerJoueurs(); this.creerPlile();
 		 * this.idPlateau+=1;
@@ -64,24 +65,56 @@ public class Plateau extends AbstractModel {
 				
 			}
 		}
+		//Territoire de Ontario
 		for (int x = 10; x < 12; x++) {
 			for (int y = 2; y < 5; y++) {
 				this.plateau[x][y].setTerritoire(new Territoire("Ontario")); 
 				
 			}
 		}
-		//remplir rectangle Ontario
-		
+		for (int x = 8; x < 12; x++) {
+			for (int y = 7; y < 9; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Ontario")); 
+				
+			}
+		}
 		for (int x = 12; x < 15; x++) {
-			for (int y = 5; y < 6; y++) {
+			for (int y = 5; y < 9; y++) {
 				this.plateau[x][y].setTerritoire(new Territoire("Canada de l'Est")); 
 				
 			}
 		}
 		//Alberta
 		for (int x = 3; x < 8; x++) {
-			for (int y = 8; y < 7; y++) {
-				this.plateau[x][y].setTerritoire(new Territoire("Canada de l'Est")); 
+			for (int y = 7; y < 9; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Alberta")); 
+				
+			}
+		}		
+		//USA EST 
+		for (int x = 9; x < 16; x++) {
+			for (int y = 9; y < 13; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Amerique de l'Est")); 
+				
+			}
+		}
+		//Amerique central
+		for (int x = 3; x < 7; x++) {
+			for (int y = 11; y < 13; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Amerique Central")); 
+				
+			}
+		}
+		//Amerique l'ouest
+		for (int x = 3; x < 9; x++) {
+			for (int y = 9; y < 11; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Amerique de l'Ouest")); 
+				
+			}
+		}
+		for (int x = 9; x < 13; x++) {
+			for (int y = 9; y < 11; y++) {
+				this.plateau[x][y].setTerritoire(new Territoire("Amerique de l'Ouest")); 
 				
 			}
 		}
