@@ -12,6 +12,7 @@ public class Joueur {
 	private int nbAttaque;
 	private int nbDefense;
 	// a commenter
+	private int echanger = 0;
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList<CarteRisk> carteRisk;
@@ -144,51 +145,79 @@ public class Joueur {
 		}
 
 	}
-	
+
 	// Tidiane Pour échanger les cartes
 	public void echangerCartes() {
-		
-		for (int i = 0; i < this.carteRisk.size(); i++) {
-		
-		
-		
-		
-//	// Création du compteur de cartes
-//	HashMap<TypeCarte, Integer> compteurCartes = new HashMap<>();
-//
-//	// Parcours de la liste des cartes du joueur et ajout au compteur
-//	for (CarteRisk carte : carteRisk) {
-//	    TypeCarte typeCarte = carte.getTypeCarte();
-//	    
-//	    if (compteurCartes.containsKey(typeCarte)) {
-//	        int nombreCartes = compteurCartes.get(typeCarte);
-//	        //compteur nous permet de stocker le nombre actuel de cartes dans la liste du joueur. 
-//	        compteurCartes.put(typeCarte, nombreCartes + 1);
-//	    } else {
-//	        compteurCartes.put(typeCarte, 1);
-//	    }
-//
-//    int nombreEchanges = 0;
-//
-//    // Calculer le nombre d'échange à faire 
-//    for (TypeCarte type : compteurCartes.keySet()) {
-//        int nombreCartes = compteurCartes.get(type);
-//        if (nombreCartes >= 3) {  // Échange pour trois cartes de même type
-//            // Effectuer l'échange
-//            nombreEchanges++;
-//        }
-//    }
-//
-//    // Ajouter des renforts en fonction du nombre d'échanges effectués
-//    
-//    
-//    
-//    // Retirer les cartes échangées de la main du joueur
-//    // ...
-//
-//    return ;
-//}
 
-}
+		// Creer une liste de cavlaerie ...
+		ArrayList<CarteRisk> cavalerie = new ArrayList<>();
+		ArrayList<CarteRisk> infanterie = new ArrayList<>();
+		ArrayList<CarteRisk> artillerie = new ArrayList<>();
+		ArrayList<CarteRisk> joker = new ArrayList<>();
+
+		
+
+		
+		int compteurArtillerie = 0;
+		int compteurInfanterie = 0;
+		int compteurCavalerie = 0;
+		int compteurJoker = 0;
+
+		for (CarteRisk carte : carteRisk) {
+			TypeCarte typeCarte = carte.getTypeCarte();
+
+			if (typeCarte == TypeCarte.ARTILLERIE) {
+				artillerie.add(carte);
+				compteurArtillerie++;
+			} else if (typeCarte == TypeCarte.INFANTERIE) {
+				infanterie.add(carte);
+				compteurInfanterie++;
+			} else if (typeCarte == TypeCarte.CAVALERIE) {
+				cavalerie.add(carte);
+				compteurCavalerie++;
+			}
+			else if (typeCarte == TypeCarte.JOKER) {
+				joker.add(carte);
+				compteurJoker++;
+			}
+		}
+		
+		
+		
+		/*
+		 * 1. 3 differents régiments 
+		 * 2. 3 mm régiments
+		 * 3. 2 regiments (differents ou pareil) + joker
+		 * 4. au moins 1 des 3 cartes échanger has your territoire = +2 regiments
+		 */
+
+		// Vérification des conditions d'échange
+		if (compteurArtillerie >= 3 || compteurInfanterie >= 3 || compteurCavalerie >= 3
+				|| (compteurArtillerie >= 1 && compteurInfanterie >= 1 && compteurCavalerie >= 1) 
+				|| (compteurArtillerie >= 1 && compteurInfanterie >= 1 && compteurJoker >= 1)
+				|| (compteurArtillerie >= 1 && compteurCavalerie >= 1 && compteurJoker >= 1)
+				|| (compteurInfanterie >= 1 && compteurInfanterie >= 1 && compteurJoker >= 1)
+				|| (compteurArtillerie >= 2 && compteurJoker >= 1)
+				|| (compteurInfanterie >= 2 && compteurJoker >= 1)
+				|| (compteurCavalerie >= 2 && compteurJoker >= 1)) 
+		{
+			this.echanger++;
+		}
+
+		// Ajouter des régiments en fonction du nombre d'échanges effectués
+		if (this.echanger==1) {
+			this.nbRegimentJoueur+=4;
+		}
+		if (this.echanger==2) {
+			this.nbRegimentJoueur+=6;
+		}
+		if (this.echanger==3) {
+			this.nbRegimentJoueur+=8;
+		}
+
+		// Retirer les cartes échangées de la main du joueur
+
+		return;
+	}
 
 }
