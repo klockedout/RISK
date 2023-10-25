@@ -10,8 +10,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
-
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase; 
 	private Continent [][] plateau  = new Continent [70][50];
