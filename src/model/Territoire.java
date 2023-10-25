@@ -5,18 +5,15 @@ import java.util.ArrayList;
 public class Territoire {
 	String nomTer;
 	int nbRegTer;
-	private TypeTerritoire typeTer; 
+	Continent continent; 
 	
-	Territoire(String nom, TypeTerritoire typeTer){
+	Territoire(String nom){
 		this.nbRegTer=0;
 		this.nomTer=nom;
-		this.typeTer = typeTer; 
 	}
 	//methodes 
 	
-	public  TypeTerritoire getTypeTerritoire() {
-		return this.typeTer;
-	}
+
 	
 	public String getNomTerritoire() {
 		return this.nomTer;
@@ -24,6 +21,10 @@ public class Territoire {
 
 	public String getNomTer() {
 		return nomTer;
+	}
+	public Joueur getVainqueur() {
+		return null; 
+		
 	}
 
 	public void setNomTer(String nomTer) {
