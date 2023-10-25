@@ -2,7 +2,6 @@ package model;
 
 public enum TypeTerritoire {
 		OCEAN,
-	    CHEMIN,
 	    BORDURE,
 	    AFRIQUE, 
 	    AMERIQUEN,

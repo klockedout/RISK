@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Continent {
 	private String nomCont;
 	private TypeTerritoire typeCase;
+	private Territoire territoire;
 	private ArrayList<Territoire> listTerritoires;
 	
 	public Continent(String nomCont, TypeTerritoire typeCase){
@@ -16,8 +17,14 @@ public class Continent {
 		return this.nomCont;
 	}
 	
-	public TypeTerritoire getTypeCase() {
-		return this.typeCase; 
+	public  TypeTerritoire getTypeTerritoire() {
+		return this.typeCase;
+	}
+	public void setTypeT(TypeTerritoire typeT) {
+		this.typeCase = typeT;
+	}
+	public void setTerritoire( Territoire territoire) {
+		this.territoire = territoire;
 	}
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 

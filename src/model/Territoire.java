@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Territoire {
 	String nomTer;
 	int nbRegTer;
-	private TypeTerritoire typeTer; 
+	Continent continent; 
 	
 	Territoire(String nom){
 		this.nbRegTer=0;
@@ -13,9 +13,7 @@ public class Territoire {
 	}
 	//methodes 
 	
-	public  TypeTerritoire getTypeTerritoire() {
-		return this.typeTer;
-	}
+
 	
 	public String getNomTerritoire() {
 		return this.nomTer;
