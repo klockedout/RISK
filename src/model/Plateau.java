@@ -17,26 +17,27 @@ public class Plateau extends AbstractModel{
 		/*this.creerContinents();
 		this.creerJoueurs();
 		this.creerPlile();
-		this.idPlateau+=1;*/
+		this.idPlateau+=1;
+		
 	 for (int x = 0; x < plateau.length; x++) { 
 		 for (int y=0; y < plateau[x].length; y++) {
 			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
 			}
 		}
-		/*for (int x = 1; x < plateau.length - 1; x++) {
+		for (int x = 1; x < plateau.length - 1; x++) {
 			for (int y = 1; y < plateau[x].length - 1; y++) {
 				plateau[x][y] = new Territoire("Test",TypeCase.CHEMIN);
 
 			}
 		}*/
 	}
-	
+	/*
 	private void creerJoueurs() {
 		String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
 		}
-	}
+	}*/
 	
 	/*private void creerContinents() {
 		String[] nomsCont = new String[]{
@@ -136,7 +137,29 @@ public class Plateau extends AbstractModel{
 	public TypeTerritoire getTypeTerritoire(int x, int y) {
 		return plateau[x][y].getTypeTerritoire();
 	}
+	
+	public Joueur getVainqueur(Joueur attaquant, Joueur defendant) {
+		ArrayList<Integer> resAttaquant = attaquant.getResultatDe();
+		ArrayList<Integer> resDefendant = attaquant.getResultatDe();
+		
+		for (int a : resAttaquant) {
+			//comparer valeur 'a' avec la valeur au mm index que 'a' dans resDefendant
+			if (a <= resDefendant.get(resDefendant.indexOf(a))) {
+				return defendant;
 
+			} else {
+				return attaquant;
+			}
+		 }
+		return null;
+		 
+	}
+	
+	public void combattre(Joueur attaquant, Joueur defendant) {
+		attaquant.setNbAttaque(attaquant.getNbAttaque()+1);
+		defendant.setNbDefense(defendant.getNbDefense()+1);
+	
+	}
 
 	public static void setIdPlateau(int idPlateau) {
 		Plateau.idPlateau = idPlateau;

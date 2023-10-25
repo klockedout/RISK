@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Joueur {
@@ -11,6 +12,7 @@ public class Joueur {
 	private int nbAttaque;
 	private int nbDefense;
 	//a commenter 
+	private ArrayList<Integer> resultatDe; //NA
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
@@ -88,6 +90,11 @@ public class Joueur {
 	public void setNbDefense(int nbDefense) {
 		this.nbDefense = nbDefense;
 	}
+	
+	
+	public ArrayList<Integer> getResultatDe(){
+		return this.resultatDe;
+	}
 
 
 	public String getPhase() {
@@ -140,5 +147,22 @@ public class Joueur {
 	}
 	
 	
-
+	public ArrayList<Integer> lancerDe(int nbDe) { // code Nam An
+		this.resultatDe.clear();
+		
+		while ( this.resultatDe.size() < nbDe+1 ) {
+			int random = (int) (Math.random() * 6) + 1;
+        	this.resultatDe.add(random);
+		}
+		
+		//Mettre en ordre décroissant
+		Collections.sort(this.resultatDe, Collections.reverseOrder());
+		
+		System.out.println(this.resultatDe);
+		return this.resultatDe;
+	}
+	
+	public void attaquer(String nomTerritoire, int nbRegiment) {
+		this.setNbAttaque(this.getNbAttaque()+1);
+	}
 }
