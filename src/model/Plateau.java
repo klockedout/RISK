@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
@@ -701,4 +703,96 @@ public class Plateau extends AbstractModel {
 		return plateau[x][y].getNomTerritoire();
 	}
 
+	public void setEtatPlateu(String etatPlateu) {
+		this.etatPlateu = etatPlateu;
+	}
+
+	public ArrayList<Continent> getContinents() {
+		return continents;
+	}
+
+	public void setContinents(ArrayList<Continent> continents) {
+		this.continents = continents;
+	}
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
+
+	public ArrayList<CarteRisk> getPile() {
+		return pile;
+	}
+
+	public void setPile(ArrayList<CarteRisk> pile) {
+		this.pile = pile;
+	}
+
+    public void placerRegiments(Territoire ter,int nbReg) {
+    	this.joueurActif.ajouterRegiment(ter, nbReg);
+    }
+    
+    public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+    	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
+    }
+    
+    public Joueur proprietaireDeTer(Territoire ter) {
+		Joueur proprietaire = null;
+		for (Joueur j : this.listeJoueurs) {
+			if (j.getTerritoires().contains(ter)) {
+				proprietaire = j;
+			}
+		}
+		return proprietaire;
+	}
+	
+	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
+		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
+		ArrayList<Territoire> res = ter.getVoisins();
+		res.retainAll(tersDeJoueur);
+		return res;
+	}
+	
+	private ArrayList<Territoire> tersNoDup (ArrayList<Territoire> ters){
+		Set<Territoire> set = new HashSet<Territoire>();
+		ArrayList<Territoire> newTers = new ArrayList<Territoire>();
+		set.addAll(ters);
+		newTers.addAll(set);
+		return newTers;
+	}
+	
+	public ArrayList<Territoire> chercherTerritoiresLiesParJoueur(Territoire ter){
+		ArrayList<Territoire> tersRes = this.tersVoisinsParJoueur(ter);
+		ArrayList<Territoire> tersTemp=new ArrayList<Territoire>();
+		while (tersRes.size()!=tersTemp.size()) {
+			tersTemp=tersRes;
+			for (Territoire t : tersRes) {
+				tersRes.addAll(this.tersVoisinsParJoueur(t));
+			}
+			this.tersNoDup(tersRes);
+		}
+		return tersRes;
+	}
+	
+	public void regimentParContinent() {
+		int nbReg = 0;
+		for (Continent c : this.continents) {
+			if (this.joueurActif.getTerritoires().containsAll(c.getTerritoires())) {
+				nbReg+=c.getBareme();
+			}
+		}
+		this.joueurActif.setNbRegimentJoueur(nbReg+this.joueurActif.getNbRegimentJoueur());
+	}
+	
+	public void regimentParTerritoire() {
+		if (this.joueurActif.getTerritoires().size()/3<3) {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getNbRegimentJoueur());
+		}else {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
+		}
+		
+	}
 }

@@ -43,3 +43,13 @@ public class Continent {
 	}
 
 
+	public ArrayList<Territoire> getTerritoires() {
+		return territoires;
+	}
+
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		this.territoires = territoires;
+	}
+	
+	
+}
