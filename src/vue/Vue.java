@@ -5,6 +5,8 @@
  */
 package vue;
 
+import javax.swing.JLabel;
+
 import controler.AbstractControler;
 import controler.Controler;
 
@@ -21,6 +23,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
     private AbstractModel model;
     private MouseListener mouseListener;
     private AbstractControler controler;
+    private final JLabel barre_etat;
     /**
      * Creates new form 
      * @param model
@@ -32,6 +35,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
         initComponents();
         this.mouseListener = new MouseListener(controler);
         this.panelJeu.addMouseListener(this.mouseListener);
+        this.barre_etat = new JLabel("Barre d'Etat");
     }
     
     public void dessinerJeu(){

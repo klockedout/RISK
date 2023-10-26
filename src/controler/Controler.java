@@ -1,5 +1,7 @@
 package controler;
 
+import java.awt.event.MouseEvent;
+
 import model.AbstractModel;
 import model.Plateau;
 import model.TypeContinent;
@@ -18,8 +20,22 @@ public class Controler extends AbstractControler {
 			System.out.println(plateau.getTerritoire(x, y));
 			System.out.println(plateau.getVoisin(x, y));
 			System.out.println(plateau.getNom(x, y));
+			
+			
+			//NA - phase attaque, choisir territoires
+			if (plateau.getPhase() == 2) {
+			
+				if (plateau.getTerritoireDept() == null) {
+					plateau.cliquerSurTerDEPART(x, y);
+				
+				} else {
+					plateau.cliquerSurTerVOISIN(x,y);
+					plateau.combattre();
+				}
+			}
 		}
 	}
+	
 
 	/*
 	 * // test 1 Si fleche disponible, je fais ce qui suit : // test 2 Type case =
