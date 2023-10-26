@@ -14,11 +14,7 @@ public class Joueur {
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
-<<<<<<< Updated upstream
 	private ArrayList <Territoire> territoires;
-=======
-	private ArrayList  <Territoire> territoires;
->>>>>>> Stashed changes
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
@@ -143,7 +139,6 @@ public class Joueur {
 		this.territoire = territoire;
 	}
 	
-<<<<<<< Updated upstream
 	public void ajouterRegiment(Territoire ter,int nbReg) {
 		if (this.territoires.contains(ter)&&this.nbRegimentJoueur>=nbReg) {
 			ter.setNbRegTer(nbReg+ter.getNbRegTer());
@@ -161,7 +156,6 @@ public class Joueur {
 			System.out.println("opération pas possible");
 		}
     }
-=======
 	public int regimentParTerritoire() {
 		if (this.territoires.size()/3<3) {
 			return 3;
@@ -170,7 +164,6 @@ public class Joueur {
 		}
 		
 	}
->>>>>>> Stashed changes
 	
 
 }
