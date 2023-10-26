@@ -158,4 +158,15 @@ public class Joueur {
     }
 	
 
+	public int regimentParTerritoire() {
+		if (this.territoires.size()/3<3) {
+			return 3;
+		}else {
+			return this.territoires.size()/3;
+		}		
+	}
+	
+	
+	
+
 }

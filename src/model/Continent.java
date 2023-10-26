@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 public class Continent {
 	private String nomCont;
-	private ArrayList<Territoire> Territoires;
+	private ArrayList<Territoire> territoires;
 	
 	Continent(String nomCont){
 		this.nomCont=nomCont;
-		this.Territoires=new ArrayList<Territoire>();
+		this.territoires=new ArrayList<Territoire>();
 	}
 
 	public String getNomCont() {
@@ -19,11 +19,11 @@ public class Continent {
 	}
 
 	public ArrayList<Territoire> getTerritoires() {
-		return Territoires;
+		return territoires;
 	}
 
 	public void setTerritoires(ArrayList<Territoire> territoires) {
-		Territoires = territoires;
+		this.territoires = territoires;
 	}
 	
 	
