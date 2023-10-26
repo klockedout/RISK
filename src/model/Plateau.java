@@ -1,22 +1,27 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Plateau extends AbstractModel {
 	private TypeContinent typeCase;
 	private Territoire[][] plateau = new Territoire[50][30];
-	static private int idPlateau = 0;
+	static private int idPlateauTotal = 0;
 	private int tour = 0;
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
-
-	public Plateau(int idPlateau) {
+	private ArrayList<Continent> continents; 
+	private int idPlateau;
+	
+	public Plateau() {
 		super();
+		this.idPlateau=Plateau.idPlateauTotal++;
 		// Larissa : création de la carte
 		// 1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
@@ -550,67 +555,86 @@ public class Plateau extends AbstractModel {
 		australieOrientale.ajouterTerritoireVoisin(nouvelleGuinee);
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
 
+		
+		afrique.ajouterContinent(continents,afrique);
+		europe.ajouterContinent(continents,europe);
+		ameriqueNord.ajouterContinent(continents,ameriqueNord);
+		ameriqueSud.ajouterContinent(continents,ameriqueSud);
+		asie.ajouterContinent(continents,asie);
+		australie.ajouterContinent(continents,australie);
+		
+	}
+	
+	//1. Créer les territoires et leur territoire voisin 
+			//EUROPE 
+			Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
+			Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
+			Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
+			Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
+			Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
+			Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
+			Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
+
+
+			//AMERIQUE NORD 
+			Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
+			Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
+			Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
+			Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
+			Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
+			Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
+			Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
+			Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
+			Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
+			//AMERIQUE DU SUD 
+			Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
+			Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
+			Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
+			Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
+			//ASIE 
+			Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
+			Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
+			Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
+			Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
+			Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
+			Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
+			Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
+			Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
+			Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
+			Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
+			Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
+			Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
+			//AFRIQUE
+			Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
+			Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
+			Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
+			Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
+			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
+			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
+			//OCEANIE
+			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
+			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
+			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
+			Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
+			
+			
+			//2.Créer Continent 
+			Continent afrique = new Continent("Afrique", 3); 
+			Continent europe = new Continent("Europe", 5); 
+			Continent ameriqueNord = new Continent("Amerique du Nord", 5); 
+			Continent ameriqueSud = new Continent("Amerique du Sud", 2); 
+			Continent asie = new Continent("Asie", 7); 
+			Continent australie = new Continent("Australie", 2); 
+			
+	private void creerJoueurs() {
+		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
+		for (String couleur : couleurs) {
+			this.joueurs.add(new Joueur(this.idPlateau, couleur,0));
+		}
+
 	}
 
-	// 1. Créer les territoires et leur territoire voisin
-	// EUROPE
-	Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
-	Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
-	Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
-	Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
-	Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
-	Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
-	Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
-
-	// AMERIQUE NORD
-	Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
-	Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
-	Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
-	Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
-	Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
-	Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
-	Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
-	Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
-	Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
-	// AMERIQUE DU SUD
-	Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
-	Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
-	Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
-	Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
-	// ASIE
-	Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
-	Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
-	Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
-	Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
-	Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
-	Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
-	Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
-	Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
-	Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
-	Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
-	Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
-	Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
-	// AFRIQUE
-	Territoire nordAfrique = new Territoire("Afrique du Nord", TypeContinent.AFRIQUE);
-	Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
-	Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
-	Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
-	Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
-	Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
-	// OCEANIE
-	Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
-	Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
-	Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
-	Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-
-	// 2.Créer Continent
-	Continent afrique = new Continent("Afrique", 3);
-	Continent europe = new Continent("Europe", 5);
-	Continent ameriqueN = new Continent("Amerique du Nord", 5);
-	Continent ameriqueS = new Continent("Amerique du Sud", 2);
-	Continent asie = new Continent("Asie", 7);
-	Continent autralie = new Continent("Australie", 2);
-
+	
 //	private void creerJoueurs() {
 //		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 //		for (String couleur : couleurs) {
@@ -628,11 +652,39 @@ public class Plateau extends AbstractModel {
 		return this.plateau[0].length;
 	}
 
+	@Override
+	public int getHauteur() {
+		// TODO Auto-generated method stub
+		return this.plateau.length;
+	}
+
+	public boolean partieTerminer() {
+		return false;
+	}
 
 	@Override
-	public String getTerritoire(int x, int y) {
+	public Joueur getVainqueur(int x, int y) {
 		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
+		// return this.plateau[x][y].getVainqueur();
+		return null;
+	}
+
+	@Override
+	public int getNbRegimentPlacés() {
+		// on parcourt la liste des joueur et on prendre le nombre de regiment
+		return 0;
+	}
+
+	@Override
+	public int getNbRegiment() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Territoire getTerritoire(int x, int y) {
+		// TODO Auto-generated method stub
+		return plateau[x][y];
 	}
 
 	@Override
@@ -652,86 +704,104 @@ public class Plateau extends AbstractModel {
 		// TODO Auto-generated method stub
 		return plateau[x][y].getNomTerritoire();
 	}
-	
-	
-	//Widad
-	
-	public ArrayList<Territoire> obtenirListeTerritoire() {
-	    ArrayList<Territoire> listeTerritoires = new ArrayList<>();
-	    for (int x = 0; x < plateau.length; x++) {
-	        for (int y = 0; y < plateau[x].length; y++) {
-	            listeTerritoires.add(plateau[x][y]);
-	        }
-	    }
-	    return listeTerritoires;
-	}
-	
-	
-	public int obtenirNbTerritoire() {
-	    return obtenirListeTerritoire().size();
-	}
-	
-	public ArrayList<Territoire> getTerritoireDispo(Joueur joueur) {
-	    ArrayList<Territoire> territoiresDisponibles = new ArrayList<>();
-	    for (Territoire territoire : obtenirListeTerritoire()) {
-	        if (territoire.proprietaireDeTer() == null) {
-	            territoiresDisponibles.add(territoire);
-	        }
-	    }
-	    return territoiresDisponibles;
-	}
-	
-	public void Getphase(int phase) {
-		if  (phase == 1) {
-	        recevoirRegimentAjouter();
-	    } else if (phase == 2) {
-	        attaquer();
-	    } else if (phase == 3) {
-	        deplacerRegiments();
-	    } else {
-			  System.err.println("Erreur : Phase invalide - " + phase);
-	    }
-	    }
-	
-	public int calculeRegimentsAjouter(int nbterritoire) {
-		return nbterritoire /3;
 
+	public void setEtatPlateu(String etatPlateu) {
+		this.etatPlateu = etatPlateu;
 	}
-	/* calculer le nombre de régiments à ajouter à chaque joueur en 
-	 * fonction du nombre de territoires qu'ils possèdent.
-	 */
-	public void recevoirRegimentAjouter() {
-	    for (Joueur joueur : joueurs) {
-	        int RegimentAjouter = joueur.calculeRegimentsAjouter(joueur.proprietaireDeTer());
-	        joueur.ajouterRegiments(RegimentAjouter); 
+
+	public ArrayList<Continent> getContinents() {
+		return continents;
 	}
+
+	public void setContinents(ArrayList<Continent> continents) {
+		this.continents = continents;
 	}
-    public void ajouterRegiments(int regiments) {
-        nbRegiment += regiments;
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
+
+	public ArrayList<CarteRisk> getPile() {
+		return pile;
+	}
+
+	public void setPile(ArrayList<CarteRisk> pile) {
+		this.pile = pile;
+	}
+
+    public void placerRegiments(Territoire ter,int nbReg) {
+    	this.joueurActif.ajouterRegiment(ter, nbReg);
     }
-
-	
-
-	public void attaquer() {
-	    
-	}
-
-	public void deplacerRegiments() {
-	    
-	}
-	
-	public ArrayList<Territoire> getTerritoireDepart(Joueur joueurActif) {
-	    ArrayList<Territoire> territoiresAvec2Regiments = new ArrayList<>();
-
-	    for (Territoire territoire : joueurActif.getListeTerritoire()) {
-	        if (territoire.getNbRegiments() >= 2) {
-	            territoiresAvec2Regiments.add(territoire);
-	        }
-	    }
-
-	    return territoiresAvec2Regiments;
+    
+    public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+    	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
+    }
+    
+    public Joueur proprietaireDeTer(Territoire ter) {
+		Joueur proprietaire = null;
+		for (Joueur j : this.joueurs) {
+			if (j.getTerritoires().contains(ter)) {
+				proprietaire = j;
+			}
+		}
+		return proprietaire;
 	}
 	
-	//Fin Widad
+	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
+		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
+		ArrayList<Territoire> res = ter.getListeTerritoireVoisin();
+		res.retainAll(tersDeJoueur);
+		return res;
+	}
+	
+	private ArrayList<Territoire> tersNoDup (ArrayList<Territoire> ters){
+		Set<Territoire> set = new HashSet<Territoire>();
+		ArrayList<Territoire> newTers = new ArrayList<Territoire>();
+		set.addAll(ters);
+		newTers.addAll(set);
+		return newTers;
+	}
+	
+	public ArrayList<Territoire> chercherTerritoiresLiesParJoueur(Territoire ter){
+		ArrayList<Territoire> tersRes = this.tersVoisinsParJoueur(ter);
+		ArrayList<Territoire> tersTemp=new ArrayList<Territoire>();
+		while (tersRes.size()!=tersTemp.size()) {
+			tersTemp=tersRes;
+			for (Territoire t : tersRes) {
+				tersRes.addAll(this.tersVoisinsParJoueur(t));
+			}
+			this.tersNoDup(tersRes);
+		}
+		return tersRes;
+	}
+	
+	public void regimentParContinent() {
+		int nbReg = 0;
+		for (Continent c : this.continents) {
+			if (this.joueurActif.getTerritoires().containsAll(c.getListTerritoire())) {
+				nbReg+=c.getBareme();
+			}
+		}
+		this.joueurActif.setNbRegimentJoueur(nbReg+this.joueurActif.getNbRegimentJoueur());
+	}
+	
+	public void regimentParTerritoire() {
+		if (this.joueurActif.getTerritoires().size()/3<3) {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getNbRegimentJoueur());
+		}else {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
+		}
+		
+	}
 
+
+	public void afficherVoisin(Territoire ter) {
+		for (Territoire t : ter.getListeTerritoireVoisin()) {
+			System.out.println(t);
+		}
+	}
 }

@@ -32,7 +32,7 @@ public abstract class AbstractModel implements Observable {
     public abstract int getHauteur();
     public abstract String getNom(int x, int y);
     public abstract TypeContinent getContinent(int x, int y);
-    public abstract String getTerritoire(int x, int y);
+    public abstract Territoire getTerritoire(int x, int y);
     public abstract ArrayList<Territoire> getVoisin(int x, int y);
     /*
     public abstract int getNbSourisIn();

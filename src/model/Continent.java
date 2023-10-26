@@ -5,7 +5,7 @@ public class Continent {
 	private String nomCont;
 	private Territoire territoire;
 	private int bareme; 
-	private ArrayList<Territoire> listTerritoires;
+	private ArrayList<Territoire> listTerritoires; 
 	
 	public Continent(String nomCont, int bareme){
 		this.nomCont=nomCont;
@@ -25,8 +25,15 @@ public class Continent {
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 
 		}
+	
+	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
+		if(liste == null) {
+			liste = new ArrayList<Continent>();
+		}
+		    liste.add(continent);
+	}
+	
 	public ArrayList<Territoire> construireListeTerritoires(){
-		
 		return this.listTerritoires;
 	}
 //	   public  ArrayList<Territoire obtenirTerritoiresParContinent(TypeContinent typeContinent) {
@@ -38,6 +45,16 @@ public class Continent {
 //	        }
 //	        return territoiresParContinent;
 //	    }
+	
+
+
+	public ArrayList<Territoire> getListTerritoires() {
+		return this.listTerritoires;
 	}
 
-
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		this.listTerritoires = territoires;
+	}
+	
+	
+}
