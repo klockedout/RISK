@@ -1,9 +1,10 @@
 package model;
 
+import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Plateau extends AbstractModel {
@@ -13,12 +14,13 @@ public class Plateau extends AbstractModel {
 	private int tour = 0;
 	private Joueur joueurActif;
 	private String etatPlateu;
+	private ArrayList<Continent> continents;
+	private ArrayList<Joueur> listeJoueurs;
+	private ArrayList<CarteRisk> pile = new ArrayList<CarteRisk>();
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
-	private ArrayList<CarteRisk> pile;
-	private ArrayList<Continent> continents; 
 	private int idPlateau;
-	
+
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
@@ -29,6 +31,10 @@ public class Plateau extends AbstractModel {
 				plateau[x][y] = new Territoire("Ocean", typeCase.OCEAN);
 			}
 		}
+
+		
+//		plateau[0][0] = new Territoire("France", TypeCase.CHEMIN);
+	
 		// 2. Ajout des territoires par continent
 		// Amerique : groenland
 		for (int x = 8; x < 14; x++) {
@@ -556,6 +562,69 @@ public class Plateau extends AbstractModel {
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
 
 		
+		// Tidiane Je crée la pile et j'ai changé certains noms ils n'étaient pas
+					// patreil que dans les règles du jeu
+					
+						// EUROPE
+						pile.add(new CarteRisk("Grande-Bretagne", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Islande", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Europe du Nord", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Scandinavie", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Europe du Sud", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("RUSSIE", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Europe de l'ouest", TypeCarte.ARTILLERIE));
+
+						// ASIE
+						pile.add(new CarteRisk("Afghanistan", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Chine", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Inde", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Asie du sud-est", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Japon", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Kamtchatka", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Moyen-Orient", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Mongolie", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("IRKOUTSK", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Sibérie", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Oural", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Yakoutie", TypeCarte.CAVALERIE));
+
+						// AMÉRIQUE DU NORD
+						pile.add(new CarteRisk("Alaska", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Alberta", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Amérique centrale", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("États de l'Est", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Groenland", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Territoires du Nord-Ouest", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Ontario", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("CANADA DE L'EST", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("États de l'Ouest", TypeCarte.ARTILLERIE));
+
+						// AMÉRIQUE DU SUD
+						pile.add(new CarteRisk("Argentine", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Brésil", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Pérou", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Venezuela", TypeCarte.INFANTERIE));
+
+						// AFRIQUE
+						pile.add(new CarteRisk("AFRIQUE CENTRALE", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Afrique orientale", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Égypte", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Madagascar", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Afrique du Nord", TypeCarte.CAVALERIE));
+						pile.add(new CarteRisk("Afrique du Sud", TypeCarte.ARTILLERIE));
+
+						// AUSTRALIE
+						pile.add(new CarteRisk("Australie Orientale", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Indonésie", TypeCarte.ARTILLERIE));
+						pile.add(new CarteRisk("Nouvelle-Guinée", TypeCarte.INFANTERIE));
+						pile.add(new CarteRisk("Australie Occidentale", TypeCarte.ARTILLERIE));
+
+						// JOKER
+						pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
+						pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
+						
+
+	
 		afrique.ajouterContinent(continents,afrique);
 		europe.ajouterContinent(continents,europe);
 		ameriqueNord.ajouterContinent(continents,ameriqueNord);
@@ -564,6 +633,7 @@ public class Plateau extends AbstractModel {
 		australie.ajouterContinent(continents,australie);
 		
 	}
+	
 	
 	//1. Créer les territoires et leur territoire voisin 
 			//EUROPE 
@@ -634,17 +704,22 @@ public class Plateau extends AbstractModel {
 
 	}
 
-	
-//	private void creerJoueurs() {
-//		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
-//		for (String couleur : couleurs) {
-//			this.joueurs.add(new Joueur(this.idPlateau, couleur));
-//		}
-//	}
+	private void creerTerritoires() {
 
-	private void creerPlile() {
+		String[] nomsTerEurope = new String[] { "Grande-Bretagne", "Islande", "Europe du Nord", "Scandinavie",
+				"Europe du Sud", "RUSSIE", "Europe de l'ouest" };
+		String[] nomsTerAsie = new String[] { "Afghanistan", "Chine", "Inde", "Asie du sud-est", "Japon", "Kamtchatka",
+				"Moyen-Orient", "Mongolie", "IRKOUTSK", "Sibérie", "Oural", "Yakoutie" };
+		String[] nomsTerAmeriqueN = new String[] { "Alaska", "Alberta", "Amérique centrale", "États de l'Est",
+				"Groenland", "Territoires du Nord-Ouest", "Ontario", "CANADA DE L'EST", "États de l'Ouest" };
+		String[] nomsTerAmeriqueS = new String[] { "Argentine", "Brésil", "Pérou", "Venezuela" };
+		String[] nomsTerAfrique = new String[] { "AFRIQUE CENTRALE", "Afrique orientale", "Égypte", "Madagascar",
+				"Afrique du Nord", "Afrique du Sud" };
+		String[] nomsTerOceanie = new String[] { "Australie Orientale", "Indonésie", "Nouvelle-Guinée",
+				"Australie Occidentale" };
 
 	}
+
 
 	@Override
 	public int getLargeur() {
@@ -662,13 +737,13 @@ public class Plateau extends AbstractModel {
 		return false;
 	}
 
+
 	@Override
 	public Joueur getVainqueur(int x, int y) {
 		// TODO Auto-generated method stub
 		// return this.plateau[x][y].getVainqueur();
 		return null;
 	}
-
 	@Override
 	public int getNbRegimentPlacés() {
 		// on parcourt la liste des joueur et on prendre le nombre de regiment
@@ -680,6 +755,7 @@ public class Plateau extends AbstractModel {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	@Override
 	public Territoire getTerritoire(int x, int y) {
@@ -699,10 +775,24 @@ public class Plateau extends AbstractModel {
 		return plateau[x][y].getListeTerritoireVoisin();
 	}
 
-	@Override
-	public String getNom(int x, int y) {
-		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
+	public int getTour() {
+		return tour;
+	}
+
+	public void setTour(int tour) {
+		this.tour = tour;
+	}
+
+	public Joueur getJoueurActif() {
+		return joueurActif;
+	}
+
+	public void setJoueurActif(Joueur joueurActif) {
+		this.joueurActif = joueurActif;
+	}
+
+	public String getEtatPlateu() {
+		return etatPlateu;
 	}
 
 	public void setEtatPlateu(String etatPlateu) {
@@ -732,6 +822,43 @@ public class Plateau extends AbstractModel {
 	public void setPile(ArrayList<CarteRisk> pile) {
 		this.pile = pile;
 	}
+	
+	public int getIdPlateau() {
+		return idPlateau;
+	}
+
+	public void setIdPlateau(int idPlateau) {
+		this.idPlateau = idPlateau;
+	}
+
+
+	// Tidiane Ajouter carte permet de rajouter une carte de la pile au joueur je l'utilise dans la classe joueur
+	public CarteRisk ajouterCartes() {
+		Collections.shuffle(pile);// Mélanger la pile de cartes à chaque tour
+
+		// un index aléatoire est généré dans la plage des index de la pile de cartes
+		// mélangée.
+		Random random = new Random();
+		int index = random.nextInt(pile.size());
+
+		return pile.remove(index); // supprimer la carte à l'index aléatoire de la pile, et cette carte est
+									// retournée.
+
+	}
+
+	@Override
+	public String getNom(int x, int y) {
+		// TODO Auto-generated method stub
+		return plateau[x][y].getNomTerritoire();
+	}
+
+
+	@Override
+	public ArrayList<CarteRisk> echangerCarte() {
+		// si 
+		return joueurActif.echangerCartes();
+	}
+
 
     public void placerRegiments(Territoire ter,int nbReg) {
     	this.joueurActif.ajouterRegiment(ter, nbReg);
@@ -804,4 +931,4 @@ public class Plateau extends AbstractModel {
 			System.out.println(t);
 		}
 	}
-}
+	}

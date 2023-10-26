@@ -18,8 +18,8 @@ public class Main {
         v.setVisible(true);
         while(!model.partieTerminer()){
             controler.calculerStepSuivant();
-        }
-
 	}
+	}}
 
-}
+
+
