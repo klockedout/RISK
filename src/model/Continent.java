@@ -12,13 +12,18 @@ public class Continent {
 	private Territoire territoire;
 	private ArrayList<Territoire> listTerritoires;
 	private HashMap<Territoire, Joueur> territoiresControles;
+	private HashMap<Continent, Territoire[]> continentTerritoires;
 	
 	public Continent(String nomCont){
 		this.nomCont=nomCont;
 		this.listTerritoires=new ArrayList<Territoire>();
 		this.territoiresControles = new HashMap<Territoire, Joueur>();
+		this.continentTerritoires= new HashMap<Continent, Territoire[]>();
 	}
-
+	
+	public void attribuerContinentTerritoires(Continent continent) {
+		this.continentTerritoires.put(continent, null); 
+	}
 
 	public String getNom() {
 		return this.nomCont;
