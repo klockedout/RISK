@@ -1,6 +1,6 @@
 package model;
 
-public enum TypeTerritoire {
+public enum TypeContinent {
 		OCEAN,
 	    BORDURE,
 	    AFRIQUE, 

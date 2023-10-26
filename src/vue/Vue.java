@@ -9,6 +9,7 @@ import controler.AbstractControler;
 import controler.Controler;
 
 import model.AbstractModel;
+import model.Plateau;
 import model.Regiment;
 
 import vue.PanelJeu;
@@ -34,8 +35,8 @@ public class Vue extends javax.swing.JFrame implements Observateur{
     }
     
     public void dessinerJeu(){
-        /*labelNbSourisIN.setText("nombre souris cachées : "+ model.getNbSourisIn());
-        labelNbSourisOut.setText("nombre souris sauvées : "+ model.getNbSourisOut());
+       //labelNomTerritoire.setText("Le territoire : "+ model.getNom());
+        /*labelNbSourisOut.setText("nombre souris sauvées : "+ model.getNbSourisOut());
         labelNbFleches.setText("Flèches : "+ model.getNbFlecheUtilisee()+"/"+model.getNbFlecheMax());
         */
         int h = this.panelJeu.getWidth();
@@ -53,7 +54,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
         this.mouseListener.updateDimension(x, y, x+cote*model.getHauteur(), y+cote*model.getLargeur(), cote);
         for(int xP=0; xP<model.getHauteur();xP++){
             for(int yP=0; yP<model.getLargeur();yP++){
-                switch(model.getTypeTerritoire(xP, yP)){
+                switch(model.getContinent(xP, yP)){
                 case OCEAN : 
                         panelJeu.drawOcean(x+xP*cote, y+yP*cote, cote);
                     break;
@@ -112,11 +113,11 @@ public class Vue extends javax.swing.JFrame implements Observateur{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-       labelNbSourisIN.setText("jLabel1");
+       labelNbSourisIN.setText("Nom Territoire");
 
-        labelNbFleches.setText("nbFleche");
+        labelNbFleches.setText("NbRegiment");
 
-       labelNbSourisOut.setText("jLabel3");
+       labelNbSourisOut.setText("Joueur");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
