@@ -21,13 +21,14 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 public class Plateau extends AbstractModel {
 	private TypeContinent typeCase;
 	private Territoire[][] plateau = new Territoire[50][30];
-	static private int idPlateau = 0;
+	static private int idPlateauTotal = 0;
 	private int tour = 0;
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
+
     private ArrayList<Continent> continents;
 	private ArrayList<Territoire> territoiresEurope;
 	private ArrayList<Territoire> territoiresAfrique;
@@ -100,10 +101,16 @@ public class Plateau extends AbstractModel {
 		Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
 		Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
 		Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-
+	}
 		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
+
+	private int idPlateau;
+	
+	public Plateau() {
+		super();
+		this.idPlateau=Plateau.idPlateauTotal++;
 
 		// Larissa : création de la carte
 		// 1. On crée les oceans
