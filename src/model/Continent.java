@@ -55,12 +55,15 @@ public class Continent {
 //		}
 //			return this.listTerritoires; 
 //		}
+
+	
 	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
-	      if (liste == null) {
-	            liste = new ArrayList<>();
-	        }
+		if(liste == null) {
+			liste = new ArrayList<Continent>();
+		}
 		    liste.add(continent);
 	}
+	
 
 	public ArrayList<Territoire> construireListeTerritoires(){
 		return this.listTerritoires;
@@ -107,6 +110,15 @@ public class Continent {
       
 }
 
+
+	public ArrayList<Territoire> getListTerritoires() {
+		return this.listTerritoires;
+	}
+
+
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		this.listTerritoires = territoires;
+	}
 	
-
-
+	
+}

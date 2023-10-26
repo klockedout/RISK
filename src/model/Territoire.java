@@ -1,15 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Territoire {
 	
 	// attribut 
-	String nomTer;
-	TypeContinent typeC; 
-	int nbRegTer;
 
-	ArrayList<Territoire>listeTerritoireVoisin; 
+	private String nomTer;
+	private TypeContinent typeC; 
+	private int nbRegTer;
+	private ArrayList<Territoire>listeTerritoireVoisin; 
+
 	
 	//constructeur 
 	Territoire(String nom, TypeContinent typeC){
@@ -56,6 +58,24 @@ public class Territoire {
 	public void setNbRegTer(int nbRegTer) {
 		this.nbRegTer = nbRegTer;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nomTer);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Territoire other = (Territoire) obj;
+		return Objects.equals(nomTer, other.nomTer);
+	}
+	
 	
 	
 
@@ -90,6 +110,12 @@ public class Territoire {
 		
 	}
 
+	@Override
+	public String toString() {
+		return nomTer;
+	}
+
+	
 	//methode qui ajouter un regiment sur un territoire 
 	
 }

@@ -20,7 +20,7 @@ public class Joueur {
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
-	private ArrayList  <Territoire> Territoire;
+	private ArrayList <Territoire> territoires;
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
@@ -34,7 +34,7 @@ public class Joueur {
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 
-		this.Territoire=new ArrayList<Territoire>();
+		this.territoires=new ArrayList<Territoire>();
 	}
 
 	@Override
@@ -117,6 +117,7 @@ public class Joueur {
 		this.carteRisk = carteRisk;
 	}
 
+
 	public ArrayList<Territoire> getListeTerritoire() {
 		return this.Territoire;
 	}
@@ -142,6 +143,53 @@ public class Joueur {
 //		return true; 
 //	}
 	//Fin Larissa
+
+	public ArrayList<Territoire> getTerritoires() {
+		return territoires;
+	}
+
+
+	public void setTerritoires(ArrayList<Territoire> territoires) {
+		this.territoires = territoires;
+	}
+
+
+	public Territoire getTerritoire() {
+		return territoire;
+	}
+
+
+	public void setTerritoire(Territoire territoire) {
+		this.territoire = territoire;
+	}
+	
+	public void ajouterRegiment(Territoire ter,int nbReg) {
+		if (this.territoires.contains(ter)&&this.nbRegimentJoueur>=nbReg) {
+			ter.setNbRegTer(nbReg+ter.getNbRegTer());
+			this.nbRegimentJoueur-=nbReg;
+		} else {
+			System.out.println("opération pas possible");
+		}
+	}
+	
+	public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+		if (this.territoires.contains(terDepart)&&this.territoires.contains(terDesti)&&terDepart.getNbRegTer()>nbReg) {
+			terDepart.setNbRegTer(terDepart.getNbRegTer()-nbReg);
+			terDesti.setNbRegTer(terDesti.getNbRegTer()+nbReg);;
+		} else {
+			System.out.println("opération pas possible");
+		}
+    }
+	
+
+	public int regimentParTerritoire() {
+		if (this.territoires.size()/3<3) {
+			return 3;
+		}else {
+			return this.territoires.size()/3;
+		}		
+	}
+	
 	
 
 }
