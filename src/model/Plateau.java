@@ -602,11 +602,20 @@ public class Plateau extends AbstractModel {
 			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
 			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
 			//OCEANIE
-			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.OCEANIE);
-			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.OCEANIE);
-			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.OCEANIE);
-			Territoire indonesie = new Territoire("Indonesie", TypeContinent.OCEANIE);
-
+			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
+			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
+			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
+			Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
+			
+			
+			//2.Créer Continent 
+			Continent afrique = new Continent("Afrique", 3); 
+			Continent europe = new Continent("Europe", 5); 
+			Continent ameriqueN = new Continent("Amerique du Nord", 5); 
+			Continent ameriqueS = new Continent("Amerique du Sud", 2); 
+			Continent asie = new Continent("Asie", 7); 
+			Continent autralie = new Continent("Australie", 2); 
+			
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 		for (String couleur : couleurs) {
