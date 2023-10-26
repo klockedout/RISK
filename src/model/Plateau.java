@@ -622,13 +622,6 @@ public class Plateau extends AbstractModel {
 			Continent asie = new Continent("Asie", 7); 
 			Continent australie = new Continent("Australie", 2); 
 			
-	private void creerJoueurs() {
-		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
-		for (String couleur : couleurs) {
-			this.joueurs.add(new Joueur(this.idPlateau, couleur));
-		}
-
-	}
 
 	
 //	private void creerJoueurs() {

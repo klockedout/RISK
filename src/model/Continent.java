@@ -26,6 +26,9 @@ public class Continent {
 			return this.listTerritoires; 
 		}
 	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
+		if(liste == null) {
+			liste = new ArrayList<Continent>();
+		}
 		    liste.add(continent);
 	}
 	public ArrayList<Territoire> construireListeTerritoires(){
