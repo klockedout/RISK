@@ -680,5 +680,23 @@ public class Plateau extends AbstractModel {
 		// TODO Auto-generated method stub
 		return plateau[x][y].getNomTerritoire();
 	}
+	
+	
+	public ArrayList<Territoire> obtenirListeTerritoire() {
+	    ArrayList<Territoire> listeTerritoires = new ArrayList<>();
+	    for (int x = 0; x < plateau.length; x++) {
+	        for (int y = 0; y < plateau[x].length; y++) {
+	            listeTerritoires.add(plateau[x][y]);
+	        }
+	    }
+	    return listeTerritoires;
+	}
+	
+	
+	public int obtenirNbTerritoire() {
+	    return obtenirListeTerritoire().size();
+	}
+	
+	
 
 }
