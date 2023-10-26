@@ -14,6 +14,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
+	private ArrayList<Continent> continents; 
 
 	public Plateau(int idPlateau) {
 		super();
@@ -550,67 +551,86 @@ public class Plateau extends AbstractModel {
 		australieOrientale.ajouterTerritoireVoisin(nouvelleGuinee);
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
 
+		
+		afrique.ajouterContinent(continents,afrique);
+		europe.ajouterContinent(continents,europe);
+		ameriqueNord.ajouterContinent(continents,ameriqueNord);
+		ameriqueSud.ajouterContinent(continents,ameriqueSud);
+		asie.ajouterContinent(continents,asie);
+		australie.ajouterContinent(continents,australie);
+		
+	}
+	
+	//1. Créer les territoires et leur territoire voisin 
+			//EUROPE 
+			Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
+			Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
+			Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
+			Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
+			Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
+			Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
+			Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
+
+
+			//AMERIQUE NORD 
+			Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
+			Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
+			Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
+			Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
+			Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
+			Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
+			Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
+			Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
+			Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
+			//AMERIQUE DU SUD 
+			Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
+			Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
+			Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
+			Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
+			//ASIE 
+			Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
+			Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
+			Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
+			Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
+			Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
+			Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
+			Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
+			Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
+			Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
+			Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
+			Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
+			Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
+			//AFRIQUE
+			Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
+			Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
+			Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
+			Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
+			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
+			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
+			//OCEANIE
+			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
+			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
+			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
+			Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
+			
+			
+			//2.Créer Continent 
+			Continent afrique = new Continent("Afrique", 3); 
+			Continent europe = new Continent("Europe", 5); 
+			Continent ameriqueNord = new Continent("Amerique du Nord", 5); 
+			Continent ameriqueSud = new Continent("Amerique du Sud", 2); 
+			Continent asie = new Continent("Asie", 7); 
+			Continent australie = new Continent("Australie", 2); 
+			
+	private void creerJoueurs() {
+		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
+		for (String couleur : couleurs) {
+			this.joueurs.add(new Joueur(this.idPlateau, couleur));
+		}
+
 	}
 
-	// 1. Créer les territoires et leur territoire voisin
-	// EUROPE
-	Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
-	Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
-	Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
-	Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
-	Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
-	Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
-	Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
-
-	// AMERIQUE NORD
-	Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
-	Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
-	Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
-	Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
-	Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
-	Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
-	Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
-	Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
-	Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
-	// AMERIQUE DU SUD
-	Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
-	Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
-	Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
-	Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
-	// ASIE
-	Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
-	Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
-	Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
-	Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
-	Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
-	Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
-	Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
-	Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
-	Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
-	Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
-	Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
-	Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
-	// AFRIQUE
-	Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
-	Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
-	Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
-	Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
-	Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
-	Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
-	// OCEANIE
-	Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
-	Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
-	Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
-	Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-
-	// 2.Créer Continent
-	Continent afrique = new Continent("Afrique", 3);
-	Continent europe = new Continent("Europe", 5);
-	Continent ameriqueN = new Continent("Amerique du Nord", 5);
-	Continent ameriqueS = new Continent("Amerique du Sud", 2);
-	Continent asie = new Continent("Asie", 7);
-	Continent autralie = new Continent("Australie", 2);
-
+	
 //	private void creerJoueurs() {
 //		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 //		for (String couleur : couleurs) {
