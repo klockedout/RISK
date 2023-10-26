@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
@@ -842,19 +843,33 @@ public class Plateau extends AbstractModel {
 	
 	
 	public void getPhase (int phase) {
+		Scanner scanner=new Scanner (System.in);
 		if (phase==1) {
 			regimentParTerritoire();
 		}
 		else if (phase==2) {
 			//attaquer();
+			//System.out.println("Voulez-vous attaquer ? (Oui/Non)");
+			//String reponse=scanner.nextLine();
+			//if (reponse.equalsIgnoreCase("Oui")) {
+				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");
+				//Territoire territoireDefense = choisirTerritoire ("Territoirede défense :");
+				//int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
+				//attaquer(territoireAttaque,territoireDefense,NbRegTer);
+			//}
 		}
 		else if (phase==3) {
+		 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
+		 String reponse = scanner.nextLine();
+		 if(reponse.equalsIgnoreCase("Oui")) {
 			deplacerRegiments(venezuela, bresil, 4);
-		}
-		else {
+		}else {
 			System.err.println("Erreur: Phase invalide " + phase);
 		}
+	}else {
+		System.err.println("Erreur: Phase invalide " + phase);
 	}
 	
 	//Widad
+}
 }
