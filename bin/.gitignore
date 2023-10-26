@@ -1,4 +1,5 @@
 
+
 /controler/
 /model/
 /risk/
@@ -8,6 +9,10 @@
 
 /model/
 /vue/
+
+
 /model/
+/controler/
+/vue/
 /risk/
 /controler/

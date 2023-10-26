@@ -3,28 +3,36 @@ import java.util.ArrayList;
 
 public class Continent {
 	private String nomCont;
-	private ArrayList<Territoire> Territoires;
+	private Territoire territoire;
+	private ArrayList<Territoire> listTerritoires;
 	
-	Continent(String nomCont){
+	public Continent(String nomCont){
 		this.nomCont=nomCont;
-		this.Territoires=new ArrayList<Territoire>();
+		this.listTerritoires=new ArrayList<Territoire>();
 	}
 
-	public String getNomCont() {
-		return nomCont;
+	public String getNom() {
+		return this.nomCont;
+	}
+	public String getTerritoire() {
+		return this.territoire.getNomTerritoire();
+	}
+	public ArrayList<Territoire> getListTerritoire() {
+			return this.listTerritoires; 
+		}
+	public ArrayList<Territoire> construireListeTerritoires(){
+		
+		return this.listTerritoires;
+	}
+//	   public  ArrayList<Territoire obtenirTerritoiresParContinent(TypeContinent typeContinent) {
+//	        ArrayList<Territoire> territoiresParContinent = new ArrayList<>();
+//	        for (Territoire territoire : Territoire) {
+//	            if (territoire.typeC.equals(typeContinent)) {
+//	                territoiresParContinent.add(territoire);
+//	            }
+//	        }
+//	        return territoiresParContinent;
+//	    }
 	}
 
-	public void setNomCont(String nomCont) {
-		this.nomCont = nomCont;
-	}
 
-	public ArrayList<Territoire> getTerritoires() {
-		return Territoires;
-	}
-
-	public void setTerritoires(ArrayList<Territoire> territoires) {
-		Territoires = territoires;
-	}
-	
-	
-}
