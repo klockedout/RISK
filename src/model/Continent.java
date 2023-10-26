@@ -22,10 +22,18 @@ public class Continent {
 	public int getBareme() {
 		return this.bareme; 
 	}
-	public ArrayList<Territoire> getListTerritoire() {
-			return this.listTerritoires; 
-		}
+//	public ArrayList<Territoire> getTerritoireContinent(Continent continent) {
+//		//a partir de la hasmap recuperer les valeurs de la hasmap
+//		for(Territoire t: continentTerritoire.entrySet()) {
+//			if (t.getKeys
+//			return t;
+//		}
+//			return this.listTerritoires; 
+//		}
 	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
+	      if (liste == null) {
+	            liste = new ArrayList<>();
+	        }
 		    liste.add(continent);
 	}
 	public ArrayList<Territoire> construireListeTerritoires(){
