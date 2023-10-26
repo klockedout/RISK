@@ -3,26 +3,27 @@ package model;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Plateau extends AbstractModel {
 	private TypeContinent typeCase;
 	private Territoire[][] plateau = new Territoire[50][30];
-	static private int idPlateau = 0;
+	static private int idPlateauTotal = 0;
 	private int tour = 0;
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Continent> continents;
 	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile = new ArrayList<CarteRisk>();
-//Larissa
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
-//Fin Larissa
+	private int idPlateau;
 
-	public Plateau(int idPlateau) {
+	public Plateau() {
 		super();
+		this.idPlateau=Plateau.idPlateauTotal++;
 		// Larissa : création de la carte
 		// 1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
@@ -564,8 +565,6 @@ public class Plateau extends AbstractModel {
 		// Tidiane Je crée la pile et j'ai changé certains noms ils n'étaient pas
 					// patreil que dans les règles du jeu
 					
-				
-
 						// EUROPE
 						pile.add(new CarteRisk("Grande-Bretagne", TypeCarte.ARTILLERIE));
 						pile.add(new CarteRisk("Islande", TypeCarte.INFANTERIE));
@@ -683,12 +682,6 @@ public class Plateau extends AbstractModel {
 			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
 			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
 			//OCEANIE
-			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.OCEANIE);
-			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.OCEANIE);
-			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.OCEANIE);
-			Territoire indonesie = new Territoire("Indonesie", TypeContinent.OCEANIE);
-/*
-
 			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
 			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
 			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
@@ -706,7 +699,7 @@ public class Plateau extends AbstractModel {
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 		for (String couleur : couleurs) {
-			this.joueurs.add(new Joueur(this.idPlateau, couleur));
+			this.joueurs.add(new Joueur(this.idPlateau, couleur,0));
 		}
 
 	}
@@ -736,26 +729,13 @@ public class Plateau extends AbstractModel {
 		// for (String nomTerEu : th )
 	}
 
-	public TypeTerritoire getTypeTerritoire() {
-		return this.TypeCase;
-	}
-	}*/
-
-			
-			
-
-	
-
-	
-//	private void creerJoueurs() {
-//		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
-//		for (String couleur : couleurs) {
-//			this.joueurs.add(new Joueur(this.idPlateau, couleur));
-//		}
+//	public TypeTerritoire getTypeTerritoire() {
+//		return this.TypeCase;
 //	}
+	
 
-
-
+			
+	
 	@Override
 	public int getLargeur() {
 		// TODO Auto-generated method stub
@@ -772,9 +752,6 @@ public class Plateau extends AbstractModel {
 		return false;
 	}
 
-	public static int getIdPlateau() {
-		return idPlateau;
-	}
 
 	@Override
 	public Joueur getVainqueur(int x, int y) {
@@ -782,7 +759,6 @@ public class Plateau extends AbstractModel {
 		// return this.plateau[x][y].getVainqueur();
 		return null;
 	}
-
 	@Override
 	public int getNbRegimentPlacés() {
 		// on parcourt la liste des joueur et on prendre le nombre de regiment
@@ -797,9 +773,9 @@ public class Plateau extends AbstractModel {
 
 
 	@Override
-	public String getTerritoire(int x, int y) {
+	public Territoire getTerritoire(int x, int y) {
 		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
+		return plateau[x][y];
 	}
 
 	@Override
@@ -812,12 +788,6 @@ public class Plateau extends AbstractModel {
 	public ArrayList<Territoire> getVoisin(int x, int y) {
 		// TODO Auto-generated method stub
 		return plateau[x][y].getListeTerritoireVoisin();
-	}
-
-
-
-	public static void setIdPlateau(int idPlateau) {
-		Plateau.idPlateau = idPlateau;
 	}
 
 	public int getTour() {
@@ -867,6 +837,14 @@ public class Plateau extends AbstractModel {
 	public void setPile(ArrayList<CarteRisk> pile) {
 		this.pile = pile;
 	}
+	
+	public int getIdPlateau() {
+		return idPlateau;
+	}
+
+	public void setIdPlateau(int idPlateau) {
+		this.idPlateau = idPlateau;
+	}
 
 
 	// Tidiane Ajouter carte permet de rajouter une carte de la pile au joueur je l'utilise dans la classe joueur
@@ -903,5 +881,80 @@ public class Plateau extends AbstractModel {
 //Fin Larissa
 
 
-		}
 
+
+
+	
+
+    public void placerRegiments(Territoire ter,int nbReg) {
+    	this.joueurActif.ajouterRegiment(ter, nbReg);
+    }
+    
+    public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
+    	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
+    }
+    
+    public Joueur proprietaireDeTer(Territoire ter) {
+		Joueur proprietaire = null;
+		for (Joueur j : this.joueurs) {
+			if (j.getTerritoires().contains(ter)) {
+				proprietaire = j;
+			}
+		}
+		return proprietaire;
+	}
+	
+	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
+		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
+		ArrayList<Territoire> res = ter.getListeTerritoireVoisin();
+		res.retainAll(tersDeJoueur);
+		return res;
+	}
+	
+	private ArrayList<Territoire> tersNoDup (ArrayList<Territoire> ters){
+		Set<Territoire> set = new HashSet<Territoire>();
+		ArrayList<Territoire> newTers = new ArrayList<Territoire>();
+		set.addAll(ters);
+		newTers.addAll(set);
+		return newTers;
+	}
+	
+	public ArrayList<Territoire> chercherTerritoiresLiesParJoueur(Territoire ter){
+		ArrayList<Territoire> tersRes = this.tersVoisinsParJoueur(ter);
+		ArrayList<Territoire> tersTemp=new ArrayList<Territoire>();
+		while (tersRes.size()!=tersTemp.size()) {
+			tersTemp=tersRes;
+			for (Territoire t : tersRes) {
+				tersRes.addAll(this.tersVoisinsParJoueur(t));
+			}
+			this.tersNoDup(tersRes);
+		}
+		return tersRes;
+	}
+	
+	public void regimentParContinent() {
+		int nbReg = 0;
+		for (Continent c : this.continents) {
+			if (this.joueurActif.getTerritoires().containsAll(c.getListTerritoire())) {
+				nbReg+=c.getBareme();
+			}
+		}
+		this.joueurActif.setNbRegimentJoueur(nbReg+this.joueurActif.getNbRegimentJoueur());
+	}
+	
+	public void regimentParTerritoire() {
+		if (this.joueurActif.getTerritoires().size()/3<3) {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getNbRegimentJoueur());
+		}else {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
+		}
+		
+	}
+
+
+	public void afficherVoisin(Territoire ter) {
+		for (Territoire t : ter.getListeTerritoireVoisin()) {
+			System.out.println(t);
+		}
+	}
+	}
