@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Territoire {
 	String nomTer;
@@ -37,6 +38,24 @@ public class Territoire {
 	public void setNbRegTer(int nbRegTer) {
 		this.nbRegTer = nbRegTer;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nomTer);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Territoire other = (Territoire) obj;
+		return Objects.equals(nomTer, other.nomTer);
+	}
+	
 	
 	
 

@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase;
@@ -197,6 +199,43 @@ public class Plateau extends AbstractModel{
     public void deplacerRegiments(Territoire terDepart, Territoire terDesti, int nbReg) {
     	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
     }
+    
+    public Joueur proprietaireDeTer(Territoire ter) {
+		Joueur proprietaire = null;
+		for (Joueur j : this.listeJoueurs) {
+			if (j.getTerritoires().contains(ter)) {
+				proprietaire = j;
+			}
+		}
+		return proprietaire;
+	}
 	
+	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
+		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
+		ArrayList<Territoire> res = ter.getVoisins();
+		res.retainAll(tersDeJoueur);
+		return res;
+	}
+	
+	private ArrayList<Territoire> tersNoDup (ArrayList<Territoire> ters){
+		Set<Territoire> set = new HashSet<Territoire>();
+		ArrayList<Territoire> newTers = new ArrayList<Territoire>();
+		set.addAll(ters);
+		newTers.addAll(set);
+		return newTers;
+	}
+	
+	public ArrayList<Territoire> chercherTerritoiresLiesParJoueur(Territoire ter){
+		ArrayList<Territoire> tersRes = this.tersVoisinsParJoueur(ter);
+		ArrayList<Territoire> tersTemp=new ArrayList<Territoire>();
+		while (tersRes.size()!=tersTemp.size()) {
+			tersTemp=tersRes;
+			for (Territoire t : tersRes) {
+				tersRes.addAll(this.tersVoisinsParJoueur(t));
+			}
+			this.tersNoDup(tersRes);
+		}
+		return tersRes;
+	}
 }
 

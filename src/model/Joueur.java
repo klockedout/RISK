@@ -120,7 +120,7 @@ public class Joueur {
 	}
 
 
-	public ArrayList<Territoire> getListeTerritoires() {
+	public ArrayList<Territoire> getTerritoires() {
 		return territoires;
 	}
 
