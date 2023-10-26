@@ -10,8 +10,12 @@ public class Joueur {
 	private int idPlateau;
 	private String couleur;
 	private int nbRegimentJoueur;
+	//NA
 	private int nbAttaque;
-	private int nbDefense;
+	private int nbDefenseReussi;
+	private int obtenu1;
+	//fin NA
+	
 	//a commenter 
 	private ArrayList<Integer> resultatDe; //NA
 	private String phase;
@@ -26,6 +30,9 @@ public class Joueur {
 		//this.idPlateau=idPlateau;
 		this.couleur=couleur;
 		this.nbRegimentJoueur = nbRegiment;
+		this.obtenu1 = 0;
+		this.nbAttaque = 0;
+		this.nbDefenseReussi = 0;
 		//this.nbRegimentJoueur = nbRegiment; 
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
@@ -55,7 +62,7 @@ public class Joueur {
 
 
 	public int getIdPlateau() {
-		return idPlateau;
+		return this.idPlateau;
 	}
 
 
@@ -65,7 +72,7 @@ public class Joueur {
 
 
 	public String getCouleur() {
-		return couleur;
+		return this.couleur;
 	}
 
 
@@ -75,7 +82,7 @@ public class Joueur {
 
 
 	public int getNbAttaque() {
-		return nbAttaque;
+		return this.nbAttaque;
 	}
 
 
@@ -84,13 +91,13 @@ public class Joueur {
 	}
 
 
-	public int getNbDefense() {
-		return nbDefense;
+	public int getNbDefenseReussi() {
+		return this.nbDefenseReussi;
 	}
 
 
-	public void setNbDefense(int nbDefense) {
-		this.nbDefense = nbDefense;
+	public void setNbDefenseReussi(int nbDefenseReussi) {
+		this.nbDefenseReussi = nbDefenseReussi;
 	}
 	
 	
@@ -100,7 +107,7 @@ public class Joueur {
 
 
 	public String getPhase() {
-		return phase;
+		return this.phase;
 	}
 
 
@@ -110,7 +117,7 @@ public class Joueur {
 
 
 	public int getNbRegimentJoueur() {
-		return nbRegimentJoueur;
+		return this.nbRegimentJoueur;
 	}
 
 
@@ -120,7 +127,7 @@ public class Joueur {
 
 
 	public ArrayList<CarteRisk> getCarteRisk() {
-		return carteRisk;
+		return this.carteRisk;
 	}
 
 
@@ -130,17 +137,17 @@ public class Joueur {
 
 
 	public ArrayList<Territoire> getListeTerritoire() {
-		return listeTerritoire;
+		return this.listeTerritoire;
 	}
 
 
 	public void setTerritoire(ArrayList<Territoire> territoire) {
-		listeTerritoire = territoire;
+		this.listeTerritoire = territoire;
 	}
 
 
 	public Territoire getTerritoire() {
-		return territoire;
+		return this.territoire;
 	}
 
 
@@ -157,6 +164,14 @@ public class Joueur {
         	this.resultatDe.add(random);
 		}
 		
+		//compteur point trophé "le malchanceux"
+		for (int res : this.resultatDe) {
+			
+			if (res ==1 ) {
+				this.obtenu1 +=1;
+			}
+		}
+		
 		//Mettre en ordre décroissant
 		Collections.sort(this.resultatDe, Collections.reverseOrder());
 		
@@ -164,9 +179,4 @@ public class Joueur {
 		return this.resultatDe;
 	}
 	
-	
-	
-	public void defendre(int nbRegiment) {
-		lancerDe(nbRegiment);
-	}
 }

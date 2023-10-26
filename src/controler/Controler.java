@@ -24,7 +24,8 @@ public class Controler extends AbstractControler {
 			
 			//NA - phase attaque, choisir territoires
 			if (plateau.getPhase() == 2) {
-			
+				
+				//condition si territoire de départ a >1 régiments TODO
 				if (plateau.getTerritoireDept() == null) {
 					plateau.cliquerSurTerDEPART(x, y);
 				

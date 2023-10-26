@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
@@ -14,13 +15,14 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Continent> continents;
 	private ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
 	private Territoire territoireDept; //NA
-	private Territoire territoireVoisin;
+	private Territoire territoireVoisin; //NA
 //Larissa
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
 	private ArrayList<CarteRisk> pile;
 	private int phase = 2;
+	Scanner scanner = new Scanner(System.in); //NA
 	
 	
 
@@ -31,12 +33,12 @@ public class Plateau extends AbstractModel {
 		Joueur joueur2 = new Joueur(0, "jaune", 15);
 		
 		this.joueurActif = joueur1;
-		afghanistan.setNbRegTer(2);
 		
 		this.listeJoueurs.add(joueur1);
 		this.listeJoueurs.add(joueur2);
 		
 		australieOrientale.setNbRegTer(4);
+		chine.setNbRegTer(1);
 		joueur2.getListeTerritoire().add(australieOrientale);
 		
 		// Larissa : création de la carte 
@@ -694,8 +696,12 @@ public class Plateau extends AbstractModel {
 		return 0;
 	}
 	
+	//NA
 	public Territoire getTerritoireDept() {
 		return this.territoireDept;
+	}
+	public void setTerritoireDept(Territoire territoireDept) {
+		this.territoireDept = territoireDept;
 	}
 
 	@Override
@@ -719,28 +725,31 @@ public class Plateau extends AbstractModel {
 
 	// NA
 	public void combattre() {
+		
 		//compteur point trophé "le belliqueux"
 		joueurActif.setNbAttaque(joueurActif.getNbAttaque()+1);
-
+		
+		int nbAtt=0;
+		int nbDef=0;
+		
+		
+		//TODO Vérifier si nbAtt choisi laisse au moins 1 regiment au territoire départ
 		//scanner demander nbAtt/nbRegiment/nbLance
-		int nbAtt=3;
+		System.out.println("Taper le nombre de régiments à déplacer pour attaquer 1~3");
+		nbAtt=scanner.nextInt(); 	
+		
 		
 		Joueur defendant =  proprietaireDeTer(this.territoireVoisin);
 		System.out.println("\ndéfendant is " + defendant.getCouleur() + ", territoire : " + this.territoireVoisin.getNomTer());
-		System.out.println("nbReg sur territoire défendant au début " + this.territoireVoisin.getNbRegTer());
 		
-		//scanner demander nbDef/nbRegiment/nbLance
-		int nbDef=2;
+		//TODO Vérifier si nbDeft choisi laisse au moins 1 regiment au territoire départ
+		System.out.println("Taper le nombre de régiments pour défendre 1~2");
+		nbDef=scanner.nextInt();
+				
 		
 		//LancerDé
 		this.joueurActif.lancerDe(nbAtt);
 		defendant.lancerDe(nbDef);
-		
-		
-		//sysout test >>>>>
-		ArrayList<Territoire> listeTerritoireAtt = this.joueurActif.getListeTerritoire();
-		ArrayList<Territoire> listeTerritoireDef = defendant.getListeTerritoire();
-		//<<<<
 		
 		//résultat lancer de dés
 		ArrayList<Integer> resAttaquant = this.joueurActif.getResultatDe();
@@ -748,34 +757,37 @@ public class Plateau extends AbstractModel {
 		Joueur vainqueur = null;
 		
 		//sysout test >>>>
-		System.out.println("\nnbRegiment attaquant : " + this.joueurActif.getNbRegimentJoueur());
-		System.out.println("nbRegiment defendant : " + defendant.getNbRegimentJoueur());
 		System.out.println("------------------------------------------\n");
+		System.out.println("nbReg sur territoire défendant au début " + this.territoireVoisin.getNbRegTer());
 		//<<<<<<<<
 		
 		for (int i = 0 ; i<Math.min(resAttaquant.size(), resDefendant.size()); i++) {
-			System.out.println("attaque num " + i);
-			//comparer valeur 'a' avec la valeur au mm index que 'a' dans resDefendant
+			
+			System.out.println("-------------------------------\ncomparer dé index " + i);
+			//comparer valeur 'i' avec la valeur au mm index que 'i' dans resDefendant
 			//if vainqueur = defendant
 			if (resAttaquant.get(i) <= resDefendant.get(i)) { 
-				vainqueur = defendant;
+				vainqueur = defendant;				
 				System.out.println("vainqueur = " + vainqueur.getCouleur());
+				
+				//compteur point trophé "le bouclier"
+				defendant.setNbDefenseReussi(defendant.getNbDefenseReussi()+1);
+				
 				//enlever regiment du territoire de l'attaquant
 				this.territoireDept.setNbRegTer(this.territoireDept.getNbRegTer() - 1);
 				//enlever regiment de l'attaquant
 				this.joueurActif.setNbRegimentJoueur(this.joueurActif.getNbRegimentJoueur()-1);
-				System.out.println("nbRegiment attaquant : " + this.joueurActif.getNbRegimentJoueur());
-				System.out.println("--------------------------\n");
 				
 				//définir le nombre restant d'attaquant 
 				nbAtt -=1;
+				
 			//if vainqueur = attaquant
 			} else {
 				vainqueur = this.joueurActif;
-				System.out.println("vainqueur is " + vainqueur.getCouleur());
+				System.out.println("vainqueur = " + vainqueur.getCouleur());
 				
 				//si territoire conquis, ajouter dans territoire ds liste du gagnant
-				if ((this.territoireVoisin.getNbRegTer() - nbDef) < 1 ) {
+				if ((this.territoireVoisin.getNbRegTer() - 1) < 1 ) {
 					//gérer listeTerritoire
 					this.joueurActif.getListeTerritoire().add(this.territoireVoisin);
 					defendant.getListeTerritoire().remove(this.territoireVoisin);
@@ -783,33 +795,27 @@ public class Plateau extends AbstractModel {
 					//gérer nbRegiment nouveau sur territoire
 					this.territoireVoisin.setNbRegTer(nbAtt);
 					
-					//test sysout >>>>>>>
 					System.out.print("Vous avez acquis le territoire " + this.territoireVoisin.getNomTer());
-					
-					System.out.println("");
-					System.out.println("nbRegiment defendant : " + defendant.getNbRegimentJoueur());
-					//<<<<<<<<<<<<
 					
 				} else {
 					//enlever regiment du territoire du defendant
 					this.territoireVoisin.setNbRegTer(this.territoireVoisin.getNbRegTer()- 1);
 					//enlever regiment du defendant 
 					defendant.setNbRegimentJoueur(defendant.getNbRegimentJoueur()-1);
-					System.out.println("nbRegiment défendant : " + defendant.getNbRegimentJoueur());
-					System.out.println("---------------------------------------------");
-				}
-				System.out.println("\nnb attaquant restant " + nbAtt);
-				
+				}				
 			}
 		 }
 		System.out.println("\nnbReg restant sur territoire defendant " + this.territoireVoisin.getNbRegTer());
-		System.out.println("vainqueur = " + vainqueur.getCouleur());
+		
+		//Reset le territoireDept
 		this.territoireDept = null;
 	}
+	//fin NA
 	
 	public Joueur proprietaireDeTer(Territoire ter) {
 		Joueur proprietaire = null;
 		for (Joueur j : this.listeJoueurs) {
+			
 			if (j.getListeTerritoire().contains(ter)) {
 				proprietaire = j;
 			}
