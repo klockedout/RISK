@@ -73,7 +73,7 @@ public class Vue extends javax.swing.JFrame implements Observateur{
                 case EUROPE : 
                     panelJeu.drawEurope(x+xP*cote, y+yP*cote, cote);
                 break;
-                case OCEANIE : 
+                case AUSTRALIE : 
                     panelJeu.drawOceanie(x+xP*cote, y+yP*cote, cote);
                 break;
                 case BORDURE : 
