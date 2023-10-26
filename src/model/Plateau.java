@@ -385,8 +385,6 @@ public class Plateau extends AbstractModel{
 	public void setPile(ArrayList<CarteRisk> pile) {
 		this.pile = pile;
 	}
-
-    
 	
 }
 
