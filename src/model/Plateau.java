@@ -41,8 +41,6 @@ public class Plateau extends AbstractModel {
 	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
 	HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
 	HashMap<Continent, ArrayList<Territoire>> continentTerritoires = new HashMap<Continent, ArrayList<Territoire>>();
-	private ArrayList<Continent> continents; 
-
 
 	public Plateau(int idPlateau) {
 		super();
@@ -100,10 +98,10 @@ public class Plateau extends AbstractModel {
 		Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
 		Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
 		//OCEANIE
-		Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.OCEANIE);
-		Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.OCEANIE);
-		Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.OCEANIE);
-		Territoire indonesie = new Territoire("Indonesie", TypeContinent.OCEANIE);
+		Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
+		Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
+		Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
+		Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
 
 		
 		// Larissa : création de la carte 
@@ -665,12 +663,12 @@ public class Plateau extends AbstractModel {
 		territoiresOceanie = getTerritoireFromContinent(TypeContinent.AUSTRALIE);
 	
 	
-	continentTerritoires.put(new Continent("AFRIQUE"), territoiresAfrique);
-	continentTerritoires.put(new Continent("AMERIQUEN"), territoiresAmeriqueNord);
-	continentTerritoires.put(new Continent("AMERIQUESUD"), territoiresAmeriqueSud);
-	continentTerritoires.put(new Continent("ASIE"), territoiresAsie);
-	continentTerritoires.put(new Continent("EUROPE"), territoiresEurope);
-	continentTerritoires.put(new Continent("OCEANIE"), territoiresOceanie);
+	continentTerritoires.put(afrique, territoiresAfrique);
+	continentTerritoires.put(ameriqueN, territoiresAmeriqueNord);
+	continentTerritoires.put(ameriqueS, territoiresAmeriqueSud);
+	continentTerritoires.put(asie, territoiresAsie);
+	continentTerritoires.put(europe, territoiresEurope);
+	continentTerritoires.put(australie, territoiresOceanie);
 	} 
 
 	/*		
@@ -685,14 +683,14 @@ public class Plateau extends AbstractModel {
 		return continentTerritoires;
 	}
 		
-		afrique.ajouterContinent(continents,afrique);
+		/*afrique.ajouterContinent(continents,afrique);
 		europe.ajouterContinent(continents,europe);
 		ameriqueN.ajouterContinent(continents,ameriqueN);
 		ameriqueS.ajouterContinent(continents,ameriqueS);
 		asie.ajouterContinent(continents,asie);
 		australie.ajouterContinent(continents,australie);
 		
-	}
+	}*/
 	
 	//1. Créer les territoires et leur territoire voisin 
 			//EUROPE 

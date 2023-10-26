@@ -79,9 +79,6 @@ public class Joueur {
 	public int getNbAttaque() {
 
 		return this.nbAttaque;
-
-		return nbAttaque;
-
 	}
 
 
