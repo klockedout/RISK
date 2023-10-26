@@ -119,16 +119,13 @@ public class Joueur {
 
 
 	public ArrayList<Territoire> getListeTerritoire() {
-		return this.Territoire;
+		return this.territoires;
 	}
 
 	public void setTerritoire(ArrayList<Territoire> territoire) {
-		this.Territoire = territoire;
+		this.territoires= territoire;
 	}
 	
-	public Territoire getTerritoire() {
-		return this.territoire;
-	}
 
 	
 	//Debut Larissa
