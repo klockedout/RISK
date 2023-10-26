@@ -19,7 +19,7 @@ public class Joueur {
 	private ArrayList<Territoire> Territoire;
 	// qu'est ce que c'est ?
 	Territoire territoire;
-
+	
 	// Tidiane j'ai rajouter la variable plateau pouvoir importer la methode ajouter
 	// carte dans cette classe
 

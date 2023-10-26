@@ -30,12 +30,15 @@ public abstract class AbstractModel implements Observable {
     public abstract Joueur getVainqueur(int x, int y);
     public abstract int getLargeur();
     public abstract int getHauteur();
-    public abstract TypeTerritoire getTypeTerritoire(int x, int y);
+    public abstract String getNom(int x, int y);
+    public abstract TypeContinent getContinent(int x, int y);
+    public abstract String getTerritoire(int x, int y);
+    public abstract ArrayList<Territoire> getVoisin(int x, int y);
     /*
     public abstract int getNbSourisIn();
     public abstract int getNbSourisOut();*/
     public abstract int getNbRegimentPlacés();
-    public abstract int getNbRegiment();	
+    public abstract int getNbRegiment();
     
     public abstract boolean partieTerminer();
 
