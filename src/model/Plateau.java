@@ -704,15 +704,6 @@ public class Plateau extends AbstractModel {
 
 	}
 
-	private void creerContinents() {
-		String[] nomsCont = new String[] { "Europe", "Asie", "Amérique du Nord", "Amérique du Sud", "Afrique",
-				"Océanie" };
-
-		for (String nomCont : nomsCont) {
-			this.continents.add(new Continent(nomCont));
-		}
-	}
-
 	private void creerTerritoires() {
 
 		String[] nomsTerEurope = new String[] { "Grande-Bretagne", "Islande", "Europe du Nord", "Scandinavie",
@@ -726,16 +717,10 @@ public class Plateau extends AbstractModel {
 				"Afrique du Nord", "Afrique du Sud" };
 		String[] nomsTerOceanie = new String[] { "Australie Orientale", "Indonésie", "Nouvelle-Guinée",
 				"Australie Occidentale" };
-		// for (String nomTerEu : th )
+
 	}
 
-//	public TypeTerritoire getTypeTerritoire() {
-//		return this.TypeCase;
-//	}
-	
 
-			
-	
 	@Override
 	public int getLargeur() {
 		// TODO Auto-generated method stub
@@ -861,10 +846,6 @@ public class Plateau extends AbstractModel {
 
 	}
 
-//Larissa
-
-
-
 	@Override
 	public String getNom(int x, int y) {
 		// TODO Auto-generated method stub
@@ -878,13 +859,6 @@ public class Plateau extends AbstractModel {
 		return joueurActif.echangerCartes();
 	}
 
-//Fin Larissa
-
-
-
-
-
-	
 
     public void placerRegiments(Territoire ter,int nbReg) {
     	this.joueurActif.ajouterRegiment(ter, nbReg);
