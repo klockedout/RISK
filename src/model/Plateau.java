@@ -14,6 +14,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
+	private ArrayList<Continent> continents; 
 
 	public Plateau(int idPlateau) {
 		super();
@@ -551,7 +552,12 @@ public class Plateau extends AbstractModel {
 		australieOrientale.ajouterTerritoireVoisin(nouvelleGuinee);
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
 		
-		
+		afrique.ajouterContinent(continents,afrique);
+		europe.ajouterContinent(continents,europe);
+		ameriqueN.ajouterContinent(continents,ameriqueN);
+		ameriqueS.ajouterContinent(continents,ameriqueS);
+		asie.ajouterContinent(continents,asie);
+		australie.ajouterContinent(continents,australie);
 		
 	}
 	
@@ -614,7 +620,7 @@ public class Plateau extends AbstractModel {
 			Continent ameriqueN = new Continent("Amerique du Nord", 5); 
 			Continent ameriqueS = new Continent("Amerique du Sud", 2); 
 			Continent asie = new Continent("Asie", 7); 
-			Continent autralie = new Continent("Australie", 2); 
+			Continent australie = new Continent("Australie", 2); 
 			
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
