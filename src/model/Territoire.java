@@ -92,6 +92,12 @@ public class Territoire {
 		
 	}
 
+	@Override
+	public String toString() {
+		return nomTer;
+	}
+
+	
 	//methode qui ajouter un regiment sur un territoire 
 	
 }
