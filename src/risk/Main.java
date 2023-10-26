@@ -19,6 +19,7 @@ public class Main {
         while(!model.partieTerminer()){
             controler.calculerStepSuivant();
         }
+        
 
 	}
 
