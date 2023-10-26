@@ -185,9 +185,9 @@ public class Joueur {
 		
 		
 		/*
-		 * 1. 3 differents régiments 
-		 * 2. 3 mm régiments
-		 * 3. 2 regiments (differents ou pareil) + joker
+		 * 1. 3 differents carterisk 
+		 * 2. 3 mm carterisk
+		 * 3. 2 carterisk (differents ou pareil) + joker
 		 * 4. au moins 1 des 3 cartes échanger has your territoire = +2 regiments
 		 */
 
@@ -219,6 +219,8 @@ public class Joueur {
 		
 		return carteRisk;
 
+		return carteRisk; 
 	}
+	
 
 }
