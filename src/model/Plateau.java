@@ -697,6 +697,60 @@ public class Plateau extends AbstractModel {
 	    return obtenirListeTerritoire().size();
 	}
 	
+	public ArrayList<Territoire> getTerritoireDispo(Joueur joueur) {
+	    ArrayList<Territoire> territoiresDisponibles = new ArrayList<>();
+	    for (Territoire territoire : obtenirListeTerritoire()) {
+	        if (territoire.proprietaireDeTer() == null) {
+	            territoiresDisponibles.add(territoire);
+	        }
+	    }
+	    return territoiresDisponibles;
+	}
+	
+	public void Getphase(int phase) {
+		if  (phase == 1) {
+	        recevoirRegimentAjouter();
+	    } else if (phase == 2) {
+	        attaquer();
+	    } else if (phase == 3) {
+	        deplacerRegiments();
+	    } else {
+			  System.err.println("Erreur : Phase invalide - " + phase);
+	    }
+	    }
+	}
+
+	public void recevoirRegimentAjouter() {
+	    for (Joueur joueur : joueurs) {
+	        int RegimentAjouter = joueur.regimentParTerritoire();
+	        joueur.ajouterRegiments(RegimentAjouter); 
+	}
+
+	public void calculeRegimentsAjouter(int nbterritoire) {
+		return obtenirNbTerritoire()/3;
+
+	}
+
+	public void attaquer() {
+	    
+	}
+
+	public void deplacerRegiments() {
+	    
+	}
+	
+	public ArrayList<Territoire> getTerritoireDepart(Joueur joueurActif) {
+	    ArrayList<Territoire> territoiresAvec2Regiments = new ArrayList<>();
+
+	    for (Territoire territoire : joueurActif.getListeTerritoire()) {
+	        if (territoire.getNbRegiments() >= 2) {
+	            territoiresAvec2Regiments.add(territoire);
+	        }
+	    }
+
+	    return territoiresAvec2Regiments;
+	}
+	
 	
 
 }

@@ -15,8 +15,8 @@ public class Joueur {
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
 	private ArrayList  <Territoire> Territoire;
-	//qu'est ce que c'est ? 
-	Territoire territoire;
+	private Territoire territoire;
+
 	
 	//contructeur 
 	
@@ -138,6 +138,7 @@ public class Joueur {
 	public void setTerritoire(Territoire territoire) {
 		this.territoire = territoire;
 	}
+	
 	
 	
 	
