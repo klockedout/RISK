@@ -13,12 +13,14 @@ public class Continent {
 	private ArrayList<Territoire> listTerritoires;
 	private HashMap<Territoire, Joueur> territoiresControles;
 	private HashMap<Continent, Territoire[]> continentTerritoires;
+	private int bareme; 
 	
-	public Continent(String nomCont){
+	public Continent(String nomCont, int bareme){
 		this.nomCont=nomCont;
 		this.listTerritoires=new ArrayList<Territoire>();
 		this.territoiresControles = new HashMap<Territoire, Joueur>();
 		this.continentTerritoires= new HashMap<Continent, Territoire[]>();
+		this.bareme = bareme; 
 	}
 	
 	public void attribuerContinentTerritoires(Continent continent) {
@@ -36,13 +38,31 @@ public class Continent {
 		return this.typeCase; }*/
 
 	}
+
 	//FARKI Imane
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 
 		}
 
+	public int getBareme() {
+		return this.bareme; 
+	}
+//	public ArrayList<Territoire> getTerritoireContinent(Continent continent) {
+//		//a partir de la hasmap recuperer les valeurs de la hasmap
+//		for(Territoire t: continentTerritoire.entrySet()) {
+//			if (t.getKeys
+//			return t;
+//		}
+//			return this.listTerritoires; 
+//		}
+	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
+	      if (liste == null) {
+	            liste = new ArrayList<>();
+	        }
+		    liste.add(continent);
+	}
+
 	public ArrayList<Territoire> construireListeTerritoires(){
-		
 		return this.listTerritoires;
 	}
 //	   public  ArrayList<Territoire obtenirTerritoiresParContinent(TypeContinent typeContinent) {

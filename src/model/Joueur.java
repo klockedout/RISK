@@ -24,7 +24,8 @@ public class Joueur {
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
-	//FARKI Imane
+
+	//contructeur 
 	
 	public Joueur (int idPlateau, String couleur, int nbRegiment){
 		//this.idPlateau=idPlateau;
@@ -64,6 +65,7 @@ public class Joueur {
 		this.idPlateau = idPlateau;
 	}
 
+
 	//FARKI Imane
 	public String getCouleur() {
 		return this.couleur;
@@ -72,20 +74,21 @@ public class Joueur {
 	public String getNom() {
 		return this.nom;
 	}
-	
-	public void setCouleur(String couleur) {
-		this.couleur = couleur;
-	}
 
 
 	public int getNbAttaque() {
+
 		return this.nbAttaque;
+
+		return nbAttaque;
+
 	}
 
 
 	public void setNbAttaque(int nbAttaque) {
 		this.nbAttaque = nbAttaque;
 	}
+
 
 	public int getNbDefense() {
 		return this.nbDefense;
@@ -99,12 +102,9 @@ public class Joueur {
 		return this.phase;
 	}
 
-	public void setPhase(String phase) {
-		this.phase = phase;
-	}
 
 	public int getNbRegimentJoueur() {
-		return this.nbRegimentJoueur;
+		return nbRegimentJoueur;
 	}
 
 	public void setNbRegimentJoueur(int nbRegimentJoueur) {
@@ -114,6 +114,7 @@ public class Joueur {
 	public ArrayList<CarteRisk> getCarteRisk() {
 		return this.carteRisk;
 	}
+
 
 	public void setCarteRisk(ArrayList<CarteRisk> carteRisk) {
 		this.carteRisk = carteRisk;
@@ -131,10 +132,19 @@ public class Joueur {
 		return this.territoire;
 	}
 
-	public void setTerritoire(Territoire territoire) {
-		this.territoire = territoire;
-	}
 	
+	//Debut Larissa
+
+//	public boolean conquerirContinent(Continent continent) {
+//		for(Territoire t : continent.getTerritoires()) {
+//			if(!this.Territoire.contains(t)) {
+//				return false;
+//			}
+//		}
+//		//on parcourt les ele
+//		return true; 
+//	}
+	//Fin Larissa
 	
 
 }

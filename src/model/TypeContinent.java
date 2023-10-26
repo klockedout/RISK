@@ -7,7 +7,7 @@ public enum TypeContinent {
 	    AMERIQUEN,
 	    AMERIQUESUD,
 	    EUROPE, 
-	    OCEANIE,
+	    AUSTRALIE,
 	    ASIE,
 	    FLECHE_HAUT,
 	    FLECHE_DROITE,
