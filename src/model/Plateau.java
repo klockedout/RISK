@@ -18,6 +18,21 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
 	private ArrayList<CarteRisk> pile;
+	
+	public Plateau(int idPlateau) {
+		/*this.creerContinents();
+		this.creerJoueurs();
+		this.creerPlile();
+		this.idPlateau+=1;
+		
+	 for (int x = 0; x < plateau.length; x++) { 
+		 for (int y=0; y < plateau[x].length; y++) {
+			 plateau[x][y] = new Territoire("Ocean",TypeCase.OCEAN);
+			}
+		}
+		for (int x = 1; x < plateau.length - 1; x++) {
+			for (int y = 1; y < plateau[x].length - 1; y++) {
+				plateau[x][y] = new Territoire("Test",TypeCase.CHEMIN);
 
 	public Plateau(int idPlateau) {
 		super();
@@ -34,6 +49,19 @@ public class Plateau extends AbstractModel {
 			for (int y = 2; y < 4; y++) {
 				this.plateau[x][y] = groenland;
 			}
+		}*/
+	
+	
+	/*private void creerContinents() {
+		String[] nomsCont = new String[]{
+				"Europe",
+				"Aise",
+				"Amérique du Nord",
+				"Amérique du Sud",
+				"Afrique",
+				"Océanie"};
+		for (String nomCont : nomsCont) {
+			this.continents.add(new Continent(nomCont));
 		}
 		//Amerique : Alaska
 		for (int x = 2; x < 5; x++) {
@@ -683,7 +711,29 @@ public class Plateau extends AbstractModel {
 		// TODO Auto-generated method stub
 		return plateau[x][y].getListeTerritoireVoisin();
 	}
+	
+	public Joueur getVainqueur(Joueur attaquant, Joueur defendant) {
+		ArrayList<Integer> resAttaquant = attaquant.getResultatDe();
+		ArrayList<Integer> resDefendant = attaquant.getResultatDe();
+		
+		for (int a : resAttaquant) {
+			//comparer valeur 'a' avec la valeur au mm index que 'a' dans resDefendant
+			if (a <= resDefendant.get(resDefendant.indexOf(a))) {
+				return defendant;
 
+			} else {
+				return attaquant;
+			}
+		 }
+		return null;
+		 
+	}
+	
+	public void combattre(Joueur attaquant, Joueur defendant) {
+		attaquant.setNbAttaque(attaquant.getNbAttaque()+1);
+		defendant.setNbDefense(defendant.getNbDefense()+1);
+	
+	}
 
 	public static void setIdPlateau(int idPlateau) {
 		Plateau.idPlateau = idPlateau;
@@ -705,7 +755,7 @@ public class Plateau extends AbstractModel {
 		this.joueurActif = joueurActif;
 	}
 
-	public String getEtatPlateu() {
+	public String getEtatPlateu() { 
 		return etatPlateu;
 	}
 
@@ -721,12 +771,8 @@ public class Plateau extends AbstractModel {
 		this.continents = continents;
 	}
 
-	public ArrayList<Joueur> getJoueurs() {
-		return joueurs;
-	}
-
-	public void setJoueurs(ArrayList<Joueur> joueurs) {
-		this.joueurs = joueurs;
+	public ArrayList<Joueur> getListeJoueurs() {
+		return this.listeJoueurs;
 	}
 
 	public ArrayList<CarteRisk> getPile() {

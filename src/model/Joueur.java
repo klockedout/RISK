@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Joueur {
@@ -11,12 +12,13 @@ public class Joueur {
 	private int nbAttaque;
 	private int nbDefense;
 	//a commenter 
+	private ArrayList<Integer> resultatDe; //NA
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList <CarteRisk> carteRisk;
-	private ArrayList  <Territoire> Territoire;
-	//qu'est ce que c'est ? 
-	Territoire territoire;
+	private ArrayList  <Territoire> listeTerritoire;
+	
+	private Territoire territoire;
 	
 	//contructeur 
 	
@@ -27,7 +29,7 @@ public class Joueur {
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 
-		this.Territoire=new ArrayList<Territoire>();
+		this.listeTerritoire=new ArrayList<Territoire>();
 	}
 
 
@@ -88,6 +90,11 @@ public class Joueur {
 	public void setNbDefense(int nbDefense) {
 		this.nbDefense = nbDefense;
 	}
+	
+	
+	public ArrayList<Integer> getResultatDe(){
+		return this.resultatDe;
+	}
 
 
 	public String getPhase() {
@@ -121,12 +128,12 @@ public class Joueur {
 
 
 	public ArrayList<Territoire> getListeTerritoire() {
-		return Territoire;
+		return listeTerritoire;
 	}
 
 
 	public void setTerritoire(ArrayList<Territoire> territoire) {
-		Territoire = territoire;
+		listeTerritoire = territoire;
 	}
 
 
@@ -140,5 +147,37 @@ public class Joueur {
 	}
 	
 	
-
+	public ArrayList<Integer> lancerDe(int nbDe) { // code Nam An
+		this.resultatDe.clear();
+		
+		while ( this.resultatDe.size() < nbDe+1 ) {
+			int random = (int) (Math.random() * 6) + 1;
+        	this.resultatDe.add(random);
+		}
+		
+		//Mettre en ordre décroissant
+		Collections.sort(this.resultatDe, Collections.reverseOrder());
+		
+		System.out.println(this.resultatDe);
+		return this.resultatDe;
+	}
+	
+	public void attaquer(int nbRegiment) {
+		//valeur pour calculer score pour trophé
+		this.setNbAttaque(this.getNbAttaque()+1);
+		
+		for (Territoire territoire : this.listeTerritoire) {
+			System.out.println(territoire.getNomTer());
+		}
+		
+		//TODO --> choisir le territoire à attaquer
+		//System.out.println(getTerritoireVoisin);
+		
+		lancerDe(nbRegiment);
+	}
+	
+	
+	public void defendre(int nbRegiment) {
+		lancerDe(nbRegiment);
+	}
 }
