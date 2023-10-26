@@ -11,7 +11,6 @@ public class Joueur {
 	private String couleur;
 	private int nbAttaque;
 	private int nbDefense;
-	// a commenter
 	private int echanger = 0;
 	private String phase;
 	private int nbRegimentJoueur;
@@ -130,6 +129,7 @@ public class Joueur {
 	// Tidiane : Obtenir carte est utiliser pour que le joueur puisse piocher la
 	// carte.
 	public void obtenirCarte() {
+		//si la liste de territoire est +1 : 
 		CarteRisk cartePiochee = plateau.ajouterCartes();
 		carteRisk.add(cartePiochee);
 
@@ -147,7 +147,7 @@ public class Joueur {
 	}
 
 	// Tidiane Pour échanger les cartes
-	public void echangerCartes() {
+	public ArrayList<CarteRisk> echangerCartes() {
 
 		// Creer une liste de cavlaerie ...
 		ArrayList<CarteRisk> cavalerie = new ArrayList<>();
@@ -216,6 +216,8 @@ public class Joueur {
 		carteRisk.removeAll(artillerie);
 		carteRisk.removeAll(infanterie);
 		carteRisk.removeAll(cavalerie);
+		
+		return carteRisk;
 
 	}
 
