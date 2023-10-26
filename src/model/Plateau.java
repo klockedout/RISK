@@ -237,5 +237,24 @@ public class Plateau extends AbstractModel{
 		}
 		return tersRes;
 	}
+	
+	public void regimentParContinent() {
+		int nbReg = 0;
+		for (Continent c : this.continents) {
+			if (this.joueurActif.getTerritoires().containsAll(c.getTerritoires())) {
+				nbReg+=c.getBareme();
+			}
+		}
+		this.joueurActif.setNbRegimentJoueur(nbReg+this.joueurActif.getNbRegimentJoueur());
+	}
+	
+	public void regimentParTerritoire() {
+		if (this.joueurActif.getTerritoires().size()/3<3) {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getNbRegimentJoueur());
+		}else {
+			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
+		}
+		
+	}
 }
 

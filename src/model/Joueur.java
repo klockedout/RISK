@@ -126,7 +126,7 @@ public class Joueur {
 
 
 	public void setTerritoires(ArrayList<Territoire> territoires) {
-		territoires = territoires;
+		this.territoires = territoires;
 	}
 
 
@@ -156,15 +156,6 @@ public class Joueur {
 			System.out.println("opération pas possible");
 		}
     }
-	
-	public int regimentParTerritoire() {
-		if (this.territoires.size()/3<3) {
-			return 3;
-		}else {
-			return this.territoires.size()/3;
-		}
-		
-	}
 	
 
 }
