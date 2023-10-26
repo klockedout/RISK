@@ -8,6 +8,7 @@ public class Territoire {
 	String nomTer;
 	TypeContinent typeC; 
 	int nbRegTer;
+
 	ArrayList<Territoire>listeTerritoireVoisin; 
 	
 	//constructeur 
@@ -21,22 +22,37 @@ public class Territoire {
 	
 	//methodes 
 	
+/*
+	private TypeTerritoire typeTer; 
+	//FARKI Imane	
+	Territoire(String nom){
+		this.nbRegTer=0;
+		this.nomTer=nom;
+	}
+	 
+	//FARKI Imane
+	public  TypeTerritoire getTypeTerritoire() {
+		return this.typeTer;
+	}*/
+	//FARKI Imane
+
 	public String getNomTerritoire() {
 		return this.nomTer;
 	}
-
+	//FARKI Imane
 	public String getNomTer() {
 		return nomTer;
 	}
 
+	//FARKI Imane
 	public void setNomTer(String nomTer) {
 		this.nomTer = nomTer;
 	}
-
+	//FARKI Imane
 	public int getNbRegTer() {
 		return nbRegTer;
 	}
-
+	//FARKI Imane
 	public void setNbRegTer(int nbRegTer) {
 		this.nbRegTer = nbRegTer;
 	}
@@ -66,6 +82,7 @@ public class Territoire {
 	}
 //Fin Larissa
 
+	
 	
 	//recuperer le joueur le plus fort dans un territoire
 	public Joueur getVainqueur() {

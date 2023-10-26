@@ -1,11 +1,17 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Joueur {
 	
 	//attribut 
+	private String nom;
 	private int idPlateau;
 	private String couleur;
 	private int nbAttaque;
@@ -18,6 +24,7 @@ public class Joueur {
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
+
 	//contructeur 
 	
 	public Joueur (int idPlateau, String couleur, int nbRegiment){
@@ -30,13 +37,12 @@ public class Joueur {
 		this.Territoire=new ArrayList<Territoire>();
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(couleur, idPlateau);
 	}
 
-//à commenter 
+   //à commenter 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,29 +55,33 @@ public class Joueur {
 		return Objects.equals(couleur, other.couleur) && idPlateau == other.idPlateau;
 	}
 
-
+	//FARKI Imane
 	public int getIdPlateau() {
-		return idPlateau;
+		return this.idPlateau;
 	}
 
-
+	//FARKI Imane
 	public void setIdPlateau(int idPlateau) {
 		this.idPlateau = idPlateau;
 	}
 
 
+	//FARKI Imane
 	public String getCouleur() {
-		return couleur;
+		return this.couleur;
 	}
-
-
-	public void setCouleur(String couleur) {
-		this.couleur = couleur;
+	//FARKI Imane
+	public String getNom() {
+		return this.nom;
 	}
 
 
 	public int getNbAttaque() {
+
+		return this.nbAttaque;
+
 		return nbAttaque;
+
 	}
 
 
@@ -81,22 +91,15 @@ public class Joueur {
 
 
 	public int getNbDefense() {
-		return nbDefense;
+		return this.nbDefense;
 	}
-
 
 	public void setNbDefense(int nbDefense) {
 		this.nbDefense = nbDefense;
 	}
 
-
 	public String getPhase() {
-		return phase;
-	}
-
-
-	public void setPhase(String phase) {
-		this.phase = phase;
+		return this.phase;
 	}
 
 
@@ -104,14 +107,12 @@ public class Joueur {
 		return nbRegimentJoueur;
 	}
 
-
 	public void setNbRegimentJoueur(int nbRegimentJoueur) {
 		this.nbRegimentJoueur = nbRegimentJoueur;
 	}
 
-
 	public ArrayList<CarteRisk> getCarteRisk() {
-		return carteRisk;
+		return this.carteRisk;
 	}
 
 
@@ -119,26 +120,31 @@ public class Joueur {
 		this.carteRisk = carteRisk;
 	}
 
-
 	public ArrayList<Territoire> getListeTerritoire() {
-		return Territoire;
+		return this.Territoire;
 	}
-
 
 	public void setTerritoire(ArrayList<Territoire> territoire) {
-		Territoire = territoire;
-	}
-
-
-	public Territoire getTerritoire() {
-		return territoire;
-	}
-
-
-	public void setTerritoire(Territoire territoire) {
-		this.territoire = territoire;
+		this.Territoire = territoire;
 	}
 	
+	public Territoire getTerritoire() {
+		return this.territoire;
+	}
+
+	
+	//Debut Larissa
+
+//	public boolean conquerirContinent(Continent continent) {
+//		for(Territoire t : continent.getTerritoires()) {
+//			if(!this.Territoire.contains(t)) {
+//				return false;
+//			}
+//		}
+//		//on parcourt les ele
+//		return true; 
+//	}
+	//Fin Larissa
 	
 
 }
