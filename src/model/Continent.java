@@ -22,10 +22,6 @@ public class Continent {
 		this.continentTerritoires= new HashMap<Continent, Territoire[]>();
 		this.bareme = bareme; 
 	}
-	
-	public void attribuerContinentTerritoires(Continent continent) {
-		this.continentTerritoires.put(continent, null); 
-	}
 
 	public String getNom() {
 		return this.nomCont;
@@ -81,7 +77,6 @@ public class Continent {
 	//FARKI Imane : avoir la liste des territoires pour un continent donné
 	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
         ArrayList<Territoire> territoiresContinent = new ArrayList<>();
-        
         for (Territoire territoire : listTerritoires) {
             if (territoire.getContinent().equals(nomContinent)) {
                 territoiresContinent.add(territoire);
@@ -90,9 +85,9 @@ public class Continent {
         return territoiresContinent;
     }
   //FARKI Imane
-    public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
-        territoiresControles.put(territoire, joueur);
-    }
+     //public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
+        //territoiresControles.put(territoire, joueur);
+    //}
   //FARKI Imane
     public boolean territoireControle(Territoire territoire, Joueur joueur) {
         return territoiresControles.get(territoire) == joueur;

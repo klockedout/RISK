@@ -37,7 +37,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> territoiresAmeriqueNord;
 	
 	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
-	HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
+	//HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
 	HashMap<Continent, ArrayList<Territoire>> continentTerritoires = new HashMap<Continent, ArrayList<Territoire>>();
 
 	public Plateau(int idPlateau) {
@@ -802,7 +802,7 @@ public class Plateau extends AbstractModel {
           ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
   		for (Continent continent : continentTerritoires.keySet()) {
               ArrayList<Territoire> territoires = continent.getListTerritoire();
-  			if (territoiresJoueur.contains((Object)territoires))
+  			if (territoiresJoueur.containsAll(territoires))
   				cpt = cpt+1;
   		}
           return cpt;
@@ -846,7 +846,7 @@ public class Plateau extends AbstractModel {
 		}
 			}
     	
-        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
+        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, SELECT numInscription FROM joueur WHERE nomJoueur = ?))";
         //PreparedStatement statement = null;
 
 		String url = "jdbc:mysql://localhost:3306/risk";
@@ -855,7 +855,6 @@ public class Plateau extends AbstractModel {
 
             try {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-
             PreparedStatement statement = connexion.prepareStatement(req);
         	        
             statement = connexion.prepareStatement(req);
@@ -888,7 +887,6 @@ public class Plateau extends AbstractModel {
 
             try {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-
             Statement statement = connexion.createStatement();
 		            
 	         String req = "SELECT j.nomJoueur, s.scoreJoueur FROM scorejoueur s, joueur j WHERE j.numInscription = s.joueur ORDER BY scoreJoueur DESC";
@@ -910,7 +908,6 @@ public class Plateau extends AbstractModel {
 	//Le territoire de départ c'est le territoire qui a 2 regiments
 	public ArrayList<Territoire> getTerritoireDepart(Joueur joueurActif) {
 	    ArrayList<Territoire> territoiresDepart = new ArrayList<>();
-
 	    for (Territoire territoire : joueurActif.getListeTerritoire()) {
 	        if (territoire.getNbRegTer() == 2) {
 	        	territoiresDepart.add(territoire);
@@ -1046,11 +1043,11 @@ public class Plateau extends AbstractModel {
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}*/
-	//FARKI Imane
+
 	public ArrayList<CarteRisk> getPile() {
 		return pile;
 	}
-	//FARKI Imane
+
 	public void setPile(ArrayList<CarteRisk> pile) {
 		this.pile = pile;
 	}
