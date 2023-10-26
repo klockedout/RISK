@@ -1,14 +1,17 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class Plateau extends AbstractModel{
 	private TypeTerritoire TypeCase; 
@@ -151,30 +154,31 @@ public class Plateau extends AbstractModel{
         }
         return listTer;
     }*/
-  //FARKI Imane
+    
+  //FARKI Imane : retourner le nombre de continents conquis par un joueur donné
 	public int getContinentJoueur(Joueur joueur) {
 		int cpt = 0;
         ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
 		for (Continent continent : continentTerritoires.keySet()) {
             ArrayList<Territoire> territoires = continent.getListTerritoire();
-			if (territoiresJoueur.contains(territoires))
+			if (territoiresJoueur.contains((Object)territoires))
 				cpt = cpt+1;
 		}
         return cpt;
     }
-	//FARKI Imane
+	//FARKI Imane : retourner le nombre de territoires conquis par un joueur donné
 	    public int getNombreTerritoiresControles(Joueur joueur) {
            return  joueur.getListeTerritoire().size();
     }
            
-	  //FARKI Imane
+	  //FARKI Imane 
 	    public void calculerScore(Joueur joueur) {
 			int score = 0;
 			
-	    	Connection connection;
-			connection = ConnexionBD.getConnexion();
-	    	
-			int nombreContinent = getContinentJoueur(joueur);
+	    	//Connection connection;
+			//connection = ConnexionBD.getConnexion();
+
+	    	int nombreContinent = getContinentJoueur(joueur);
 			 
 			if(nombreContinent >= 3)
 				score = 10;
@@ -205,61 +209,62 @@ public class Plateau extends AbstractModel{
 				}
 	    	
 	        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
-	        PreparedStatement statement = null;
+	        //PreparedStatement statement = null;
 
-	        try {
-	            statement = connection.prepareStatement(req);
-	            statement.setDouble(1, score);
+			String url = "jdbc:mysql://localhost:3306/risk";
+	        String utilisateur = "root";
+	        String motDePasse = "";
+
+	            try {
+	            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+
+	            PreparedStatement statement = connexion.prepareStatement(req);
+	        	        
+	            statement = connexion.prepareStatement(req);
+	            statement.setInt(1, score);
 	            statement.setString(2, joueur.getNom());
-	            statement.executeUpdate();	
+	            statement.executeUpdate();
+	            statement.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	        } finally {
-	            //fermer le PreparedStatement soit aprés le try ou aprés le catch
-	            if (statement != null) {
-	                try {
-	                    statement.close();
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        }
+	        } 
 	    }
+	    
 	    }
+	    
 	   /*for(Joueur joueur : listeJoueurs) {
         territoiresConquis.put(joueur, getNombreTerritoiresControles(joueur));}*/
 	    
 	    
-	  //FARKI Imane
-	public void afficherRes() {
+	  //FARKI Imane : afficher les resultats des joueurs
+	  public void afficherRes() {
 		
-		Connection connection;
-		connection = ConnexionBD.getConnexion();
+		//Connection connection;
+		//connection = ConnexionBD.getConnexion();
 		
-	    String req = "SELECT j.nomJoueur, s.scoreJoueur FROM scorejoueur s, joueur j WHERE j.numInscription = s.joueur ORDER BY scoreJoueur DESC";
-	    PreparedStatement statement = null;
+    	String url = "jdbc:mysql://localhost:3306/risk";
+        String utilisateur = "root";
+        String motDePasse = "";
 
-	    try {
-	        statement = connection.prepareStatement(req);
-	        try (ResultSet resultSet = statement.executeQuery()) {
+            try {
+            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+
+            Statement statement = connexion.createStatement();
+		            
+	         String req = "SELECT j.nomJoueur, s.scoreJoueur FROM scorejoueur s, joueur j WHERE j.numInscription = s.joueur ORDER BY scoreJoueur DESC";
+	    
+	        //statement = connexion.prepareStatement(req);
+	            ResultSet resultSet = statement.executeQuery(req);
 	            System.out.println("Classement des joueurs :");
 	            while (resultSet.next()) {
 	                String nomJoueur = resultSet.getString("nomJoueur");
 	                int score = resultSet.getInt("scoreJoueur");
 	                System.out.println("Joueur : " + nomJoueur + ", Score : " + score);
 	            }
-	        }
-	    } catch (SQLException e) {
+	            statement.close();
+	           } catch (SQLException e) {
 	        e.printStackTrace();
-	    } finally {
-	        if (statement != null) {
-	            try {
-	                statement.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }
+	    } 
 	}
 	//FARKI Imane 
 	//Le territoire de départ c'est le territoire qui a 2 regiments

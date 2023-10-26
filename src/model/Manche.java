@@ -15,12 +15,12 @@ public class Manche {
     public Joueur getJoueurActuel() {
         return joueurs.get(tourActuel);
     }
-    //FARKI Imane
+    //FARKI Imane 
     public void passerAuTourSuivant() {
         tourActuel += 1;
     }
-    //FARKI Imane
-    public static boolean demanderContinuerDeplacementRegiments() {
+    //FARKI Imane : Demander au joueur s'il veut continuer à deplacer des régiments et on retourne sa réponse
+    public boolean demanderContinuerDeplacementRegiments() {
         Scanner scanner = new Scanner(System.in);
         String reponse;
         do {
@@ -32,7 +32,8 @@ public class Manche {
 
         return reponse.equals("oui");
     }
-  //FARKI Imane
+    
+  //FARKI Imane : si la reponse du joueur = oui il continue à joueur sinon on passe au joueur suivant
     public void gererTour() {
         Joueur joueurActuel = getJoueurActuel();
 		
@@ -40,8 +41,6 @@ public class Manche {
 		
 		if (reponse) 
 			System.out.println("C'est le tour de : "+joueurActuel.getNom());
-        // la logique métier spécifique à la gestion du tour (une fois le joueur a fini de deplacer les régiments)
-        // Exécutez ici les actions du joueur actuel
         else {
         	passerAuTourSuivant();
 		    Joueur joueurSuivant = getJoueurActuel();

@@ -31,10 +31,10 @@ public class Continent {
 	public ArrayList<Territoire> getListTerritoire() {
 			return this.listTerritoires; 
 		}
-	//FARKI Imane
+	//FARKI Imane : avoir la liste des territoires pour un continent donné
 	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
         ArrayList<Territoire> territoiresContinent = new ArrayList<>();
-
+        //nomContinent.getTypeCase() : retourne TypeTerritoire pour un continent
         for (Territoire territoire : listTerritoires) {
             if (territoire.getTypeTerritoire().equals(nomContinent.getTypeCase())) {
                 territoiresContinent.add(territoire);
@@ -50,7 +50,7 @@ public class Continent {
     public boolean territoireControle(Territoire territoire, Joueur joueur) {
         return territoiresControles.get(territoire) == joueur;
     }
-  //FARKI Imane
+  //FARKI Imane : retourne le nombre des territoires conquis par un joueur donné
     public int getNombreTerritoiresControles(Joueur joueur) {
         int nombreTerritoires = 0;
         for (Territoire territoire : territoiresControles.keySet()) {

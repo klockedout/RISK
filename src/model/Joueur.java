@@ -19,7 +19,7 @@ public class Joueur {
 	//qu'est ce que c'est ? 
 	Territoire territoire;
 	
-	//contructeur 
+	//FARKI Imane
 	
 	public Joueur (int idPlateau, String couleur, int nbRegiment){
 		//this.idPlateau=idPlateau;
@@ -37,7 +37,7 @@ public class Joueur {
 		return Objects.hash(couleur, idPlateau);
 	}
 
-//à commenter 
+   //à commenter 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
