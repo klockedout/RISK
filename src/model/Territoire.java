@@ -6,10 +6,10 @@ import java.util.Objects;
 public class Territoire {
 	
 	// attribut 
-	String nomTer;
-	TypeContinent typeC; 
-	int nbRegTer;
-	ArrayList<Territoire>listeTerritoireVoisin; 
+	private String nomTer;
+	private TypeContinent typeC; 
+	private int nbRegTer;
+	private ArrayList<Territoire>listeTerritoireVoisin; 
 	
 	//constructeur 
 	Territoire(String nom, TypeContinent typeC){

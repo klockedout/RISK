@@ -627,7 +627,7 @@ public class Plateau extends AbstractModel {
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 		for (String couleur : couleurs) {
-			this.joueurs.add(new Joueur(this.idPlateau, couleur));
+			this.joueurs.add(new Joueur(this.idPlateau, couleur,0));
 		}
 
 	}
@@ -741,7 +741,7 @@ public class Plateau extends AbstractModel {
     
     public Joueur proprietaireDeTer(Territoire ter) {
 		Joueur proprietaire = null;
-		for (Joueur j : this.listeJoueurs) {
+		for (Joueur j : this.joueurs) {
 			if (j.getTerritoires().contains(ter)) {
 				proprietaire = j;
 			}
@@ -751,7 +751,7 @@ public class Plateau extends AbstractModel {
 	
 	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
 		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
-		ArrayList<Territoire> res = ter.getVoisins();
+		ArrayList<Territoire> res = ter.getListeTerritoireVoisin();
 		res.retainAll(tersDeJoueur);
 		return res;
 	}
@@ -780,7 +780,7 @@ public class Plateau extends AbstractModel {
 	public void regimentParContinent() {
 		int nbReg = 0;
 		for (Continent c : this.continents) {
-			if (this.joueurActif.getTerritoires().containsAll(c.getTerritoires())) {
+			if (this.joueurActif.getTerritoires().containsAll(c.getListTerritoire())) {
 				nbReg+=c.getBareme();
 			}
 		}
