@@ -804,4 +804,57 @@ public class Plateau extends AbstractModel {
 			System.out.println(t);
 		}
 	}
+	
+	//Widad
+	
+	public ArrayList<Territoire>obtenirListeTerritoire(){
+		ArrayList<Territoire>listeTerritoires=new ArrayList<>();
+		for (int x=0;x<plateau.length;x++) {
+			for (int y=0; y<plateau[x].length;x++) {
+				listeTerritoires.add(plateau[x][y]);
+			}
+		}
+		return listeTerritoires;
+	}
+	
+	public int obtenirNbTerritoire() {
+		return obtenirListeTerritoire().size();
+	}
+	
+	public ArrayList<Territoire> getTerritoireDispo(Joueur joueur){
+		ArrayList<Territoire>territoiresDisponibles=new ArrayList<>();
+		for (Territoire territoire : obtenirListeTerritoire()) {
+			if (proprietaireDeTer(territoire)==null) {//Si pas de proprietaire,territoire disponible
+				territoiresDisponibles.add(territoire);
+			}
+		}
+		return territoiresDisponibles;
+	}
+	
+	public ArrayList<Territoire>getTerritoireDepart(Joueur joueurActif){
+		ArrayList<Territoire>territoireAvecMin2Regiments=new ArrayList<>();
+		for (Territoire territoire : joueurActif.getTerritoires()) {
+			if (territoire.getNbRegTer()>=2) {
+				territoireAvecMin2Regiments.add(territoire);
+			}
+		}return territoireAvecMin2Regiments;
+	}
+	
+	
+	public void getPhase (int phase) {
+		if (phase==1) {
+			regimentParTerritoire();
+		}
+		else if (phase==2) {
+			//attaquer();
+		}
+		else if (phase==3) {
+			deplacerRegiments(venezuela, bresil, 4);
+		}
+		else {
+			System.err.println("Erreur: Phase invalide " + phase);
+		}
+	}
+	
+	//Widad
 }
