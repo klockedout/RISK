@@ -591,7 +591,7 @@ public class Plateau extends AbstractModel {
 	Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
 	Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
 	// AFRIQUE
-	Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
+	Territoire nordAfrique = new Territoire("Afrique du Nord", TypeContinent.AFRIQUE);
 	Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
 	Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
 	Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
@@ -628,34 +628,6 @@ public class Plateau extends AbstractModel {
 		return this.plateau[0].length;
 	}
 
-	@Override
-	public int getHauteur() {
-		// TODO Auto-generated method stub
-		return this.plateau.length;
-	}
-
-	public boolean partieTerminer() {
-		return false;
-	}
-
-	@Override
-	public Joueur getVainqueur(int x, int y) {
-		// TODO Auto-generated method stub
-		// return this.plateau[x][y].getVainqueur();
-		return null;
-	}
-
-	@Override
-	public int getNbRegimentPlacés() {
-		// on parcourt la liste des joueur et on prendre le nombre de regiment
-		return 0;
-	}
-
-	@Override
-	public int getNbRegiment() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public String getTerritoire(int x, int y) {
@@ -681,6 +653,8 @@ public class Plateau extends AbstractModel {
 		return plateau[x][y].getNomTerritoire();
 	}
 	
+	
+	//Widad
 	
 	public ArrayList<Territoire> obtenirListeTerritoire() {
 	    ArrayList<Territoire> listeTerritoires = new ArrayList<>();
@@ -718,18 +692,25 @@ public class Plateau extends AbstractModel {
 			  System.err.println("Erreur : Phase invalide - " + phase);
 	    }
 	    }
-	}
+	
+	public int calculeRegimentsAjouter(int nbterritoire) {
+		return nbterritoire /3;
 
+	}
+	/* calculer le nombre de régiments à ajouter à chaque joueur en 
+	 * fonction du nombre de territoires qu'ils possèdent.
+	 */
 	public void recevoirRegimentAjouter() {
 	    for (Joueur joueur : joueurs) {
-	        int RegimentAjouter = joueur.regimentParTerritoire();
+	        int RegimentAjouter = joueur.calculeRegimentsAjouter(joueur.proprietaireDeTer());
 	        joueur.ajouterRegiments(RegimentAjouter); 
 	}
-
-	public void calculeRegimentsAjouter(int nbterritoire) {
-		return obtenirNbTerritoire()/3;
-
 	}
+    public void ajouterRegiments(int regiments) {
+        nbRegiment += regiments;
+    }
+
+	
 
 	public void attaquer() {
 	    
@@ -751,6 +732,6 @@ public class Plateau extends AbstractModel {
 	    return territoiresAvec2Regiments;
 	}
 	
-	
+	//Fin Widad
 
 }

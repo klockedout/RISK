@@ -5,6 +5,9 @@ import vue.Vue;
 import controler.AbstractControler;
 import model.AbstractModel;
 import model.*;
+
+import java.util.ArrayList;
+
 import controler.*;
 
 
@@ -21,5 +24,9 @@ public class Main {
         }
 
 	}
-
+	
 }
+	
+	
+
+	

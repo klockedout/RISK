@@ -138,7 +138,7 @@ public class Joueur {
 	public void setTerritoire(Territoire territoire) {
 		this.territoire = territoire;
 	}
-	
+
 	
 	
 	
