@@ -9,7 +9,7 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 public class Plateau extends AbstractModel {
 	private TypeContinent typeCase;
 	private Territoire[][] plateau = new Territoire[50][30];
-	static private int idPlateau = 0;
+	static private int idPlateauTotal = 0;
 	private int tour = 0;
 	private Joueur joueurActif;
 	private String etatPlateu;
@@ -17,9 +17,11 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
 	private ArrayList<Continent> continents; 
-
-	public Plateau(int idPlateau) {
+	private int idPlateau;
+	
+	public Plateau() {
 		super();
+		this.idPlateau=Plateau.idPlateauTotal++;
 		// Larissa : création de la carte
 		// 1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
