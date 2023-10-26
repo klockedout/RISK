@@ -28,8 +28,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
-
-    
+    private ArrayList<Continent> continents;
 	private ArrayList<Territoire> territoiresEurope;
 	private ArrayList<Territoire> territoiresAfrique;
 	private ArrayList<Territoire> territoiresAsie;
@@ -665,8 +664,8 @@ public class Plateau extends AbstractModel {
 	
 	
 	continentTerritoires.put(afrique, territoiresAfrique);
-	continentTerritoires.put(ameriqueN, territoiresAmeriqueNord);
-	continentTerritoires.put(ameriqueS, territoiresAmeriqueSud);
+	continentTerritoires.put(ameriqueNord, territoiresAmeriqueNord);
+	continentTerritoires.put(ameriqueSud, territoiresAmeriqueSud);
 	continentTerritoires.put(asie, territoiresAsie);
 	continentTerritoires.put(europe, territoiresEurope);
 	continentTerritoires.put(australie, territoiresOceanie);
@@ -764,7 +763,7 @@ public class Plateau extends AbstractModel {
 
 	//FARKI Imane
 	private void creerJoueurs(String couleur, int nbRegiment) {
-		this.listeJoueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
+		this.joueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
 		/*String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
@@ -822,9 +821,9 @@ public class Plateau extends AbstractModel {
 		if(nombreContinent >= 3)
 			score = 10;
 		else {
-			Collections.sort(listeJoueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
-			for(int i=0; i<listeJoueurs.size(); i++) {
-				if(listeJoueurs.get(i).equals(joueur)) {
+			Collections.sort(joueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
+			for(int i=0; i<joueurs.size(); i++) {
+				if(joueurs.get(i).equals(joueur)) {
 				switch (i) {
 		        case 1:
 		            score = 8;
@@ -1024,13 +1023,9 @@ public class Plateau extends AbstractModel {
 	}
 	//FARKI Imane
 	public String getEtatPlateu() {
-		return etatPlateu;
+		return etatPlateu;}
 
-	@Override
-	public String getNom(int x, int y) {
-		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
-	}
+
 	//FARKI Imane
 	public void setEtatPlateu(String etatPlateu) {
 		this.etatPlateu = etatPlateu;
@@ -1066,7 +1061,7 @@ public class Plateau extends AbstractModel {
 	@Override
 	public String getNom(int x, int y) {
 		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
+		return plateau[x][y].getNomTerritoire();}
 
     public void placerRegiments(Territoire ter,int nbReg) {
     	this.joueurActif.ajouterRegiment(ter, nbReg);
