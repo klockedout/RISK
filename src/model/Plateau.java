@@ -680,9 +680,9 @@ public class Plateau extends AbstractModel {
 	}
 
 	@Override
-	public String getTerritoire(int x, int y) {
+	public Territoire getTerritoire(int x, int y) {
 		// TODO Auto-generated method stub
-		return plateau[x][y].getNomTerritoire();
+		return plateau[x][y];
 	}
 
 	@Override
@@ -794,5 +794,12 @@ public class Plateau extends AbstractModel {
 			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
 		}
 		
+	}
+
+
+	public void afficherVoisin(Territoire ter) {
+		for (Territoire t : ter.getListeTerritoireVoisin()) {
+			System.out.println(t);
+		}
 	}
 }
