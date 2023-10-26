@@ -30,6 +30,10 @@ public class Plateau extends AbstractModel {
 //Fin Larissa
 	private ArrayList<CarteRisk> pile;
 
+	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
+	HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
+	HashMap<Continent, Territoire[]> continentTerritoires= new HashMap<Continent, Territoire[]>();
+
 
 	public Plateau(int idPlateau) {
 		super();
@@ -38,12 +42,6 @@ public class Plateau extends AbstractModel {
 		for (int x = 0; x < plateau.length; x++) {
 			for (int y = 0; y < plateau[x].length; y++) {
 				plateau[x][y] = new Territoire("Ocean", typeCase.OCEAN);
-
-	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
-	HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
-	HashMap<Continent, Territoire[]> continentTerritoires= new HashMap<Continent, Territoire[]>();
-
-
 
 			}
 		}
@@ -638,13 +636,6 @@ public class Plateau extends AbstractModel {
 		}
 	}*/
 
-
-
-	
-	
-
-	 }
-	}
 	//FARKI Imane
 	private void creerJoueurs(String couleur, int nbRegiment) {
 		this.listeJoueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
@@ -653,27 +644,14 @@ public class Plateau extends AbstractModel {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
 		}*/
 	}
-//	Larissa 
-//	private void creerContinents() {
-//		String[] nomsCont = new String[]{
-//				"Europe",
-//				"Asie",
-//				"Amérique du Nord",
-//				"Amérique du Sud",
-//				"Afrique",
-//				"Océanie"};
-//		for (String nomCont : nomsCont) {
-//			this.continents.add(new Continent(nomCont));
-//		}
-//	}
 	
 	//FARKI Imane
     public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
         territoiresControles.put(joueur, territoire);
     }
 
-    /*//FARKI Imane
-     * public boolean territoireControle(Territoire territoire, Joueur joueur) {
+    //FARKI Imane
+      /*public boolean territoireControle(Territoire territoire, Joueur joueur) {
 		
 		return territoiresControles.containsKey(joueur);
     }
@@ -688,83 +666,86 @@ public class Plateau extends AbstractModel {
         return listTer;
     }*/
     
-  //FARKI Imane : retourner le nombre de continents conquis par un joueur donné
-	public int getContinentJoueur(Joueur joueur) {
-		int cpt = 0;
-        ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
-		for (Continent continent : continentTerritoires.keySet()) {
-            ArrayList<Territoire> territoires = continent.getListTerritoire();
-			if (territoiresJoueur.contains((Object)territoires))
-				cpt = cpt+1;
-		}
-        return cpt;
-    }
 	//FARKI Imane : retourner le nombre de territoires conquis par un joueur donné
-	    public int getNombreTerritoiresControles(Joueur joueur) {
-           return  joueur.getListeTerritoire().size();
-    }
-           
-	  //FARKI Imane 
-	    public void calculerScore(Joueur joueur) {
-			int score = 0;
-			
-	    	//Connection connection;
-			//connection = ConnexionBD.getConnexion();
+    public int getNombreTerritoiresControles(Joueur joueur) {
+       return  joueur.getListeTerritoire().size();
+}
+    
+    //FARKI Imane : retourner le nombre de continents conquis par un joueur donné
+  	public int getContinentJoueur(Joueur joueur) {
+  		int cpt = 0;
+          ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
+  		for (Continent continent : continentTerritoires.keySet()) {
+              ArrayList<Territoire> territoires = continent.getListTerritoire();
+  			if (territoiresJoueur.contains((Object)territoires))
+  				cpt = cpt+1;
+  		}
+          return cpt;
+      }
 
-	    	int nombreContinent = getContinentJoueur(joueur);
-			 
-			if(nombreContinent >= 3)
-				score = 10;
-			else {
-				Collections.sort(listeJoueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
-				for(int i=0; i<listeJoueurs.size(); i++) {
-					if(listeJoueurs.get(i).equals(joueur)) {
-					switch (i) {
-			        case 1:
-			            score = 8;
-			            break;
-			        case 2:
-			            score = 6;
-			            break;
-			        case 3:
-			            score = 4;
-			            break;
-			        case 4:
-			            score = 2;
-			            break;
-			        case 5:
-			            score = 0;
-			            break;
-			        
-					
-				}      
+	//FARKI Imane
+    public void calculerScore(Joueur joueur) {
+		int score = 0;
+		
+    	//Connection connection;
+		//connection = ConnexionBD.getConnexion();
+
+    	int nombreContinent = getContinentJoueur(joueur);
+		 
+		if(nombreContinent >= 3)
+			score = 10;
+		else {
+			Collections.sort(listeJoueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
+			for(int i=0; i<listeJoueurs.size(); i++) {
+				if(listeJoueurs.get(i).equals(joueur)) {
+				switch (i) {
+		        case 1:
+		            score = 8;
+		            break;
+		        case 2:
+		            score = 6;
+		            break;
+		        case 3:
+		            score = 4;
+		            break;
+		        case 4:
+		            score = 2;
+		            break;
+		        case 5:
+		            score = 0;
+		            break;
+		        
+				
+			}      
+		}
 			}
-				}
-	    	
-	        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
-	        //PreparedStatement statement = null;
+    	
+        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, joueur = (SELECT numInscription FROM joueur WHERE nomJoueur = ?)))";
+        //PreparedStatement statement = null;
 
-			String url = "jdbc:mysql://localhost:3306/risk";
-	        String utilisateur = "root";
-	        String motDePasse = "";
+		String url = "jdbc:mysql://localhost:3306/risk";
+        String utilisateur = "root";
+        String motDePasse = "";
 
-	            try {
-	            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            try {
+            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
 
-	            PreparedStatement statement = connexion.prepareStatement(req);
-	        	        
-	            statement = connexion.prepareStatement(req);
-	            statement.setInt(1, score);
-	            statement.setString(2, joueur.getNom());
-	            statement.executeUpdate();
-	            statement.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } 
-	    }
-	    
-	    }
-	    
+            PreparedStatement statement = connexion.prepareStatement(req);
+        	        
+            statement = connexion.prepareStatement(req);
+            statement.setInt(1, score);
+            statement.setString(2, joueur.getNom());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    }
+    
+               
+	  //FARKI Imane 
 	   /*for(Joueur joueur : listeJoueurs) {
         territoiresConquis.put(joueur, getNombreTerritoiresControles(joueur));}*/
 	    
@@ -814,15 +795,14 @@ public class Plateau extends AbstractModel {
 	}
 	    
 	//FARKI Imane   
-	public TypeTerritoire getTypeTerritoire() {
+	/*public TypeTerritoire getTypeTerritoire() {
 		return this.TypeCase;
-	}
+	}*/
 
 	
 	private void creerPlile() {
 
 	}
-	
 
 	@Override
 	public int getLargeur() {
@@ -932,9 +912,6 @@ public class Plateau extends AbstractModel {
 	public void setPile(ArrayList<CarteRisk> pile) {
 		this.pile = pile;
 	}
-	
-
-
 
 //Larissa
 
