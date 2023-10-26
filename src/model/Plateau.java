@@ -15,7 +15,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<CarteRisk> pile;
 	private ArrayList<Continent> continents; 
-
+//blabla
 	public Plateau(int idPlateau) {
 		super();
 		// Larissa : création de la carte
