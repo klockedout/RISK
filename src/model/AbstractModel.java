@@ -21,13 +21,11 @@ public abstract class AbstractModel implements Observable {
         observateurs = new ArrayList<>();
     }
     
-    /*
-    public abstract void faireSeDeplacerLesAnimaux();
-    
+    /*    
     public abstract TypeCase getTypeCase(int x, int y);
     public abstract void setTypeCase(int x, int y,TypeCase tc);  */
     
-    public abstract void combattre();
+    public abstract void combattre(); 
     public abstract int getLargeur();
     public abstract int getHauteur();
     public abstract String getNom(int x, int y);
@@ -35,9 +33,6 @@ public abstract class AbstractModel implements Observable {
     public abstract Territoire getTerritoire(int x, int y);
     public abstract ArrayList<Territoire> getVoisin(int x, int y);
     public abstract ArrayList<CarteRisk> echangerCarte(); 
-    /*
-    public abstract int getNbSourisIn();
-    public abstract int getNbSourisOut();*/
     public abstract int getNbRegimentPlacés();
     public abstract int getNbRegiment();
     

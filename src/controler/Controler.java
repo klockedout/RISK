@@ -18,18 +18,6 @@ public class Controler extends AbstractControler {
 		if (this.model instanceof Plateau) {
 			Plateau plateau = (Plateau) model;
 			System.out.println("Vous avez cliquer sur : " + plateau.getTerritoire(x, y));
-			try{
-				System.out.println("son propiétaire est : " + plateau.proprietaireDeTer(plateau.getTerritoire(x, y)));
-				System.out.println("Il y a " + plateau.getTerritoire(x, y).getNbRegTer() + " regiments sur ce territoire. ");
-			}catch(Exception e) {
-				System.out.println("pas de propiétaire sur ce territoire");
-			}
-			System.out.println("----------les voisins sont : -----------------");
-			plateau.afficherVoisin(plateau.getTerritoire(x, y));
-			System.out.println(plateau.getTerritoire(x, y));
-			System.out.println(plateau.getVoisin(x, y));
-			System.out.println(plateau.getNom(x, y));
-			
 			
 			//NA - phase attaque, choisir territoires
 			if (plateau.getPhase() == 2) {
@@ -43,6 +31,21 @@ public class Controler extends AbstractControler {
 					plateau.combattre();
 				}
 			}
+			
+			try{
+				System.out.println("son propiétaire est : " + plateau.proprietaireDeTer(plateau.getTerritoire(x, y)));
+				System.out.println("Il y a " + plateau.getTerritoire(x, y).getNbRegTer() + " regiments sur ce territoire. ");
+			}catch(Exception e) {
+				System.out.println("pas de propiétaire sur ce territoire");
+			}
+			System.out.println("----------les voisins sont : -----------------");
+			plateau.afficherVoisin(plateau.getTerritoire(x, y));
+			System.out.println(plateau.getTerritoire(x, y));
+			System.out.println(plateau.getVoisin(x, y));
+			System.out.println(plateau.getNom(x, y));
+			 
+	
+			
 		}
 	}
 	

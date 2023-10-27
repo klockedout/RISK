@@ -27,8 +27,6 @@ public class Joueur {
 	private ArrayList  <Territoire> listeTerritoire; 
 	private ArrayList<Integer> resultatDe; 
 	//fin NA
-	private String phase;
-	private ArrayList <CarteRisk> carteRisk;
 	
 	//contructeur 
 	public Joueur (int idPlateau, String couleur, int nbRegiment){
@@ -39,7 +37,6 @@ public class Joueur {
 		this.nbAttaque = 0;
 		this.nbDefenseReussi = 0;
 		this.resultatDe = new ArrayList<Integer>();
-		//this.nbRegimentJoueur = nbRegiment; 
 		//liste de cartesRisk
 		this.carteRisk=new ArrayList<CarteRisk>();
 		//liste des territoires du joueur 
@@ -137,6 +134,7 @@ public class Joueur {
 
 	public void setTerritoires(ArrayList<Territoire> territoires) {
 		this.territoires = territoires;
+	}
 
 	public ArrayList<Territoire> getListeTerritoire() {
 		return this.listeTerritoire;
@@ -173,7 +171,7 @@ public class Joueur {
 					+ "et elle est de type : " + this.carteRisk.get(i).getTypeCarte());
 		}
 
-	}
+	}  
 
 	// Tidiane Pour échanger les cartes
 	public ArrayList<CarteRisk> echangerCartes() {
@@ -283,8 +281,8 @@ public class Joueur {
 		return "Joueur [idPlateau=" + idPlateau + ", couleur=" + couleur + "]";
 	}
 		
-
-	public ArrayList<Integer> lancerDe(int nbDe) { // code Nam An
+	//NA
+	public ArrayList<Integer> lancerDe(int nbDe) { 
 		this.resultatDe.clear();
 		
 		while ( this.resultatDe.size() < nbDe ) {

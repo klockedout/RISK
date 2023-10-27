@@ -16,7 +16,6 @@ public class Plateau extends AbstractModel {
 	private Joueur joueurActif;
 	private String etatPlateu;
 	private ArrayList<Continent> continents;
-	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile = new ArrayList<CarteRisk>();
 	private int idPlateau;
 	private ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
@@ -26,7 +25,6 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
-	private ArrayList<CarteRisk> pile;
 	private int phase = 2;
 	Scanner scanner = new Scanner(System.in); //NA
 	
@@ -38,10 +36,10 @@ public class Plateau extends AbstractModel {
 		// Larissa : création de la carte
 		// 1. On crée les oceans
 		
-		/*TEST COMBATTRE NAM AN 
+		//TEST COMBATTRE() NAM AN 
 		Joueur joueur1 = new Joueur(0, "rouge", 12);
 		Joueur joueur2 = new Joueur(0, "jaune", 15);
-		
+	
 		this.joueurActif = joueur1;
 		
 		this.listeJoueurs.add(joueur1);
@@ -50,7 +48,7 @@ public class Plateau extends AbstractModel {
 		australieOrientale.setNbRegTer(4);
 		chine.setNbRegTer(1);
 		joueur2.getListeTerritoire().add(australieOrientale);
-		*/
+		
 		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
@@ -791,10 +789,11 @@ public class Plateau extends AbstractModel {
 	public boolean partieTerminer() {
 		return false;
 	}
-
+	
+	/*
 	public static int getIdPlateau() {
 		return idPlateau;
-	}
+	}*/
 	
 	@Override
 	public int getNbRegimentPlacés() {
@@ -925,22 +924,6 @@ public class Plateau extends AbstractModel {
 	}
 	//fin NA
 	
-	public Joueur proprietaireDeTer(Territoire ter) {
-		Joueur proprietaire = null;
-		for (Joueur j : this.listeJoueurs) {
-			
-			if (j.getListeTerritoire().contains(ter)) {
-				proprietaire = j;
-			}
-		}
-		return proprietaire;
-	}
-	
-	
-
-	public static void setIdPlateau(int idPlateau) {
-		Plateau.idPlateau = idPlateau;
-	}
 
 	public int getTour() {
 		return tour;
