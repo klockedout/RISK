@@ -33,6 +33,10 @@ public abstract class AbstractModel implements Observable {
     public abstract Territoire getTerritoire(int x, int y);
     public abstract ArrayList<Territoire> getVoisin(int x, int y);
     public abstract ArrayList<CarteRisk> echangerCarte(); 
+   
+    /*
+    public abstract int getNbSourisIn();
+    public abstract int getNbSourisOut();*/
     public abstract int getNbRegimentPlacés();
     public abstract int getNbRegiment();
     

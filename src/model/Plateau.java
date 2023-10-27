@@ -3,10 +3,21 @@ package model;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Scanner;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Plateau extends AbstractModel {
@@ -30,6 +41,24 @@ public class Plateau extends AbstractModel {
 	Scanner scanner = new Scanner(System.in); //NA
 	
 	
+	private ArrayList<CarteRisk> pile;
+    private ArrayList<Continent> continents;
+	private ArrayList<Territoire> territoiresEurope;
+	private ArrayList<Territoire> territoiresAfrique;
+	private ArrayList<Territoire> territoiresAsie;
+	private ArrayList<Territoire> territoiresOceanie;
+	private ArrayList<Territoire> territoiresAmeriqueSud;
+	private ArrayList<Territoire> territoiresAmeriqueNord;
+	public Continent europe; 
+	public Continent afrique; 
+	public Continent ameriqueNord; 
+	public Continent ameriqueSud; 
+	public Continent asie; 
+	public Continent australie; 
+	
+	
+	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
+	HashMap<Continent, ArrayList<Territoire>> continentTerritoires = new HashMap<Continent, ArrayList<Territoire>>();
 
 	public Plateau() {
 		super();
@@ -50,9 +79,79 @@ public class Plateau extends AbstractModel {
 		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
+		
+        //Cration liete territoire continent
+		territoiresEurope = new ArrayList<Territoire>();
+		territoiresAfrique = new ArrayList<Territoire>();
+		territoiresAsie = new ArrayList<Territoire>();
+		territoiresOceanie = new ArrayList<Territoire>();
+		territoiresAmeriqueSud = new ArrayList<Territoire>();
+		territoiresAmeriqueNord = new ArrayList<Territoire>();
+		continents = new ArrayList<Continent>(); 
+		//2.Créer Continent 
+		afrique = new Continent(TypeContinent.AFRIQUE, 3); 
+		europe = new Continent(TypeContinent.EUROPE, 2); 
+		ameriqueNord = new Continent(TypeContinent.AMERIQUEN, 5); 
+		ameriqueSud = new Continent(TypeContinent.AMERIQUESUD, 7); 
+		asie = new Continent(TypeContinent.ASIE, 7); 
+		australie = new Continent(TypeContinent.AUSTRALIE, 7); 
+		//1. Créer les territoires et leur territoire voisin 
+		//EUROPE 
+		Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
+		Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
+		Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
+		Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
+		Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
+		Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
+		Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
+		    
+		//AMERIQUE NORD 
+		Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
+		Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
+		Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
+		Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
+		Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
+		Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
+		Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
+		Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
+		Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
+		//AMERIQUE DU SUD 
+		Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
+		Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
+		Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
+		Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
+		//ASIE 
+		Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
+		Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
+		Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
+		Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
+		Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
+		Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
+		Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
+		Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
+		Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
+		Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
+		Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
+		Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
+		//AFRIQUE
+		Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
+		Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
+		Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
+		Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
+		Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
+		Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
+		//OCEANIE
+		Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
+		Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
+		Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
+		Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
+
+		// Larissa : création de la carte
+		// 1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
 			for (int y = 0; y < plateau[x].length; y++) {
 				plateau[x][y] = new Territoire("Ocean", typeCase.OCEAN);
+
 			}
 		}
 
@@ -65,6 +164,7 @@ public class Plateau extends AbstractModel {
 			for (int y = 2; y < 4; y++) {
 				this.plateau[x][y] = groenland;
 			}
+
 		}
 	
 		//Amerique : Alaska
@@ -585,7 +685,6 @@ public class Plateau extends AbstractModel {
 		australieOccidentale.ajouterTerritoireVoisin(australieOrientale);
 		australieOrientale.ajouterTerritoireVoisin(nouvelleGuinee);
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
-
 		
 		// Tidiane Je crée la pile et j'ai changé certains noms ils n'étaient pas
 					// patreil que dans les règles du jeu
@@ -662,6 +761,7 @@ public class Plateau extends AbstractModel {
 		asie.ajouterContinent(continents,asie);
 		australie.ajouterContinent(continents,australie);
 		
+		attribuerTerritoiresContinent();
 	}
 	
 	
@@ -674,58 +774,251 @@ public class Plateau extends AbstractModel {
 			Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
 			Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
 			Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
+	  public ArrayList<Territoire> getTerritoireFromContinent(TypeContinent tc) {
+			ArrayList<Territoire> territoiresContinent = new ArrayList<Territoire>();
+	        for (int x = 0; x < plateau.length; x++) {
+				for (int y = 0; y < plateau[x].length; y++) {
+				   if(plateau[x][y].getContinent() == tc && !territoiresContinent.contains(plateau[x][y])) {
+					 territoiresContinent.add(plateau[x][y]);
+				}
+			}
+		}
+					return territoiresContinent;
+	}
+	  
+	  
+	 // FARKI Imane : Creer la liste des territoires pour chaque centinent 
+	public void attribuerTerritoiresContinent() {
+		//territoiresAfrique = getTerritoireFromContinent(TypeContinent.AFRIQUE);
+	
+		territoiresAfrique.addAll(getTerritoireFromContinent(TypeContinent.AFRIQUE));
+		territoiresAmeriqueNord.addAll(getTerritoireFromContinent(TypeContinent.AMERIQUEN));
+		territoiresAmeriqueSud.addAll(getTerritoireFromContinent(TypeContinent.AMERIQUESUD));
+		territoiresAsie.addAll(getTerritoireFromContinent(TypeContinent.ASIE));
+		territoiresEurope.addAll(getTerritoireFromContinent(TypeContinent.EUROPE));
+		territoiresOceanie.addAll(getTerritoireFromContinent(TypeContinent.AUSTRALIE));
+		
+	//Ajouter les listes dans la map
+	continentTerritoires.put(afrique, territoiresAfrique);
+	continentTerritoires.put(ameriqueNord, territoiresAmeriqueNord);
+	continentTerritoires.put(ameriqueSud, territoiresAmeriqueSud);
+	continentTerritoires.put(asie, territoiresAsie);
+	continentTerritoires.put(europe, territoiresEurope);
+	continentTerritoires.put(australie, territoiresOceanie);
+	} 
 
 
-			//AMERIQUE NORD 
-			Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
-			Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
-			Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
-			Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
-			Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
-			Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
-			Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
-			Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
-			Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
-			//AMERIQUE DU SUD 
-			Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
-			Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
-			Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
-			Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
-			//ASIE 
-			Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
-			Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
-			Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
-			Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
-			Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
-			Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
-			Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
-			Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
-			Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
-			Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
-			Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
-			Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
-			//AFRIQUE
-			Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
-			Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
-			Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
-			Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
-			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
-			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
-			//OCEANIE
-			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
-			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
-			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
-			Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-			
-			
-			//2.Créer Continent 
-			Continent afrique = new Continent("Afrique", 3); 
-			Continent europe = new Continent("Europe", 5); 
-			Continent ameriqueNord = new Continent("Amerique du Nord", 5); 
-			Continent ameriqueSud = new Continent("Amerique du Sud", 2); 
-			Continent asie = new Continent("Asie", 7); 
-			Continent australie = new Continent("Australie", 2); 
-			
+	public ArrayList<Territoire> getTerritoiresAfrique() {
+		return territoiresAfrique;
+	}
+
+	//FARKI Imane : avoir la liste des territoires pour un continent donné
+	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
+        //ArrayList<Territoire> territoiresContinent = new ArrayList<>();
+        for(Map.Entry<Continent, ArrayList<Territoire>> continent : continentTerritoires.entrySet()) {
+            if(continent.getKey().equals(nomContinent)) {
+            	return continent.getValue();
+            }
+        }
+        return null;
+        }
+        
+        /*for (Territoire territoire : listTerritoires) {
+            if (territoire.getContinent().equals(nomContinent)) {
+                territoiresContinent.add(territoire);
+            }
+        }
+        return territoiresContinent;
+    }*/
+	/*		
+	private void creerJoueurs() {
+		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
+		for (String couleur : couleurs) {
+			this.joueurs.add(new Joueur(this.idPlateau, couleur));
+		}
+	}*/
+    //FARKI Imane
+	public HashMap<Continent, ArrayList<Territoire>> getContinentTerritoires() {
+		return continentTerritoires;
+	}
+
+		
+
+
+
+//	private void creerJoueurs() {
+//		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
+//		for (String couleur : couleurs) {
+//			this.joueurs.add(new Joueur(this.idPlateau, couleur));
+//		}
+//	}
+
+	//FARKI Imane
+	private void creerJoueurs(String couleur, int nbRegiment) {
+		this.joueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
+		/*String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
+		for (String couleur : couleurs) {
+			this.joueurs.add(new Joueur(this.idPlateau,couleur));
+		}*/
+	}
+	
+	//FARKI Imane
+    public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
+        territoiresControles.put(joueur, territoire);
+    }
+
+    //FARKI Imane
+      /*public boolean territoireControle(Territoire territoire, Joueur joueur) {
+		
+		return territoiresControles.containsKey(joueur);
+    }
+
+    public ArrayList<Territoire> getTerritoiresControles(Joueur joueur) {
+        ArrayList<Territoire> listTer = new ArrayList<Territoire>();
+        for (Territoire territoire : territoiresControles.keySet()) {
+            if (territoireControle(territoire, joueur)) {
+            	listeTer.add(territoire);
+            }
+        }
+        return listTer;
+    }*/
+    
+	//FARKI Imane : retourner le nombre de territoires conquis par un joueur donné
+    public int getNombreTerritoiresControles(Joueur joueur) {
+       return  joueur.getListeTerritoire().size();
+}
+    
+    //FARKI Imane : retourner le nombre de continents conquis par un joueur donné
+  	public int getContinentJoueur(Joueur joueur) {
+  		int nombre = 0;
+  		for(Continent centinent : continents) {
+  			if(joueur.conquerirContinent(centinent))
+  				nombre+=1;
+  		}
+  		return nombre;
+  	}
+  		
+  		/*int cpt = 0;
+          ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
+  		for (Continent continent : continentTerritoires.keySet()) {
+              ArrayList<Territoire> territoires = continent.getListTerritoire();
+  			if (territoiresJoueur.containsAll(territoires))
+  				cpt = cpt+1;
+  		}
+          return cpt;
+          
+        }*/
+
+	//FARKI Imane
+    public void calculerScore(Joueur joueur) {
+		int score = 0;
+		
+    	//Connection connection;
+		//connection = ConnexionBD.getConnexion();
+
+    	int nombreContinent = getContinentJoueur(joueur);
+		 
+		if(nombreContinent >= 3)
+			score = 10;
+		else {
+			Collections.sort(joueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
+			for(int i=0; i<joueurs.size(); i++) {
+				if(joueurs.get(i).equals(joueur)) {
+				switch (i) {
+		        case 1:
+		            score = 8;
+		            break;
+		        case 2:
+		            score = 6;
+		            break;
+		        case 3:
+		            score = 4;
+		            break;
+		        case 4:
+		            score = 3;
+		            break;
+       
+				
+			}      
+		}
+			}
+    	
+        String req = "INSERT INTO scorejoueur (scoreJoueur, joueur) VALUES (?, SELECT numInscription FROM joueur WHERE nomJoueur = ?))";
+        //PreparedStatement statement = null;
+
+		String url = "jdbc:mysql://localhost:3306/risk";
+        String utilisateur = "root";
+        String motDePasse = "";
+
+            try {
+            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            PreparedStatement statement = connexion.prepareStatement(req);
+        	        
+            //statement = connexion.prepareStatement(req);
+            statement.setInt(1, score);
+            statement.setString(2, joueur.getNom());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    }
+    
+               
+	  //FARKI Imane 
+	   /*for(Joueur joueur : listeJoueurs) {
+        territoiresConquis.put(joueur, getNombreTerritoiresControles(joueur));}*/
+	    
+	    
+	  //FARKI Imane : afficher les resultats des joueurs
+	  public void afficherRes() {
+		
+		//Connection connection;
+		//connection = ConnexionBD.getConnexion();
+		
+    	String url = "jdbc:mysql://localhost:3306/risk";
+        String utilisateur = "root";
+        String motDePasse = "";
+
+            try {
+            Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+            Statement statement = connexion.createStatement();
+		            
+	         String req = "SELECT j.nomJoueur, s.scoreJoueur FROM scorejoueur s, joueur j WHERE j.numInscription = s.joueur ORDER BY scoreJoueur DESC";
+	    
+	        //statement = connexion.prepareStatement(req);
+	            ResultSet resultSet = statement.executeQuery(req);
+	            System.out.println("Classement des joueurs :");
+	            while (resultSet.next()) {
+	                String nomJoueur = resultSet.getString("nomJoueur");
+	                int score = resultSet.getInt("scoreJoueur");
+	                System.out.println("Joueur : " + nomJoueur + ", Score : " + score);
+	            }
+	            statement.close();
+	           } catch (SQLException e) {
+	        e.printStackTrace();
+	    } 
+	}
+	//FARKI Imane 
+	//Le territoire de départ c'est le territoire qui a 2 regiments
+	public ArrayList<Territoire> getTerritoireDepart(Joueur joueurActif) {
+	    ArrayList<Territoire> territoiresDepart = new ArrayList<>();
+	    for (Territoire territoire : joueurActif.getListeTerritoire()) {
+	        if (territoire.getNbRegTer() == 2) {
+	        	territoiresDepart.add(territoire);
+	        }
+	    }
+
+	    return territoiresDepart;
+	}
+	    
+	//FARKI Imane   
+	/*public TypeTerritoire getTypeTerritoire() {
+		return this.TypeCase;
+	}*/
+
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 		for (String couleur : couleurs) {
@@ -796,6 +1089,18 @@ public class Plateau extends AbstractModel {
 		return idPlateau;
 	}*/
 	
+
+	//FARKI Imane
+	public static int getIdPlateau() {
+		return idPlateau;
+	}
+	@Override
+	public Joueur getVainqueur(int x, int y) {
+		// TODO Auto-generated method stub
+		// return this.plateau[x][y].getVainqueur();
+		return null;
+	}
+
 	@Override
 	public int getNbRegimentPlacés() {
 		// on parcourt la liste des joueur et on prendre le nombre de regiment
@@ -943,16 +1248,39 @@ public class Plateau extends AbstractModel {
 
 	public String getEtatPlateu() { 
 		return etatPlateu;
+	public static void setIdPlateau(int idPlateau) {
+		Plateau.idPlateau = idPlateau;
 	}
+	//FARKI Imane
+	public int getTour() {
+		return tour;
+	}
+	//FARKI Imane
+	public void setTour(int tour) {
+		this.tour = tour;
+	}
+	//FARKI Imane
+	public Joueur getJoueurActif() {
+		return joueurActif;
+	}
+	//FARKI Imane
+	public void setJoueurActif(Joueur joueurActif) {
+		this.joueurActif = joueurActif;
+	}
+	//FARKI Imane
+	public String getEtatPlateu() {
+		return etatPlateu;}
 
+
+	//FARKI Imane
 	public void setEtatPlateu(String etatPlateu) {
 		this.etatPlateu = etatPlateu;
 	}
-
+	//FARKI Imane
 	public ArrayList<Continent> getContinents() {
-		return continents;
+		return this.continents;
 	}
-
+	//FARKI Imane
 	public void setContinents(ArrayList<Continent> continents) {
 		this.continents = continents;
 	}
@@ -960,6 +1288,13 @@ public class Plateau extends AbstractModel {
 	public ArrayList<Joueur> getListeJoueurs() {
 		return this.listeJoueurs;
 	}
+	/*public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}*/
 
 	public ArrayList<CarteRisk> getPile() {
 		return pile;
@@ -1009,6 +1344,14 @@ public class Plateau extends AbstractModel {
 		return joueurActif.echangerCartes();
 	}
 
+
+//Larissa
+
+
+	@Override
+	public String getNom(int x, int y) {
+		// TODO Auto-generated method stub
+		return plateau[x][y].getNomTerritoire();}
 
     public void placerRegiments(Territoire ter,int nbReg) {
     	this.joueurActif.ajouterRegiment(ter, nbReg);
