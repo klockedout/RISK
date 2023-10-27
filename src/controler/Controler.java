@@ -21,7 +21,7 @@ public class Controler extends AbstractControler {
 			System.out.println("Vous avez cliquer sur : " + plateau.getTerritoire(x, y));
 			
 			//NA - phase attaque, choisir territoires
-			if (plateau.getPhase() == 2) {
+			if (plateau.getPhaseNum() == 2) {
 				
 				//condition si territoire de départ a >1 régiments TODO
 				if (plateau.getTerritoireDept() == null) {
@@ -30,7 +30,7 @@ public class Controler extends AbstractControler {
 				} else {
 					plateau.cliquerSurTerVOISIN(x,y);
 					plateau.combattre();
-				}
+				}   
 			}
 			
 			try{

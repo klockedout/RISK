@@ -37,7 +37,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
-	private int phase = 2;
+	private int phase = 1;
 	Scanner scanner = new Scanner(System.in); //NA
 	
 	private ArrayList<Territoire> territoiresEurope;
@@ -64,13 +64,30 @@ public class Plateau extends AbstractModel {
 		//TEST COMBATTRE() NAM AN 
 		Joueur joueur1 = new Joueur(0, "rouge", 12);
 		Joueur joueur2 = new Joueur(0, "jaune", 15);
-	
+		
+		this.listeJoueurs.add(joueur1);
+		this.listeJoueurs.add(joueur2);
+		this.joueurActif = this.listeJoueurs.get(this.tour);
+		
+		gererTour();
+		australieOrientale.setNbRegTer(4);
+		australieOccidentale.setNbRegTer(4);
+		indonesie.setNbRegTer(6);
+		nouvelleGuinee.setNbRegTer(4);
+
+		
+		joueur1.getListeTerritoire().add(australieOccidentale);
+		joueur1.getListeTerritoire().add(nouvelleGuinee);
+		joueur1.getListeTerritoire().add(indonesie);
+		joueur2.getListeTerritoire().add(australieOrientale);
+		
+		
+		
+		
 		this.joueurActif = joueur1;
 		
 		this.listeJoueurs.add(joueur1);
 		this.listeJoueurs.add(joueur2);
-		
-		
 		
 		//test trophé conquérent
 		System.out.println(conquerant());
@@ -838,8 +855,25 @@ public class Plateau extends AbstractModel {
 		return continentTerritoires;
 	}
 
+	public void afficherTestTidiane() {
+		System.out.println("La carte que le joueur a pioché est :" + ajouterCartes().getNomCarte() + " et elle est de type "
+				+ ajouterCartes().getTypeCarte());
+		obtenirCarte();
+		this.joueurActif.afficherCartes();
 		
+		ArrayList<CarteRisk> cartedetest = new ArrayList<CarteRisk>();
+		
+		cartedetest.add(new CarteRisk("Australie Orientale", TypeCarte.ARTILLERIE));
+		cartedetest.add(new CarteRisk("JOKER", TypeCarte.JOKER));
+		cartedetest.add(new CarteRisk("Indonésie", TypeCarte.ARTILLERIE));
+		this.joueurActif.setCarteRisk(cartedetest);
+		this.joueurActif.afficherCartes();
 
+		this.joueurActif.echangerCartes();this.joueurActif.setCarteRisk(cartedetest);
+		this.joueurActif.afficherCartes();
+
+		this.joueurActif.echangerCartes();
+	}
 
 
 //	private void creerJoueurs() {
@@ -1058,12 +1092,6 @@ public class Plateau extends AbstractModel {
 	}
 	
 
-
-	
-	public int getPhase() {
-		return this.phase;
-	}
-
 	@Override
 	public int getLargeur() {
 		// TODO Auto-generated method stub
@@ -1231,6 +1259,17 @@ public class Plateau extends AbstractModel {
 	public Joueur getJoueurActif() {
 		return joueurActif;
 	}
+	
+	//FARKI Imane 
+    public void passerAuTourSuivant() {
+        this.tour += 1;
+    }
+    
+  //FARKI Imane
+    public Joueur getJoueurActuel() {
+        return this.listeJoueurs.get(this.tour);
+    }
+    
 	//FARKI Imane
 	public void setJoueurActif(Joueur joueurActif) {
 		this.joueurActif = joueurActif;
@@ -1322,18 +1361,17 @@ public class Plateau extends AbstractModel {
     	this.joueurActif.deplacerRegiments(terDepart, terDesti, nbReg);
     }
     
-    public Joueur proprietaireDeTer(Territoire ter) { 
+    public Joueur proprietaireDeTer(Territoire ter) {
     	
 		Joueur proprietaire = null;
-		
 		for (Joueur j : this.listeJoueurs) {
-			
 			if (j.getListeTerritoire().contains(ter)) {
 				proprietaire = j;
 			}
 		}
 		return proprietaire;
 	} 
+ 
 	
 	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
 		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
@@ -1373,13 +1411,16 @@ public class Plateau extends AbstractModel {
 		this.joueurActif.setNbRegimentJoueur(nbReg+this.joueurActif.getNbRegimentJoueur());
 	}
 	
-	public void regimentParTerritoire() {
+	public int regimentParTerritoire() {
+		int nbReg;
 		if (this.joueurActif.getTerritoires().size()/3<3) {
+			nbReg = 3+ this.joueurActif.getNbRegimentJoueur();
 			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getNbRegimentJoueur());
 		}else {
-			this.joueurActif.setNbRegimentJoueur(3+this.joueurActif.getTerritoires().size()/3);
+			nbReg = this.joueurActif.getNbRegimentJoueur()+this.joueurActif.getTerritoires().size()/3;
+			this.joueurActif.setNbRegimentJoueur(this.joueurActif.getNbRegimentJoueur()+this.joueurActif.getTerritoires().size()/3);
 		}
-		
+		return nbReg;
 	}
 
 
@@ -1425,15 +1466,21 @@ public class Plateau extends AbstractModel {
 		return territoiresDisponibles;
 	}
 
+	public int getPhaseNum() {
+		return this.phase;
+	}
 	//lE JOUEUR DOIT CHOISIR LES ACTIONS QU'IL VEUT FAIRE,
-	public void getPhase (int phase) {
+	public int getPhase () {
 		Scanner scanner=new Scanner (System.in);
-		if (phase==1) {    // le joueur reçoit des regiments enfonction du nombre de territoire qu'il possède 
-			regimentParTerritoire();
+		if (this.phase==1) {    // le joueur reçoit des regiments enfonction du nombre de territoire qu'il possède 
+			int nbReg = regimentParTerritoire();
+			System.out.print("vous avez obtenu " + nbReg + " nouveaux régiments!");
+			this.phase +=1;
 		}
-		else if (phase==2) { //le joueur peut choisir d'attaquer
+		else if (this.phase==2) { //le joueur peut choisir d'attaquer
 			System.out.println("Voulez-vous attaquer ? (Oui/Non)");
 			combattre();
+			this.phase +=1;
 			//String reponse=scanner.nextLine();
 			//if (reponse.equalsIgnoreCase("Oui")) {
 				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");
@@ -1441,18 +1488,22 @@ public class Plateau extends AbstractModel {
 				//int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
 				//attaquer(territoireAttaque,territoireDefense,NbRegTer);
 			}
-		 else if (phase==3) { //le joueur peut choisir de déplacer ses regiments vers ses territoires voisins
-		 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
-		 String reponse1 = scanner.nextLine();
-		 if(reponse1.equalsIgnoreCase("Oui")) {
-			 deplacerRegiments(chine, afghanistan, 8);
+		 else if (this.phase==3) { //le joueur peut choisir de déplacer ses regiments vers ses territoires voisins
+			 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
+			 String reponse1 = scanner.nextLine();
+			 this.phase = 1;
+			 this.tour += 1;
+			 if(reponse1.equalsIgnoreCase("Oui")) {
+				 deplacerRegiments(chine, afghanistan, 8);
+			}else {
+				System.err.println("Erreur: Phase invalide " + phase);
+				
+			}
+			 
 		}else {
 			System.err.println("Erreur: Phase invalide " + phase);
 		}
-	}else {
-		System.err.println("Erreur: Phase invalide " + phase);
-	}
-	
+		return this.phase;
 	//Widad
 }
 
@@ -1481,7 +1532,40 @@ public class Plateau extends AbstractModel {
 		return vainqueur;
 	}
 	
-	
+	 //FARKI Imane : Demander au joueur s'il veut continuer à deplacer des régiments et on retourne sa réponse
+    public boolean demanderContinuerDeplacementRegiments() {
+        String reponse;
+        do {
+            System.out.print("Voulez-vous déplacer encore des régiments ? (oui/non) : ");
+            reponse = scanner.nextLine().toLowerCase();
+        } while (!reponse.equals("oui") && !reponse.equals("non"));
 
-}  
+        return reponse.equals("oui");
+    }
+    
+  //FARKI Imane : si la reponse du joueur = oui il continue à joueur sinon on passe au joueur suivant
+    public Joueur gererTour() {
+    	
+        Joueur joueurActuel = getJoueurActuel();
+        Joueur joueurSuivant =null;
+    	System.out.println("tour " + this.tour + " joueur actif " + this.joueurActif);
+
+		boolean reponse = demanderContinuerDeplacementRegiments();
+		
+		if (reponse) {
+			System.out.println("C'est le tour de : "+ joueurActuel.getCouleur());
+			getPhase();
+    	}	
+        else {
+        	passerAuTourSuivant();
+       
+		    joueurSuivant = getJoueurActuel();
+		    System.out.println("C'est le tour de : "+joueurSuivant.getCouleur());
+		    getPhase();		    
+        }
+		return joueurSuivant;
+    }
+}
+
+
 	
