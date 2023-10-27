@@ -28,8 +28,6 @@ public class Manche {
             reponse = scanner.nextLine().toLowerCase();
         } while (!reponse.equals("oui") && !reponse.equals("non"));
 
-        scanner.close();
-
         return reponse.equals("oui");
     }
     

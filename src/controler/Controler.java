@@ -33,6 +33,7 @@ public class Controler extends AbstractControler {
 				}
 			}
 			
+		
 			try{
 				System.out.println("son propiétaire est : " + plateau.proprietaireDeTer(plateau.getTerritoire(x, y)));
 				System.out.println("Il y a " + plateau.getTerritoire(x, y).getNbRegTer() + " regiments sur ce territoire. ");

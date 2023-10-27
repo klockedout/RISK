@@ -35,9 +35,9 @@ public class Plateau extends AbstractModel {
 	private Territoire territoireVoisin; //NA
 //Larissa
 	private ArrayList<Territoire> listeTerritoireVoisin;
-	private ArrayList<Joueur> joueurs;
+	private Manche manche; 
 //Fin Larissa
-	private int phase = 2;
+	private int phase;
 	Scanner scanner = new Scanner(System.in); //NA
 	
 	private ArrayList<Territoire> territoiresEurope;
@@ -54,17 +54,42 @@ public class Plateau extends AbstractModel {
 	public Continent australie; 
 	
 	
+	
 	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
 	HashMap<Continent, ArrayList<Territoire>> continentTerritoires = new HashMap<Continent, ArrayList<Territoire>>();
 
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
-		
-		//TEST COMBATTRE() NAM AN 
-		Joueur joueur1 = new Joueur(0, "rouge", 12);
-		Joueur joueur2 = new Joueur(0, "jaune", 15);
+		this.tour = 0;
+		this.joueurActif = this.listeJoueurs.get(0);
+		//CREATION DU JOUEURS
+		Joueur joueur1 = new Joueur(0, "rouge", 25);
+		Joueur joueur2 = new Joueur(0, "jaune", 25);
 	
+		this.listeJoueurs.add(joueur1);
+		this.listeJoueurs.add(joueur2);
+		gererTour();
+		
+		do {
+			australieOrientale.setNbRegTer(4);
+			ameriqueCentrale.setNbRegTer(4);
+			etatUnisEst.setNbRegTer(6);
+			canada.setNbRegTer(4);
+			ontario.setNbRegTer(3);
+			chine.setNbRegTer(1);
+		}
+		while(this.joueurActif.getNbRegimentJoueur() > 0);
+		
+		joueur1.getListeTerritoire().add(ameriqueCentrale);
+		joueur1.getListeTerritoire().add(australieOrientale);
+		joueur1.getListeTerritoire().add(etatUnisEst);
+		joueur1.getListeTerritoire().add(canada);
+		joueur1.getListeTerritoire().add(ontario);
+		
+		
+		
+		
 		this.joueurActif = joueur1;
 		
 		this.listeJoueurs.add(joueur1);
@@ -96,10 +121,8 @@ public class Plateau extends AbstractModel {
 		australie = new Continent(TypeContinent.AUSTRALIE, 7); 
 	
 
-		australieOrientale.setNbRegTer(4);
-		chine.setNbRegTer(1);
-		joueur2.getListeTerritoire().add(australieOrientale);
-		
+	
+		System.out.println("\n---------------" + proprietaireDeTer(ontario));
 		// Larissa : création de la carte
 		// 1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
@@ -716,8 +739,10 @@ public class Plateau extends AbstractModel {
 		australie.ajouterContinent(continents,australie);
 		
 		attribuerTerritoiresContinent();
+		
 	}
-	
+		
+
 	//1. Créer les territoires et leur territoire voisin 
 	//EUROPE 
 	Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
@@ -782,6 +807,10 @@ public class Plateau extends AbstractModel {
 					return territoiresContinent;
 	}
 	    
+	//FARKI Imane
+	    public Joueur getJoueurActuel() {
+	        return this.listeJoueurs.get(this.tour);
+	    }
 	  
 	 // FARKI Imane : Creer la liste des territoires pour chaque centinent 
 	public void attribuerTerritoiresContinent() {
@@ -851,7 +880,7 @@ public class Plateau extends AbstractModel {
 
 	//FARKI Imane
 	private void creerJoueurs(String couleur, int nbRegiment) {
-		this.joueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
+		this.listeJoueurs.add(new Joueur(this.idPlateau, couleur, nbRegiment));
 		/*String[] couleurs = new String[]{"bleu","jaune","rouge","vert","noir"};
 		for (String couleur : couleurs) {
 			this.joueurs.add(new Joueur(this.idPlateau,couleur));
@@ -918,7 +947,7 @@ public class Plateau extends AbstractModel {
 			score = 10;
 		else {
 			Collections.sort(joueurs,(j1,j2) -> j1.getListeTerritoire().size() - j2.getListeTerritoire().size());
-			for(int i=0; i<joueurs.size(); i++) {
+			for(int i=0; i<this.listeJoueurs.size(); i++) {
 				if(joueurs.get(i).equals(joueur)) {
 				switch (i) {
 		        case 1:
@@ -997,6 +1026,11 @@ public class Plateau extends AbstractModel {
 	        e.printStackTrace();
 	    } 
 	}
+	  
+	//FARKI Imane 
+	    public void passerAuTourSuivant() {
+	        this.tour += 1;
+	    }
 	//FARKI Imane 
 	//Le territoire de départ c'est le territoire qui a 2 regiments
 	public ArrayList<Territoire> getTerritoireDepart(Joueur joueurActif) {
@@ -1018,7 +1052,7 @@ public class Plateau extends AbstractModel {
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
 		for (String couleur : couleurs) {
-			this.joueurs.add(new Joueur(this.idPlateau, couleur,0));
+			this.listeJoueurs.add(new Joueur(this.idPlateau, couleur,0));
 		}
 
 	}
@@ -1482,6 +1516,32 @@ public class Plateau extends AbstractModel {
 	}
 	
 	
+    //FARKI Imane : Demander au joueur s'il veut continuer à deplacer des régiments et on retourne sa réponse
+    public boolean demanderContinuerDeplacementRegiments() {
+        String reponse;
+        do {
+            System.out.print("Voulez-vous déplacer encore des régiments ? (oui/non) : ");
+            reponse = scanner.nextLine().toLowerCase();
+        } while (!reponse.equals("oui") && !reponse.equals("non"));
 
-}  
+        return reponse.equals("oui");
+    }
+    
+  //FARKI Imane : si la reponse du joueur = oui il continue à joueur sinon on passe au joueur suivant
+    public void gererTour() {
+    	System.out.println("tour " + this.tour);
+        Joueur joueurActuel = getJoueurActuel();
+		
+		boolean reponse = demanderContinuerDeplacementRegiments();
+		
+		if (reponse) 
+			System.out.println("C'est le tour de : "+joueurActuel.getNom());
+        else {
+        	passerAuTourSuivant();
+		    Joueur joueurSuivant = getJoueurActuel();
+		    System.out.println("C'est le tour de : "+joueurSuivant.getNom());
+        }
+    }
+}
+
 	
