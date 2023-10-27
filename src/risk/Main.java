@@ -22,32 +22,31 @@ public class Main {
         v.setVisible(true);
         while(!model.partieTerminer()){
         controler.calculerStepSuivant();
-        }
+        }  
 
 
-    // Test obtenirListeTerritoire
-    ArrayList<Territoire> listeTerritoires = model.obtenirListeTerritoire();
-    for (Territoire territoire2 : listeTerritoires) {
-        System.out.println("Territoire : " + territoire2.getNomTer());
-    }
-
-    // Test obtenirNbTerritoire
-    int nbTerritoires = model.obtenirNbTerritoire();
-    System.out.println("Nombre de territoires : " + nbTerritoires);
-
-	// Test getTerritoireDispo
-	Joueur joueur = new Joueur(2, "bleu", 4); 
-	ArrayList<Territoire> territoiresDisponibles = model.getTerritoireDispo(joueur);
-	for (Territoire territoire : territoiresDisponibles) {
-		System.out.println("Territoire disponible : " + territoire.getNomTer());
+	    // Test obtenirListeTerritoire
+	    ArrayList<Territoire> listeTerritoires = model.obtenirListeTerritoire();
+	    for (Territoire territoire2 : listeTerritoires) {
+	        System.out.println("Territoire : " + territoire2.getNomTer());
+	    }
 	
-	}
-	// Test getTerritoireDepart
-
-	ArrayList<Territoire> territoiresDepart = model.getTerritoireDepart(joueur);
-	for (Territoire territoire : territoiresDepart) {
-	    System.out.println("Territoire de départ : " + territoire.getNomTer());
-	}
+	    // Test obtenirNbTerritoire
+	    int nbTerritoires = model.obtenirNbTerritoire();
+	    System.out.println("Nombre de territoires : " + nbTerritoires);
+	
+		// Test getTerritoireDispo
+		Joueur joueur = new Joueur(2, "bleu", 4); 
+		ArrayList<Territoire> territoiresDisponibles = model.getTerritoireDispo(joueur);
+		for (Territoire territoire : territoiresDisponibles) {
+			System.out.println("Territoire disponible : " + territoire.getNomTer());
+		
+		}
+		// Test getTerritoireDepart
+		ArrayList<Territoire> territoiresDepart = model.getTerritoireDepart(joueur);
+		for (Territoire territoire : territoiresDepart) {
+		    System.out.println("Territoire de départ : " + territoire.getNomTer());
+		}
  
 	
 	}

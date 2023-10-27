@@ -18,8 +18,6 @@ public class Joueur {
 	// qu'est ce que c'est ?
 	private Territoire territoire;
 	
-	// Tidiane j'ai rajouter la variable plateau pouvoir importer la methode ajouter
-	private Plateau plateau;
 	//NA
 	private int nbAttaque;
 	private int nbDefenseReussi;
@@ -295,5 +293,9 @@ public class Joueur {
 		System.out.println(this.resultatDe);
 		return this.resultatDe;
 	}
+	
+	
+	
+	 
 	
 }
