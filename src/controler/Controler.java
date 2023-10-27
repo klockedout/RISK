@@ -14,7 +14,7 @@ public class Controler extends AbstractControler {
 
 	@Override
 	public void cliqueSur(int x, int y) {
-		System.out.println("Cliquer : " + x + " ; " + y);
+		//System.out.println("Cliquer : " + x + " ; " + y);
 		if (this.model instanceof Plateau) {
 			Plateau plateau = (Plateau) model;
 
@@ -35,12 +35,12 @@ public class Controler extends AbstractControler {
 			
 			try{
 				System.out.println("son propiétaire est : " + plateau.proprietaireDeTer(plateau.getTerritoire(x, y)));
-				System.out.println("Il y a " + plateau.getTerritoire(x, y).getNbRegTer() + " regiments sur ce territoire. ");
+				//System.out.println("Il y a " + plateau.getTerritoire(x, y).getNbRegTer() + " regiments sur ce territoire. ");
 			}catch(Exception e) {
 				System.out.println("pas de propiétaire sur ce territoire");
 			}
 
-			System.out.println("Vous avez cliquer sur : " + plateau.getTerritoire(x,y));
+			//System.out.println("Vous avez cliquer sur : " + plateau.getTerritoire(x,y));
 
 			System.out.println("----------les voisins sont : -----------------");
 			plateau.afficherVoisin(plateau.getTerritoire(x, y));

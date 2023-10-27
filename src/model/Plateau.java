@@ -1343,7 +1343,8 @@ public class Plateau extends AbstractModel {
 		// si 
 		return joueurActif.echangerCartes();
 	}
-
+	
+	
 
 //Larissa
 
@@ -1481,6 +1482,10 @@ public class Plateau extends AbstractModel {
 			System.out.println("Voulez-vous attaquer ? (Oui/Non)");
 			combattre();
 			this.phase +=1;
+			if(this.getContinentJoueur(this.joueurActif) > 1) {
+				System.out.println("Le Joueur "+ this.joueurActif+ " a gagné!!");
+				System.out.println("FIN DE PARTIE");
+			}
 			//String reponse=scanner.nextLine();
 			//if (reponse.equalsIgnoreCase("Oui")) {
 				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");

@@ -9,7 +9,7 @@ import model.Territoire;
 import java.util.ArrayList;
 
 
-
+  
 public class Main {
 
 	public static void main(String[] args) {
@@ -22,14 +22,7 @@ public class Main {
         while(!model.partieTerminer()){
         controler.calculerStepSuivant();
         }  
-
-		/*Controler controler = new Controler(model);
-		Vue v = new Vue(model, controler);
-		model.addObservateur(v);
-		v.setVisible(true);
-		while (!model.partieTerminer()) {
-			controler.calculerStepSuivant();
-		}*/
+ 
 
 
 
