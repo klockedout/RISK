@@ -35,21 +35,35 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> territoiresOceanie;
 	private ArrayList<Territoire> territoiresAmeriqueSud;
 	private ArrayList<Territoire> territoiresAmeriqueNord;
+	public Continent europe; 
+	public Continent afrique; 
+	public Continent ameriqueNord; 
+	public Continent ameriqueSud; 
+	public Continent asie; 
+	public Continent australie; 
+	
 	
 	HashMap<Joueur,Territoire> territoiresControles = new HashMap<Joueur, Territoire>();
-	//HashMap<String, Integer> territoiresConquis = new HashMap<String, Integer>();
 	HashMap<Continent, ArrayList<Territoire>> continentTerritoires = new HashMap<Continent, ArrayList<Territoire>>();
 
 	public Plateau(int idPlateau) {
 		super();
-        //FARKI Imane
-		ArrayList<Territoire> territoiresEurope = new ArrayList<Territoire>();
-		ArrayList<Territoire> territoiresAfrique = new ArrayList<Territoire>();
-		ArrayList<Territoire> territoiresAsie = new ArrayList<Territoire>();
-		ArrayList<Territoire> territoiresOceanie = new ArrayList<Territoire>();
-		ArrayList<Territoire> territoiresAmeriqueSud = new ArrayList<Territoire>();
-		ArrayList<Territoire> territoiresAmeriqueNord = new ArrayList<Territoire>();
 		
+        //Cration liete territoire continent
+		territoiresEurope = new ArrayList<Territoire>();
+		territoiresAfrique = new ArrayList<Territoire>();
+		territoiresAsie = new ArrayList<Territoire>();
+		territoiresOceanie = new ArrayList<Territoire>();
+		territoiresAmeriqueSud = new ArrayList<Territoire>();
+		territoiresAmeriqueNord = new ArrayList<Territoire>();
+		continents = new ArrayList<Continent>(); 
+		//2.Créer Continent 
+		afrique = new Continent(TypeContinent.AFRIQUE, 3); 
+		europe = new Continent(TypeContinent.EUROPE, 2); 
+		ameriqueNord = new Continent(TypeContinent.AMERIQUEN, 5); 
+		ameriqueSud = new Continent(TypeContinent.AMERIQUESUD, 7); 
+		asie = new Continent(TypeContinent.ASIE, 7); 
+		australie = new Continent(TypeContinent.AUSTRALIE, 7); 
 		//1. Créer les territoires et leur territoire voisin 
 		//EUROPE 
 		Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
@@ -59,7 +73,7 @@ public class Plateau extends AbstractModel {
 		Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
 		Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
 		Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
-	            
+		    
 		//AMERIQUE NORD 
 		Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
 		Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
@@ -100,10 +114,6 @@ public class Plateau extends AbstractModel {
 		Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
 		Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
 		Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-
-		
-		// Larissa : création de la carte 
-		//1. On crée les oceans
 
 		// Larissa : création de la carte
 		// 1. On crée les oceans
@@ -639,7 +649,15 @@ public class Plateau extends AbstractModel {
 		australieOccidentale.ajouterTerritoireVoisin(australieOrientale);
 		australieOrientale.ajouterTerritoireVoisin(nouvelleGuinee);
 		australieOrientale.ajouterTerritoireVoisin(australieOccidentale);
-
+		
+		afrique.ajouterContinent(continents,afrique);
+		europe.ajouterContinent(continents,europe);
+		ameriqueNord.ajouterContinent(continents,ameriqueNord);
+		ameriqueSud.ajouterContinent(continents,ameriqueSud);
+		asie.ajouterContinent(continents,asie);
+		australie.ajouterContinent(continents,australie);
+		
+		attribuerTerritoiresContinent();
 	}
 	
 	  public ArrayList<Territoire> getTerritoireFromContinent(TypeContinent tc) {
@@ -653,16 +671,20 @@ public class Plateau extends AbstractModel {
 		}
 					return territoiresContinent;
 	}
+	  
+	  
 	 // FARKI Imane : Creer la liste des territoires pour chaque centinent 
 	public void attribuerTerritoiresContinent() {
-		territoiresAfrique = getTerritoireFromContinent(TypeContinent.AFRIQUE);
-		territoiresAmeriqueNord = getTerritoireFromContinent(TypeContinent.AMERIQUEN);
-		territoiresAmeriqueSud = getTerritoireFromContinent(TypeContinent.AMERIQUESUD);
-		territoiresAsie = getTerritoireFromContinent(TypeContinent.ASIE);
-		territoiresEurope = getTerritoireFromContinent(TypeContinent.EUROPE);
-		territoiresOceanie = getTerritoireFromContinent(TypeContinent.AUSTRALIE);
+		//territoiresAfrique = getTerritoireFromContinent(TypeContinent.AFRIQUE);
 	
-	
+		territoiresAfrique.addAll(getTerritoireFromContinent(TypeContinent.AFRIQUE));
+		territoiresAmeriqueNord.addAll(getTerritoireFromContinent(TypeContinent.AMERIQUEN));
+		territoiresAmeriqueSud.addAll(getTerritoireFromContinent(TypeContinent.AMERIQUESUD));
+		territoiresAsie.addAll(getTerritoireFromContinent(TypeContinent.ASIE));
+		territoiresEurope.addAll(getTerritoireFromContinent(TypeContinent.EUROPE));
+		territoiresOceanie.addAll(getTerritoireFromContinent(TypeContinent.AUSTRALIE));
+		
+	//Ajouter les listes dans la map
 	continentTerritoires.put(afrique, territoiresAfrique);
 	continentTerritoires.put(ameriqueNord, territoiresAmeriqueNord);
 	continentTerritoires.put(ameriqueSud, territoiresAmeriqueSud);
@@ -671,6 +693,29 @@ public class Plateau extends AbstractModel {
 	continentTerritoires.put(australie, territoiresOceanie);
 	} 
 
+
+	public ArrayList<Territoire> getTerritoiresAfrique() {
+		return territoiresAfrique;
+	}
+
+	//FARKI Imane : avoir la liste des territoires pour un continent donné
+	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
+        //ArrayList<Territoire> territoiresContinent = new ArrayList<>();
+        for(Map.Entry<Continent, ArrayList<Territoire>> continent : continentTerritoires.entrySet()) {
+            if(continent.getKey().equals(nomContinent)) {
+            	return continent.getValue();
+            }
+        }
+        return null;
+        }
+        
+        /*for (Territoire territoire : listTerritoires) {
+            if (territoire.getContinent().equals(nomContinent)) {
+                territoiresContinent.add(territoire);
+            }
+        }
+        return territoiresContinent;
+    }*/
 	/*		
 	private void creerJoueurs() {
 		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
@@ -684,75 +729,8 @@ public class Plateau extends AbstractModel {
 	}
 
 		
-		/*afrique.ajouterContinent(continents,afrique);
-		europe.ajouterContinent(continents,europe);
-		ameriqueNord.ajouterContinent(continents,ameriqueNord);
-		ameriqueSud.ajouterContinent(continents,ameriqueSud);
-		asie.ajouterContinent(continents,asie);
-		australie.ajouterContinent(continents,australie);*/
-		
-	
-	
-	//1. Créer les territoires et leur territoire voisin 
-			//EUROPE 
-			Territoire islande = new Territoire("Islande", TypeContinent.EUROPE);
-			Territoire scandinavie = new Territoire("Scandinavie", TypeContinent.EUROPE);
-			Territoire grandeBretagne = new Territoire("Grande-Bretagne", TypeContinent.EUROPE);
-			Territoire europeOuest = new Territoire("Europe de l'Ouest", TypeContinent.EUROPE);
-			Territoire europeNord = new Territoire("Europe du Nord", TypeContinent.EUROPE);
-			Territoire europeSud = new Territoire("Europe du Sud", TypeContinent.EUROPE);
-			Territoire russie = new Territoire("Russie", TypeContinent.EUROPE);
 
 
-			//AMERIQUE NORD 
-			Territoire alaska = new Territoire("Alaska", TypeContinent.AMERIQUEN);
-			Territoire alberta = new Territoire("Alberta", TypeContinent.AMERIQUEN);
-			Territoire ontario = new Territoire("Ontario", TypeContinent.AMERIQUEN);
-			Territoire canada = new Territoire("Canada de l'Est", TypeContinent.AMERIQUEN);
-			Territoire groenland = new Territoire("Groenland", TypeContinent.AMERIQUEN);
-			Territoire territoireNordOuest = new Territoire("Territoire du Nord-Ouest", TypeContinent.AMERIQUEN);
-			Territoire etatUnisOuest = new Territoire("Etats-Unis de l'Ouest", TypeContinent.AMERIQUEN);
-			Territoire etatUnisEst = new Territoire("Etats-Unis de l'Est", TypeContinent.AMERIQUEN);
-			Territoire ameriqueCentrale = new Territoire("Amerique Centrale", TypeContinent.AMERIQUEN);
-			//AMERIQUE DU SUD 
-			Territoire venezuela = new Territoire("Venezuela", TypeContinent.AMERIQUESUD);
-			Territoire bresil = new Territoire("Brésil", TypeContinent.AMERIQUESUD);
-			Territoire perou = new Territoire("Pérou", TypeContinent.AMERIQUESUD);
-			Territoire argentine = new Territoire("Argentine", TypeContinent.AMERIQUESUD);
-			//ASIE 
-			Territoire oural = new Territoire("Oural", TypeContinent.ASIE);
-			Territoire siberie = new Territoire("Sibérie", TypeContinent.ASIE);
-			Territoire yajoutie = new Territoire("Yakoutie", TypeContinent.ASIE);
-			Territoire kamchatka = new Territoire("Kamchatka", TypeContinent.ASIE);
-			Territoire mongolie = new Territoire("Mongolie", TypeContinent.ASIE);
-			Territoire japon = new Territoire("Japon", TypeContinent.ASIE);
-			Territoire chine = new Territoire("Chine", TypeContinent.ASIE);
-			Territoire moyenOrient = new Territoire("Moyen-Orient", TypeContinent.ASIE);
-			Territoire afghanistan = new Territoire("Afghanistan", TypeContinent.ASIE);
-			Territoire inde = new Territoire("Inde", TypeContinent.ASIE);
-			Territoire asieSudEst = new Territoire("Asie du Sud Est", TypeContinent.ASIE);
-			Territoire irtoutsk = new Territoire("Irtoutsk", TypeContinent.ASIE);
-			//AFRIQUE
-			Territoire nordAfrique = new Territoire("Nord de l'Afrique", TypeContinent.AFRIQUE);
-			Territoire egypte = new Territoire("Égypte", TypeContinent.AFRIQUE);
-			Territoire afriqueOrientale = new Territoire("Afrique Orientale", TypeContinent.AFRIQUE);
-			Territoire afriqueCentrale = new Territoire("Afrique Centrale", TypeContinent.AFRIQUE);
-			Territoire afriqueSud = new Territoire("Afrique du Sud", TypeContinent.AFRIQUE);
-			Territoire madagascar = new Territoire("Madagascar", TypeContinent.AFRIQUE);
-			//OCEANIE
-			Territoire nouvelleGuinee = new Territoire("Nouvelle-Guinée", TypeContinent.AUSTRALIE);
-			Territoire australieOccidentale = new Territoire("Australie Occidentale", TypeContinent.AUSTRALIE);
-			Territoire australieOrientale = new Territoire("Australie Orientale", TypeContinent.AUSTRALIE);
-			Territoire indonesie = new Territoire("Indonesie", TypeContinent.AUSTRALIE);
-			
-			
-			//2.Créer Continent 
-			Continent afrique = new Continent("Afrique", 3); 
-			Continent europe = new Continent("Europe", 5); 
-			Continent ameriqueNord = new Continent("Amerique du Nord", 5); 
-			Continent ameriqueSud = new Continent("Amerique du Sud", 2); 
-			Continent asie = new Continent("Asie", 7); 
-			Continent australie = new Continent("Australie", 2); 
 
 //	private void creerJoueurs() {
 //		String[] couleurs = new String[] { "bleu", "jaune", "rouge", "vert", "noir" };
@@ -798,7 +776,15 @@ public class Plateau extends AbstractModel {
     
     //FARKI Imane : retourner le nombre de continents conquis par un joueur donné
   	public int getContinentJoueur(Joueur joueur) {
-  		int cpt = 0;
+  		int nombre = 0;
+  		for(Continent centinent : continents) {
+  			if(joueur.conquerirContinent(centinent))
+  				nombre+=1;
+  		}
+  		return nombre;
+  	}
+  		
+  		/*int cpt = 0;
           ArrayList<Territoire> territoiresJoueur = joueur.getListeTerritoire();
   		for (Continent continent : continentTerritoires.keySet()) {
               ArrayList<Territoire> territoires = continent.getListTerritoire();
@@ -807,7 +793,7 @@ public class Plateau extends AbstractModel {
   		}
           return cpt;
           
-        }
+        }*/
 
 	//FARKI Imane
     public void calculerScore(Joueur joueur) {
@@ -1026,7 +1012,7 @@ public class Plateau extends AbstractModel {
 	}
 	//FARKI Imane
 	public ArrayList<Continent> getContinents() {
-		return continents;
+		return this.continents;
 	}
 	//FARKI Imane
 	public void setContinents(ArrayList<Continent> continents) {
