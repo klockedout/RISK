@@ -864,21 +864,21 @@ public class Plateau extends AbstractModel {
 			regimentParTerritoire();
 		}
 		else if (phase==2) {
-			//attaquer();
-			//System.out.println("Voulez-vous attaquer ? (Oui/Non)");
-			//String reponse=scanner.nextLine();
-			//if (reponse.equalsIgnoreCase("Oui")) {
-				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");
-				//Territoire territoireDefense = choisirTerritoire ("Territoirede défense :");
-				//int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
-				//attaquer(territoireAttaque,territoireDefense,NbRegTer);
-			//}
+			attaquer();
+			System.out.println("Voulez-vous attaquer ? (Oui/Non)");
+			String reponse=scanner.nextLine();
+			if (reponse.equalsIgnoreCase("Oui")) {
+				Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");
+				Territoire territoireDefense = choisirTerritoire ("Territoire de défense :");
+				int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
+				attaquer(territoireAttaque,territoireDefense,NbRegTer);
+			}
 		}
 		else if (phase==3) {
 		 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
-		 String reponse = scanner.nextLine();
-		 if(reponse.equalsIgnoreCase("Oui")) {
-			deplacerRegiments(venezuela, bresil, 4);
+		 String reponse1 = scanner.nextLine();
+		 if(reponse1.equalsIgnoreCase("Oui")) {
+			 deplacerRegiments(afriqueCentrale, afghanistan, phase);
 		}else {
 			System.err.println("Erreur: Phase invalide " + phase);
 		}
@@ -889,3 +889,4 @@ public class Plateau extends AbstractModel {
 	//Widad
 }
 }
+

@@ -2,15 +2,12 @@ package risk;
 
 import controler.Controler;
 import vue.Vue;
-import controler.AbstractControler;
 import model.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 
-import controler.*;
-import javax.swing.*;
+
 
 
 public class Main {
