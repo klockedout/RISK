@@ -6,10 +6,12 @@ import java.util.Objects;
 public class Territoire {
 	
 	// attribut 
+
 	private String nomTer;
 	private TypeContinent typeC; 
 	private int nbRegTer;
 	private ArrayList<Territoire>listeTerritoireVoisin; 
+   
 	
 	//constructeur 
 	Territoire(String nom, TypeContinent typeC){
@@ -22,22 +24,37 @@ public class Territoire {
 	
 	//methodes 
 	
+/*
+	private TypeTerritoire typeTer; 
+	//FARKI Imane	
+	Territoire(String nom){
+		this.nbRegTer=0;
+		this.nomTer=nom;
+	}
+	 
+	//FARKI Imane
+	public  TypeTerritoire getTypeTerritoire() {
+		return this.typeTer;
+	}*/
+	//FARKI Imane
+
 	public String getNomTerritoire() {
 		return this.nomTer;
 	}
-
+	//FARKI Imane
 	public String getNomTer() {
 		return nomTer;
 	}
 
+	//FARKI Imane
 	public void setNomTer(String nomTer) {
 		this.nomTer = nomTer;
 	}
-
+	//FARKI Imane
 	public int getNbRegTer() {
 		return nbRegTer;
 	}
-
+	//FARKI Imane
 	public void setNbRegTer(int nbRegTer) {
 		this.nbRegTer = nbRegTer;
 	}
@@ -45,7 +62,7 @@ public class Territoire {
 	@Override
 	public int hashCode() {
 		return Objects.hash(nomTer);
-	}
+	}  
 
 	@Override
 	public boolean equals(Object obj) {
@@ -86,6 +103,11 @@ public class Territoire {
 
 	
 	
+	//recuperer le joueur le plus fort dans un territoire
+	public Joueur getVainqueur() {
+		return null; 
+		
+	}
 
 	@Override
 	public String toString() {
