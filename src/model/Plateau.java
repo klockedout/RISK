@@ -1014,12 +1014,13 @@ public class Plateau extends AbstractModel {
     public Joueur proprietaireDeTer(Territoire ter) {
 		Joueur proprietaire = null;
 		for (Joueur j : this.listeJoueurs) {
-			if (j.getTerritoires().contains(ter)) {
+			
+			if (j.getListeTerritoire().contains(ter)) {
 				proprietaire = j;
 			}
 		}
 		return proprietaire;
-	}
+	} 
 	
 	private ArrayList<Territoire> tersVoisinsParJoueur(Territoire ter){
 		ArrayList<Territoire> tersDeJoueur = this.proprietaireDeTer(ter).getTerritoires();
