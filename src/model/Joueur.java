@@ -133,7 +133,7 @@ public class Joueur {
 	//Debut Larissa
 
 	public boolean conquerirContinent(Continent continent) {
-		for(Territoire t : continent.getTerritoiresParContinent(continent)) {
+		for(Territoire t : plateau.getListeTerritoire(continent)) {
 			if(!this.territoires.contains(t)) {
 				return false;
 			}

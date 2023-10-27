@@ -8,32 +8,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Continent {
-	private String nomCont;
+	private TypeContinent tc;
 	private Territoire territoire;
 	private ArrayList<Territoire> listTerritoires;
 	private HashMap<Territoire, Joueur> territoiresControles;
-	private HashMap<Continent, Territoire[]> continentTerritoires;
+	//private HashMap<Continent, Territoire[]> continentTerritoires;
 	private int bareme; 
 	
-	public Continent(String nomCont, int bareme){
-		this.nomCont=nomCont;
+	public Continent(TypeContinent tc, int bareme){
+		this.tc = tc;
 		this.listTerritoires=new ArrayList<Territoire>();
 		this.territoiresControles = new HashMap<Territoire, Joueur>();
-		this.continentTerritoires= new HashMap<Continent, Territoire[]>();
+		//this.continentTerritoires= new HashMap<Continent, Territoire[]>();
 		this.bareme = bareme; 
 	}
 
-	public String getNom() {
-		return this.nomCont;
+	public TypeContinent getNom() {
+		return this.tc;
 	}
 	public String getTerritoire() {
 		return this.territoire.getNomTerritoire();
-
-	//FARKI Imane
-	/*public TypeTerritoire getTypeCase() {
-		return this.typeCase; }*/
-
 	}
+
 
 	//FARKI Imane
 	public ArrayList<Territoire> getListTerritoire() {
@@ -43,15 +39,6 @@ public class Continent {
 	public int getBareme() {
 		return this.bareme; 
 	}
-	/*public ArrayList<Territoire> getTerritoireContinent(Continent continent) {
-		//a partir de la hasmap recuperer les valeurs de la hasmap
-		for(Territoire t: continentTerritoires.entrySet()) {
-			if (t.getKeys
-			return t;
-		}
-			return this.listTerritoires; 
-		}*/
-
 	
 	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
 		if(liste == null) {
@@ -64,9 +51,6 @@ public class Continent {
 	public ArrayList<Territoire> construireListeTerritoires(){
 		return this.listTerritoires;
 	}
-	   public Territoire [] getTerritoiresParContinent(Continent continent) {
-	        return continentTerritoires.get(continent);
-	    }
 	
 	//FARKI Imane : avoir la liste des territoires pour un continent donné
 	/*public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
