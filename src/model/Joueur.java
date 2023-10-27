@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Joueur {
@@ -9,30 +10,44 @@ public class Joueur {
 	// attribut
 	private int idPlateau;
 	private String couleur;
-	private int nbAttaque;
-	private int nbDefense;
 	private int echanger = 0;
 	private String phase;
 	private int nbRegimentJoueur;
 	private ArrayList<CarteRisk> carteRisk;
 	private ArrayList<Territoire> territoires;
 	// qu'est ce que c'est ?
-	Territoire territoire;
+	private Territoire territoire;
 	
 	// Tidiane j'ai rajouter la variable plateau pouvoir importer la methode ajouter
 	private Plateau plateau;
-
-	// contructeur
-
-	public Joueur(int idPlateau, String couleur, int nbRegiment) {
-		// this.idPlateau=idPlateau;
-		this.couleur = couleur;
+	//NA
+	private int nbAttaque;
+	private int nbDefenseReussi;
+	private int obtenu1;
+	private ArrayList  <Territoire> listeTerritoire; 
+	private ArrayList<Integer> resultatDe; 
+	//fin NA
+	private String phase;
+	private ArrayList <CarteRisk> carteRisk;
+	
+	//contructeur 
+	public Joueur (int idPlateau, String couleur, int nbRegiment){
+		//this.idPlateau=idPlateau;
+		this.couleur=couleur;
 		this.nbRegimentJoueur = nbRegiment;
-		// liste de cartesRisk
-		this.carteRisk = new ArrayList<CarteRisk>();
-		// liste des territoires du joueur
+		this.obtenu1 = 0;
+		this.nbAttaque = 0;
+		this.nbDefenseReussi = 0;
+		this.resultatDe = new ArrayList<Integer>();
+		//this.nbRegimentJoueur = nbRegiment; 
+		//liste de cartesRisk
+		this.carteRisk=new ArrayList<CarteRisk>();
+		//liste des territoires du joueur 
+		this.listeTerritoire=new ArrayList<Territoire>();
 		this.territoires = new ArrayList<Territoire>();
+		
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -53,7 +68,7 @@ public class Joueur {
 	}
 
 	public int getIdPlateau() {
-		return idPlateau;
+		return this.idPlateau;
 	}
 
 	public void setIdPlateau(int idPlateau) {
@@ -61,7 +76,7 @@ public class Joueur {
 	}
 
 	public String getCouleur() {
-		return couleur;
+		return this.couleur;
 	}
 
 	public void setCouleur(String couleur) {
@@ -69,23 +84,30 @@ public class Joueur {
 	}
 
 	public int getNbAttaque() {
-		return nbAttaque;
+		return this.nbAttaque;
 	}
 
 	public void setNbAttaque(int nbAttaque) {
 		this.nbAttaque = nbAttaque;
 	}
 
-	public int getNbDefense() {
-		return nbDefense;
+
+	public int getNbDefenseReussi() {
+		return this.nbDefenseReussi;
 	}
 
-	public void setNbDefense(int nbDefense) {
-		this.nbDefense = nbDefense;
+
+	public void setNbDefenseReussi(int nbDefenseReussi) {
+		this.nbDefenseReussi = nbDefenseReussi;
+	}
+	
+	
+	public ArrayList<Integer> getResultatDe(){
+		return this.resultatDe;
 	}
 
 	public String getPhase() {
-		return phase;
+		return this.phase;
 	}
 
 	public void setPhase(String phase) {
@@ -93,7 +115,7 @@ public class Joueur {
 	}
 
 	public int getNbRegimentJoueur() {
-		return nbRegimentJoueur;
+		return this.nbRegimentJoueur;
 	}
 
 	public void setNbRegimentJoueur(int nbRegimentJoueur) {
@@ -101,7 +123,7 @@ public class Joueur {
 	}
 
 	public ArrayList<CarteRisk> getCarteRisk() {
-		return carteRisk;
+		return this.carteRisk;
 	}
 
 	public void setCarteRisk(ArrayList<CarteRisk> carteRisk) {
@@ -115,10 +137,18 @@ public class Joueur {
 
 	public void setTerritoires(ArrayList<Territoire> territoires) {
 		this.territoires = territoires;
+
+	public ArrayList<Territoire> getListeTerritoire() {
+		return this.listeTerritoire;
+	}
+
+
+	public void setTerritoire(ArrayList<Territoire> territoire) {
+		this.listeTerritoire = territoire;
 	}
 
 	public Territoire getTerritoire() {
-		return territoire;
+		return this.territoire;
 	}
 
 	public void setTerritoire(Territoire territoire) {
@@ -254,4 +284,27 @@ public class Joueur {
 	}
 		
 
+	public ArrayList<Integer> lancerDe(int nbDe) { // code Nam An
+		this.resultatDe.clear();
+		
+		while ( this.resultatDe.size() < nbDe ) {
+			int random = (int) (Math.random() * 6) + 1;
+        	this.resultatDe.add(random);
+		}
+		
+		//compteur point trophé "le malchanceux"
+		for (int res : this.resultatDe) {
+			
+			if (res ==1 ) {
+				this.obtenu1 +=1;
+			}
+		}
+		
+		//Mettre en ordre décroissant
+		Collections.sort(this.resultatDe, Collections.reverseOrder());
+		
+		System.out.println(this.resultatDe);
+		return this.resultatDe;
+	}
+	
 }

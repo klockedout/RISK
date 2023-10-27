@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Scanner;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 public class Plateau extends AbstractModel {
@@ -17,15 +18,42 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Continent> continents;
 	private ArrayList<Joueur> listeJoueurs;
 	private ArrayList<CarteRisk> pile = new ArrayList<CarteRisk>();
+	private int idPlateau;
+	private ArrayList<Joueur> listeJoueurs = new ArrayList<Joueur>();
+	private Territoire territoireDept; //NA
+	private Territoire territoireVoisin; //NA
+//Larissa
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
-	private int idPlateau;
+//Fin Larissa
+	private ArrayList<CarteRisk> pile;
+	private int phase = 2;
+	Scanner scanner = new Scanner(System.in); //NA
+	
+	
 
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
 		// Larissa : création de la carte
 		// 1. On crée les oceans
+		
+		/*TEST COMBATTRE NAM AN 
+		Joueur joueur1 = new Joueur(0, "rouge", 12);
+		Joueur joueur2 = new Joueur(0, "jaune", 15);
+		
+		this.joueurActif = joueur1;
+		
+		this.listeJoueurs.add(joueur1);
+		this.listeJoueurs.add(joueur2);
+		
+		australieOrientale.setNbRegTer(4);
+		chine.setNbRegTer(1);
+		joueur2.getListeTerritoire().add(australieOrientale);
+		*/
+		
+		// Larissa : création de la carte 
+		//1. On crée les oceans
 		for (int x = 0; x < plateau.length; x++) {
 			for (int y = 0; y < plateau[x].length; y++) {
 				plateau[x][y] = new Territoire("Ocean", typeCase.OCEAN);
@@ -42,7 +70,8 @@ public class Plateau extends AbstractModel {
 				this.plateau[x][y] = groenland;
 			}
 		}
-		// Amerique : Alaska
+	
+		//Amerique : Alaska
 		for (int x = 2; x < 5; x++) {
 			for (int y = 5; y < 7; y++) {
 				this.plateau[x][y] = alaska;
@@ -703,7 +732,7 @@ public class Plateau extends AbstractModel {
 		}
 
 	}
-
+	/*
 	private void creerTerritoires() {
 
 		String[] nomsTerEurope = new String[] { "Grande-Bretagne", "Islande", "Europe du Nord", "Scandinavie",
@@ -720,6 +749,32 @@ public class Plateau extends AbstractModel {
 
 	}
 
+	}*/
+
+
+	//NA
+	public Territoire cliquerSurTerDEPART(int x, int y) {
+		System.out.println("territoire départ choisi : " + this.plateau[x][y].getNomTer());
+		this.territoireDept = this.plateau[x][y];
+		return this.plateau[x][y];
+
+	}
+	
+	//NA
+	public Territoire cliquerSurTerVOISIN(int x, int y) {
+		this.territoireVoisin = this.plateau[x][y];
+		System.out.println("territoire voisin choisi : " + this.territoireVoisin.getNomTer());
+		return this.territoireVoisin;
+	}
+	
+
+	private void creerPile() {
+
+	}
+	
+	public int getPhase() {
+		return this.phase;
+	}
 
 	@Override
 	public int getLargeur() {
@@ -737,13 +792,10 @@ public class Plateau extends AbstractModel {
 		return false;
 	}
 
-
-	@Override
-	public Joueur getVainqueur(int x, int y) {
-		// TODO Auto-generated method stub
-		// return this.plateau[x][y].getVainqueur();
-		return null;
+	public static int getIdPlateau() {
+		return idPlateau;
 	}
+	
 	@Override
 	public int getNbRegimentPlacés() {
 		// on parcourt la liste des joueur et on prendre le nombre de regiment
@@ -754,6 +806,14 @@ public class Plateau extends AbstractModel {
 	public int getNbRegiment() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	//NA
+	public Territoire getTerritoireDept() {
+		return this.territoireDept;
+	}
+	public void setTerritoireDept(Territoire territoireDept) {
+		this.territoireDept = territoireDept;
 	}
 
 
@@ -774,6 +834,113 @@ public class Plateau extends AbstractModel {
 		// TODO Auto-generated method stub
 		return plateau[x][y].getListeTerritoireVoisin();
 	}
+	
+
+	// NA
+	public void combattre() {
+		
+		//compteur point trophé "le belliqueux"
+		joueurActif.setNbAttaque(joueurActif.getNbAttaque()+1);
+		
+		int nbAtt=0;
+		int nbDef=0;
+		
+		
+		//TODO Vérifier si nbAtt choisi laisse au moins 1 regiment au territoire départ
+		//scanner demander nbAtt/nbRegiment/nbLance
+		System.out.println("Taper le nombre de régiments à déplacer pour attaquer 1~3");
+		nbAtt=scanner.nextInt(); 	
+		
+		
+		Joueur defendant =  proprietaireDeTer(this.territoireVoisin);
+		System.out.println("\ndéfendant is " + defendant.getCouleur() + ", territoire : " + this.territoireVoisin.getNomTer());
+		
+		//TODO Vérifier si nbDeft choisi laisse au moins 1 regiment au territoire départ
+		System.out.println("Taper le nombre de régiments pour défendre 1~2");
+		nbDef=scanner.nextInt();
+				
+		
+		//LancerDé
+		this.joueurActif.lancerDe(nbAtt);
+		defendant.lancerDe(nbDef);
+		
+		//résultat lancer de dés
+		ArrayList<Integer> resAttaquant = this.joueurActif.getResultatDe();
+		ArrayList<Integer> resDefendant = defendant.getResultatDe();
+		Joueur vainqueur = null;
+		
+		//sysout test >>>>
+		System.out.println("------------------------------------------\n");
+		System.out.println("nbReg sur territoire défendant au début " + this.territoireVoisin.getNbRegTer());
+		//<<<<<<<<
+		
+		for (int i = 0 ; i<Math.min(resAttaquant.size(), resDefendant.size()); i++) {
+			
+			System.out.println("-------------------------------\ncomparer dé index " + i);
+			//comparer valeur 'i' avec la valeur au mm index que 'i' dans resDefendant
+			//if vainqueur = defendant
+			if (resAttaquant.get(i) <= resDefendant.get(i)) { 
+				vainqueur = defendant;				
+				System.out.println("vainqueur = " + vainqueur.getCouleur());
+				
+				//compteur point trophé "le bouclier"
+				defendant.setNbDefenseReussi(defendant.getNbDefenseReussi()+1);
+				
+				//enlever regiment du territoire de l'attaquant
+				this.territoireDept.setNbRegTer(this.territoireDept.getNbRegTer() - 1);
+				//enlever regiment de l'attaquant
+				this.joueurActif.setNbRegimentJoueur(this.joueurActif.getNbRegimentJoueur()-1);
+				
+				//définir le nombre restant d'attaquant 
+				nbAtt -=1;
+				
+			//if vainqueur = attaquant
+			} else {
+				vainqueur = this.joueurActif;
+				System.out.println("vainqueur = " + vainqueur.getCouleur());
+				
+				//si territoire conquis, ajouter dans territoire ds liste du gagnant
+				if ((this.territoireVoisin.getNbRegTer() - 1) < 1 ) {
+					//gérer listeTerritoire
+					this.joueurActif.getListeTerritoire().add(this.territoireVoisin);
+					defendant.getListeTerritoire().remove(this.territoireVoisin);
+					
+					//gérer nbRegiment nouveau sur territoire
+					this.territoireVoisin.setNbRegTer(nbAtt);
+					
+					System.out.print("Vous avez acquis le territoire " + this.territoireVoisin.getNomTer());
+					
+				} else {
+					//enlever regiment du territoire du defendant
+					this.territoireVoisin.setNbRegTer(this.territoireVoisin.getNbRegTer()- 1);
+					//enlever regiment du defendant 
+					defendant.setNbRegimentJoueur(defendant.getNbRegimentJoueur()-1);
+				}				
+			}
+		 }
+		System.out.println("\nnbReg restant sur territoire defendant " + this.territoireVoisin.getNbRegTer());
+		
+		//Reset le territoireDept
+		this.territoireDept = null;
+	}
+	//fin NA
+	
+	public Joueur proprietaireDeTer(Territoire ter) {
+		Joueur proprietaire = null;
+		for (Joueur j : this.listeJoueurs) {
+			
+			if (j.getListeTerritoire().contains(ter)) {
+				proprietaire = j;
+			}
+		}
+		return proprietaire;
+	}
+	
+	
+
+	public static void setIdPlateau(int idPlateau) {
+		Plateau.idPlateau = idPlateau;
+	}
 
 	public int getTour() {
 		return tour;
@@ -791,7 +958,7 @@ public class Plateau extends AbstractModel {
 		this.joueurActif = joueurActif;
 	}
 
-	public String getEtatPlateu() {
+	public String getEtatPlateu() { 
 		return etatPlateu;
 	}
 
@@ -807,12 +974,8 @@ public class Plateau extends AbstractModel {
 		this.continents = continents;
 	}
 
-	public ArrayList<Joueur> getJoueurs() {
-		return joueurs;
-	}
-
-	public void setJoueurs(ArrayList<Joueur> joueurs) {
-		this.joueurs = joueurs;
+	public ArrayList<Joueur> getListeJoueurs() {
+		return this.listeJoueurs;
 	}
 
 	public ArrayList<CarteRisk> getPile() {

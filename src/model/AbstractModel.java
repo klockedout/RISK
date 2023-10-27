@@ -27,7 +27,7 @@ public abstract class AbstractModel implements Observable {
     public abstract TypeCase getTypeCase(int x, int y);
     public abstract void setTypeCase(int x, int y,TypeCase tc);  */
     
-    public abstract Joueur getVainqueur(int x, int y);
+    public abstract void combattre();
     public abstract int getLargeur();
     public abstract int getHauteur();
     public abstract String getNom(int x, int y);

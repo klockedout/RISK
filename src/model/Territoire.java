@@ -86,11 +86,7 @@ public class Territoire {
 //Fin Larissa
 
 	
-	//recuperer le joueur le plus fort dans un territoire
-	public Joueur getVainqueur() {
-		return null; 
-		
-	}
+	
 
 	@Override
 	public String toString() {

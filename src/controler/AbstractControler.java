@@ -5,6 +5,8 @@
  */
 package controler;
 
+import java.awt.event.MouseEvent;
+
 import model.AbstractModel;
 
 
@@ -21,4 +23,14 @@ public abstract class AbstractControler {
     
     public abstract void cliqueSur(int x, int y);
     public abstract void calculerStepSuivant();
+
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
