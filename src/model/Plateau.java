@@ -77,6 +77,10 @@ public class Plateau extends AbstractModel {
 		chine.setNbRegTer(1);
 		joueur2.getListeTerritoire().add(australieOrientale);
 		
+		//test trophé conquérent
+		System.out.println(conquerant());
+
+		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
 		
@@ -1523,6 +1527,21 @@ public class Plateau extends AbstractModel {
 			this.joueurActif.getCarteRisk().add(cartePiochee);
 
 		}
+		
+	
+	//Trophé Conquérant
+	public Joueur conquerant() {
+		Joueur vainqueur = null;
+		int max =0;
+		for (Joueur j : this.listeJoueurs) {
+			
+			if (max <= j.getListeTerritoire().size()) {
+				max = j.getListeTerritoire().size();
+				vainqueur = j;
+			}
+		}
+		return vainqueur;
+	}
 	
 	
 
