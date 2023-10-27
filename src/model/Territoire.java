@@ -73,8 +73,7 @@ public class Territoire {
 	}
 	
 	public ArrayList<Territoire> getListeTerritoireVoisin() {
-			return this.listeTerritoireVoisin;
-			
+			return this.listeTerritoireVoisin;	
 	}
 	
 	public void ajouterTerritoireVoisin(Territoire voisin) {
@@ -92,3 +91,4 @@ public class Territoire {
 	public String toString() {
 		return nomTer;
 	}	
+}

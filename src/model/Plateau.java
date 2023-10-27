@@ -1075,7 +1075,7 @@ public class Plateau extends AbstractModel {
 		}
 	}
 	
-	//Widad
+	//Widad / OBTENIR LISTE DES TERRITOIRES
 	
 	public ArrayList<Territoire>obtenirListeTerritoire(){
 		ArrayList<Territoire>listeTerritoires=new ArrayList<>();
@@ -1092,9 +1092,14 @@ public class Plateau extends AbstractModel {
 	 * parcourir les lignes et les colonnes, puis ajoute
 	 *  chaque territoire à la liste listeTerritoires.*/
 	
+	//OBTENIR NB TERRITOIRE
+	
 	public int obtenirNbTerritoire() {
 		return obtenirListeTerritoire().size();
 	}
+	
+	
+	// AFFICHER LES TERRITOIRES DISPONIBLES DONC QUI N'ONT PAS DE PROPRIETAIRES
 	
 	public ArrayList<Territoire> getTerritoireDispo(Joueur joueur){
 		ArrayList<Territoire>territoiresDisponibles=new ArrayList<>();
@@ -1110,6 +1115,7 @@ public class Plateau extends AbstractModel {
 	 *  territoires du plateau et ajoute à la liste territoiresDisponibles
 	 *   uniquement les territoires qui n'ont pas encore été conquis */
 
+	//AFFICHER LE TERRITOIRE DE DEPART QUI DOIT AVOIR MINIMUM 2 REGIMENTS POUR POUVOIR ATTAQUER
 	
 	public ArrayList<Territoire>getTerritoireDepart(Joueur joueurActif){
 		ArrayList<Territoire>territoireAvecMin2Regiments=new ArrayList<>();
@@ -1126,15 +1132,15 @@ public class Plateau extends AbstractModel {
 	 *  tous les territoires stocké dans la liste  */
 
 
-	
+	//lE JOUEUR DOIT CHOISIR LES ACTIONS QU'IL VEUT FAIRE 
 	public void getPhase (int phase) {
 		Scanner scanner=new Scanner (System.in);
 		if (phase==1) {
 			regimentParTerritoire();
 		}
 		else if (phase==2) {
-			//attaquer();
-			//System.out.println("Voulez-vous attaquer ? (Oui/Non)");
+			System.out.println("Voulez-vous attaquer ? (Oui/Non)");
+			combattre();
 			//String reponse=scanner.nextLine();
 			//if (reponse.equalsIgnoreCase("Oui")) {
 				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");

@@ -49,11 +49,7 @@ public class Main {
 	    System.out.println("Territoire de départ : " + territoire.getNomTer());
 	}
  
-
-	// Test getPhase
-	int phase = 1; 
-	model.getPhase(phase);
-	}
 	
+	}
 }
 	
