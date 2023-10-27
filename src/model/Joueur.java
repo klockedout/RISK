@@ -153,14 +153,7 @@ public class Joueur {
 		this.territoire = territoire;
 	}
 
-	// Tidiane : Obtenir carte est utiliser pour que le joueur puisse piocher la
-	// carte.
-	public void obtenirCarte() {
-		//si la liste de territoire est +1 : 
-		CarteRisk cartePiochee = plateau.ajouterCartes();
-		carteRisk.add(cartePiochee);
-
-	}
+	
 
 	// Tidiane Pour afficher les cartes d'un joueur
 	public void afficherCartes() {
@@ -181,8 +174,6 @@ public class Joueur {
 		ArrayList<CarteRisk> infanterie = new ArrayList<>();
 		ArrayList<CarteRisk> artillerie = new ArrayList<>();
 		ArrayList<CarteRisk> joker = new ArrayList<>();
-
-		
 
 		
 		int compteurArtillerie = 0;

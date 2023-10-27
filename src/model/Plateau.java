@@ -25,7 +25,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
-	//private int phase = 2;
+	private int phase = 2;
 	Scanner scanner = new Scanner(System.in); //NA
 	
 	
@@ -33,7 +33,7 @@ public class Plateau extends AbstractModel {
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
-		/*
+		
 		//TEST COMBATTRE() NAM AN 
 		Joueur joueur1 = new Joueur(0, "rouge", 12);
 		Joueur joueur2 = new Joueur(0, "jaune", 15);
@@ -46,9 +46,9 @@ public class Plateau extends AbstractModel {
 		australieOrientale.setNbRegTer(4);
 		chine.setNbRegTer(1);
 		joueur2.getListeTerritoire().add(australieOrientale);
-		*/
+		
 		System.out.println("hello");
-		System.out.println("uagde"+ ajouterCartes());
+
 		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
@@ -650,7 +650,12 @@ public class Plateau extends AbstractModel {
 						pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
 						pile.add(new CarteRisk("JOKER", TypeCarte.JOKER));
 						
-
+						//TEST TIDIANE
+						System.out.println("la carte est de nom "+ ajouterCartes().getNomCarte()+ "et de type " + ajouterCartes().getTypeCarte() );
+						obtenirCarte();
+						this.joueurActif.afficherCartes();
+						this.joueurActif.echangerCartes();
+						
 	
 		afrique.ajouterContinent(continents,afrique);
 		europe.ajouterContinent(continents,europe);
@@ -979,16 +984,20 @@ public class Plateau extends AbstractModel {
 
 	// Tidiane Ajouter carte permet de rajouter une carte de la pile au joueur je l'utilise dans la classe joueur
 	public CarteRisk ajouterCartes() {
+		
 		Collections.shuffle(pile);// Mélanger la pile de cartes à chaque tour
 
 		// un index aléatoire est généré dans la plage des index de la pile de cartes
 		// mélangée.
+		if (!pile.isEmpty()) {
 		Random random = new Random();
 		int index = random.nextInt(pile.size());
 
 		return pile.remove(index); // supprimer la carte à l'index aléatoire de la pile, et cette carte est
-									// retournée.
-
+		}							// retournée.
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -1077,4 +1086,16 @@ public class Plateau extends AbstractModel {
 			System.out.println(t);
 		}
 	}
-	}
+	// Tidiane : Obtenir carte est utiliser pour que le joueur puisse piocher la
+		// carte.
+		public void obtenirCarte() {
+			//si la liste de territoire est +1 : 
+			CarteRisk cartePiochee = ajouterCartes();
+			this.joueurActif.getCarteRisk().add(cartePiochee);
+
+		}
+	
+	
+
+		}  
+	
