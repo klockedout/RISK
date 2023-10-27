@@ -33,8 +33,6 @@ public class Plateau extends AbstractModel {
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
-		// Larissa : création de la carte
-		// 1. On crée les oceans
 		
 		//TEST COMBATTRE() NAM AN 
 		Joueur joueur1 = new Joueur(0, "rouge", 12);
@@ -850,11 +848,10 @@ public class Plateau extends AbstractModel {
 		System.out.println("Taper le nombre de régiments à déplacer pour attaquer 1~3");
 		nbAtt=scanner.nextInt(); 	
 		
-		
 		Joueur defendant =  proprietaireDeTer(this.territoireVoisin);
 		System.out.println("\ndéfendant is " + defendant.getCouleur() + ", territoire : " + this.territoireVoisin.getNomTer());
 		
-		//TODO Vérifier si nbDeft choisi laisse au moins 1 regiment au territoire départ
+		//TODO Vérifier si nbDef choisi laisse au moins 1 regiment au territoire départ
 		System.out.println("Taper le nombre de régiments pour défendre 1~2");
 		nbDef=scanner.nextInt();
 				
@@ -1016,7 +1013,7 @@ public class Plateau extends AbstractModel {
     
     public Joueur proprietaireDeTer(Territoire ter) {
 		Joueur proprietaire = null;
-		for (Joueur j : this.joueurs) {
+		for (Joueur j : this.listeJoueurs) {
 			if (j.getTerritoires().contains(ter)) {
 				proprietaire = j;
 			}
