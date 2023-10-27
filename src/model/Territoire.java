@@ -92,4 +92,3 @@ public class Territoire {
 	public String toString() {
 		return nomTer;
 	}	
-}

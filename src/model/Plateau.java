@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Scanner;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
@@ -1073,4 +1074,87 @@ public class Plateau extends AbstractModel {
 			System.out.println(t);
 		}
 	}
+	
+	//Widad
+	
+	public ArrayList<Territoire>obtenirListeTerritoire(){
+		ArrayList<Territoire>listeTerritoires=new ArrayList<>();
+		for (int x=0;x<plateau.length;x++) {
+			for (int y=0; y<plateau[x].length;x++) {
+				listeTerritoires.add(plateau[x][y]);
+			}
+		}
+		return listeTerritoires;
 	}
+	
+	/**parcourir la grille de territoires et retourne 
+	 * une liste avec tous les territoires. double boucle for pour 
+	 * parcourir les lignes et les colonnes, puis ajoute
+	 *  chaque territoire à la liste listeTerritoires.*/
+	
+	public int obtenirNbTerritoire() {
+		return obtenirListeTerritoire().size();
+	}
+	
+	public ArrayList<Territoire> getTerritoireDispo(Joueur joueur){
+		ArrayList<Territoire>territoiresDisponibles=new ArrayList<>();
+		for (Territoire territoire : obtenirListeTerritoire()) {
+			if (proprietaireDeTer(territoire)==null) {//Si pas de proprietaire,territoire disponible
+				territoiresDisponibles.add(territoire);
+			}
+		}
+		return territoiresDisponibles;
+	}
+	/*en paramètre un joueur j et retourne une liste de territoires 
+	 * disponibles pour ce joueur. Elle parcourt la liste de tous les
+	 *  territoires du plateau et ajoute à la liste territoiresDisponibles
+	 *   uniquement les territoires qui n'ont pas encore été conquis */
+
+	
+	public ArrayList<Territoire>getTerritoireDepart(Joueur joueurActif){
+		ArrayList<Territoire>territoireAvecMin2Regiments=new ArrayList<>();
+		for (Territoire territoire : joueurActif.getTerritoires()) {
+			if (territoire.getNbRegTer()>=2) {
+				territoireAvecMin2Regiments.add(territoire);
+			}
+		}return territoireAvecMin2Regiments;
+	}
+	
+	/* parametre : joueurActif,retourner une liste de territoires qui
+	 *  appartient à ce joueur et ayant au moins 2 regiments.Donc on 
+	 *  crée une liste vide pour stocker les territoires, parcourir 
+	 *  tous les territoires stocké dans la liste  */
+
+
+	
+	public void getPhase (int phase) {
+		Scanner scanner=new Scanner (System.in);
+		if (phase==1) {
+			regimentParTerritoire();
+		}
+		else if (phase==2) {
+			//attaquer();
+			//System.out.println("Voulez-vous attaquer ? (Oui/Non)");
+			//String reponse=scanner.nextLine();
+			//if (reponse.equalsIgnoreCase("Oui")) {
+				//Territoire territoireAttaque= choisirTerritoire("Territoire d'attaque : ");
+			//	Territoire territoireDefense = choisirTerritoire ("Territoire de défense :");
+				//int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
+				//attaquer(territoireAttaque,territoireDefense,NbRegTer);
+			}
+		 else if (phase==3) {
+		 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
+		 String reponse1 = scanner.nextLine();
+		 if(reponse1.equalsIgnoreCase("Oui")) {
+			 deplacerRegiments(chine, afghanistan, 8);
+		}else {
+			System.err.println("Erreur: Phase invalide " + phase);
+		}
+	}else {
+		System.err.println("Erreur: Phase invalide " + phase);
+	}
+	
+	//Widad
+}
+}
+
