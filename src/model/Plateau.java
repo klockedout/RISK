@@ -689,9 +689,9 @@ public class Plateau extends AbstractModel {
 		ameriqueNord.ajouterContinent(continents,ameriqueNord);
 		ameriqueSud.ajouterContinent(continents,ameriqueSud);
 		asie.ajouterContinent(continents,asie);
-		australie.ajouterContinent(continents,australie);
+		australie.ajouterContinent(continents,australie);*/
 		
-	}*/
+	
 	
 	//1. Créer les territoires et leur territoire voisin 
 			//EUROPE 
@@ -835,12 +835,9 @@ public class Plateau extends AbstractModel {
 		            score = 4;
 		            break;
 		        case 4:
-		            score = 2;
+		            score = 3;
 		            break;
-		        case 5:
-		            score = 0;
-		            break;
-		        
+       
 				
 			}      
 		}
@@ -857,7 +854,7 @@ public class Plateau extends AbstractModel {
             Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
             PreparedStatement statement = connexion.prepareStatement(req);
         	        
-            statement = connexion.prepareStatement(req);
+            //statement = connexion.prepareStatement(req);
             statement.setInt(1, score);
             statement.setString(2, joueur.getNom());
             statement.executeUpdate();
@@ -1131,4 +1128,6 @@ public class Plateau extends AbstractModel {
 			System.out.println(t);
 		}
 	}
+
+
 }

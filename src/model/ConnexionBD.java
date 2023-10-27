@@ -71,7 +71,12 @@
 	            } catch (Exception e) {
 	                e.printStackTrace();
 	            }*/
-	    
+			
+		    System.out.println("Main");
+				Plateau plateau = new Plateau(0);
+				Continent continent = plateau.afrique;
+				System.out.println(continent.getTerritoiresParContinent(continent));
+			
 		}
 	}
 	    	
