@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Objects;
 
 public class Joueur {
-
+   
 	//attribut 
 	private String nom;
 	private int idPlateau;
@@ -19,7 +19,6 @@ public class Joueur {
 	private int echanger = 0;
 	private String phase;
 	private int nbRegimentJoueur;
-	private ArrayList<CarteRisk> carteRisk;
 	private ArrayList<Territoire> territoires;
 	// qu'est ce que c'est ?
 	private Territoire territoire;
@@ -32,9 +31,6 @@ public class Joueur {
 	private ArrayList<Integer> resultatDe; 
 	//fin NA
 	private ArrayList <CarteRisk> carteRisk;
-	private ArrayList <Territoire> territoires;
-	//qu'est ce que c'est ? 
-	Territoire territoire;
 	Plateau plateau;
 	Continent continent;
 	
@@ -88,7 +84,8 @@ public class Joueur {
 
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
-
+	}
+	
 	//FARKI Imane
 	public String getCouleur() {
 		return this.couleur;
@@ -149,16 +146,6 @@ public class Joueur {
 	}
 
 
-	public ArrayList<Territoire> getListeTerritoire() {
-		return this.territoires;
-	}
-
-	public void setTerritoire(ArrayList<Territoire> territoire) {
-		this.territoires= territoire;
-	}
-	
-
-	
 	//Debut Larissa
 
 	public boolean conquerirContinent(Continent continent) {

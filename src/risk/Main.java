@@ -38,7 +38,7 @@ public class Main {
 	    for (Territoire territoire2 : listeTerritoires) {
 	        System.out.println("Territoire : " + territoire2.getNomTer());
 	    }
-	
+	   
 	    // Test obtenirNbTerritoire
 	    int nbTerritoires = model.obtenirNbTerritoire();
 	    System.out.println("Nombre de territoires : " + nbTerritoires);

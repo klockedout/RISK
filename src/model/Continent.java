@@ -63,10 +63,9 @@ public class Continent {
 	}
 	
 	//FARKI Imane : avoir la liste des territoires pour un continent donné
+	
+    /*    
 	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
-        ArrayList<Territoire> territoiresContinent = new ArrayList<>();}
-        
-	/*public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
         ArrayList<Territoire> territoiresContinent = new ArrayList<>();
         for (Territoire territoire : listTerritoires) {
             if (territoire.getContinent().equals(nomContinent)) {
@@ -74,7 +73,7 @@ public class Continent {
             }
         }
         return territoiresContinent;}
-
+	*/
   //FARKI Imane
      //public void attribuerTerritoire(Territoire territoire, Joueur joueur) {
         //territoiresControles.put(territoire, joueur);

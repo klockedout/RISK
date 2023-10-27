@@ -11,7 +11,7 @@ public class Territoire {
 	private TypeContinent typeC; 
 	private int nbRegTer;
 	private ArrayList<Territoire>listeTerritoireVoisin; 
-
+   
 	
 	//constructeur 
 	Territoire(String nom, TypeContinent typeC){
@@ -62,7 +62,7 @@ public class Territoire {
 	@Override
 	public int hashCode() {
 		return Objects.hash(nomTer);
-	}
+	}  
 
 	@Override
 	public boolean equals(Object obj) {
