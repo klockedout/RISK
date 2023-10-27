@@ -654,7 +654,7 @@ public class Plateau extends AbstractModel {
 						this.joueurActif.afficherCartes();
 						this.joueurActif.echangerCartes();
 						
-	
+  
 		afrique.ajouterContinent(continents,afrique);
 		europe.ajouterContinent(continents,europe);
 		ameriqueNord.ajouterContinent(continents,ameriqueNord);
