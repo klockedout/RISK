@@ -97,6 +97,7 @@ public class Territoire {
 		return nomTer;
 	}
 
+
 	
 	//methode qui ajouter un regiment sur un territoire 
 	

@@ -818,6 +818,11 @@ public class Plateau extends AbstractModel {
 		return listeTerritoires;
 	}
 	
+	/**parcourir la grille de territoires et retourne 
+	 * une liste avec tous les territoires. double boucle for pour 
+	 * parcourir les lignes et les colonnes, puis ajoute
+	 *  chaque territoire à la liste listeTerritoires.*/
+	
 	public int obtenirNbTerritoire() {
 		return obtenirListeTerritoire().size();
 	}
@@ -831,6 +836,11 @@ public class Plateau extends AbstractModel {
 		}
 		return territoiresDisponibles;
 	}
+	/*en paramètre un joueur j et retourne une liste de territoires 
+	 * disponibles pour ce joueur. Elle parcourt la liste de tous les
+	 *  territoires du plateau et ajoute à la liste territoiresDisponibles
+	 *   uniquement les territoires qui n'ont pas encore été conquis */
+
 	
 	public ArrayList<Territoire>getTerritoireDepart(Joueur joueurActif){
 		ArrayList<Territoire>territoireAvecMin2Regiments=new ArrayList<>();
@@ -841,6 +851,12 @@ public class Plateau extends AbstractModel {
 		}return territoireAvecMin2Regiments;
 	}
 	
+	/* parametre : joueurActif,retourner une liste de territoires qui
+	 *  appartient à ce joueur et ayant au moins 2 regiments.Donc on 
+	 *  crée une liste vide pour stocker les territoires, parcourir 
+	 *  tous les territoires stocké dans la liste  */
+
+
 	
 	public void getPhase (int phase) {
 		Scanner scanner=new Scanner (System.in);
