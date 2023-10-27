@@ -25,7 +25,7 @@ public class Plateau extends AbstractModel {
 	private ArrayList<Territoire> listeTerritoireVoisin;
 	private ArrayList<Joueur> joueurs;
 //Fin Larissa
-	private int phase = 2;
+	//private int phase = 2;
 	Scanner scanner = new Scanner(System.in); //NA
 	
 	
@@ -33,7 +33,7 @@ public class Plateau extends AbstractModel {
 	public Plateau() {
 		super();
 		this.idPlateau=Plateau.idPlateauTotal++;
-		
+		/*
 		//TEST COMBATTRE() NAM AN 
 		Joueur joueur1 = new Joueur(0, "rouge", 12);
 		Joueur joueur2 = new Joueur(0, "jaune", 15);
@@ -46,7 +46,9 @@ public class Plateau extends AbstractModel {
 		australieOrientale.setNbRegTer(4);
 		chine.setNbRegTer(1);
 		joueur2.getListeTerritoire().add(australieOrientale);
-		
+		*/
+		System.out.println("hello");
+		System.out.println("uagde"+ ajouterCartes());
 		
 		// Larissa : création de la carte 
 		//1. On crée les oceans
