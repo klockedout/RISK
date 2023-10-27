@@ -1132,13 +1132,13 @@ public class Plateau extends AbstractModel {
 	 *  tous les territoires stocké dans la liste  */
 
 
-	//lE JOUEUR DOIT CHOISIR LES ACTIONS QU'IL VEUT FAIRE 
+	//lE JOUEUR DOIT CHOISIR LES ACTIONS QU'IL VEUT FAIRE,
 	public void getPhase (int phase) {
 		Scanner scanner=new Scanner (System.in);
-		if (phase==1) {
+		if (phase==1) {    // le joueur reçoit des regiments enfonction du nombre de territoire qu'il possède 
 			regimentParTerritoire();
 		}
-		else if (phase==2) {
+		else if (phase==2) { //le joueur peut choisir d'attaquer
 			System.out.println("Voulez-vous attaquer ? (Oui/Non)");
 			combattre();
 			//String reponse=scanner.nextLine();
@@ -1148,7 +1148,7 @@ public class Plateau extends AbstractModel {
 				//int NbRegTer = choisirNombreRegiments("Combien de regiments souhatez-vous envoyer?");
 				//attaquer(territoireAttaque,territoireDefense,NbRegTer);
 			}
-		 else if (phase==3) {
+		 else if (phase==3) { //le joueur peut choisir de déplacer ses regiments vers ses territoires voisins
 		 System.out.println("Voulez-vous déplacer des régiments ? (Oui/Non)");
 		 String reponse1 = scanner.nextLine();
 		 if(reponse1.equalsIgnoreCase("Oui")) {
