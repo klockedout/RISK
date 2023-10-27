@@ -23,6 +23,8 @@ public class Joueur {
 	private ArrayList <Territoire> territoires;
 	//qu'est ce que c'est ? 
 	Territoire territoire;
+	Plateau plateau;
+	Continent continent;
 	
 
 	//contructeur 
@@ -130,16 +132,16 @@ public class Joueur {
 	
 	//Debut Larissa
 
-//	public boolean conquerirContinent(Continent continent) {
-//		for(Territoire t : continent.getTerritoires()) {
-//			if(!this.Territoire.contains(t)) {
-//				return false;
-//			}
-//		}
-//		//on parcourt les ele
-//		return true; 
-//	}
-	//Fin Larissa
+	public boolean conquerirContinent(Continent continent) {
+		for(Territoire t : continent.getTerritoiresParContinent(continent)) {
+			if(!this.territoires.contains(t)) {
+				return false;
+			}
+		}
+		//on parcourt les ele
+		return true; 
+	}
+//	//Fin Larissa
 
 	public ArrayList<Territoire> getTerritoires() {
 		return territoires;

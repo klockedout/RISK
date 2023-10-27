@@ -43,14 +43,14 @@ public class Continent {
 	public int getBareme() {
 		return this.bareme; 
 	}
-//	public ArrayList<Territoire> getTerritoireContinent(Continent continent) {
-//		//a partir de la hasmap recuperer les valeurs de la hasmap
-//		for(Territoire t: continentTerritoire.entrySet()) {
-//			if (t.getKeys
-//			return t;
-//		}
-//			return this.listTerritoires; 
-//		}
+	public ArrayList<Territoire> getTerritoireContinent(Continent continent) {
+		//a partir de la hasmap recuperer les valeurs de la hasmap
+		for(Territoire t: continentTerritoires.entrySet()) {
+			if (t.getKeys
+			return t;
+		}
+			return this.listTerritoires; 
+		}
 
 	
 	public void ajouterContinent(ArrayList<Continent> liste, Continent continent) {
@@ -64,15 +64,15 @@ public class Continent {
 	public ArrayList<Territoire> construireListeTerritoires(){
 		return this.listTerritoires;
 	}
-//	   public  ArrayList<Territoire obtenirTerritoiresParContinent(TypeContinent typeContinent) {
+	   public Territoire [] getTerritoiresParContinent(Continent continent) {
 //	        ArrayList<Territoire> territoiresParContinent = new ArrayList<>();
 //	        for (Territoire territoire : Territoire) {
 //	            if (territoire.typeC.equals(typeContinent)) {
 //	                territoiresParContinent.add(territoire);
 //	            }
 //	        }
-//	        return territoiresParContinent;
-//	    }
+	        return continentTerritoires.get(continent);
+	    }
 	
 	//FARKI Imane : avoir la liste des territoires pour un continent donné
 	public ArrayList<Territoire> getListeTerritoire(Continent nomContinent) {
