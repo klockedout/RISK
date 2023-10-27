@@ -188,6 +188,12 @@ public class Joueur {
 			return this.territoires.size()/3;
 		}		
 	}
+
+
+	@Override
+	public String toString() {
+		return "Joueur [idPlateau=" + idPlateau + ", couleur=" + couleur + "]";
+	}
 	
 	
 
